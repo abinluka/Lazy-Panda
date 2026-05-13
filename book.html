@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Book a photography session with Lazy Panda Photography — weddings, portraits, fashion, events and more in Kerala, India.">
+<title>Book a Session | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ---- HERO — fullscreen minimal ---- */
+#book-hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  background: var(--dark);
+  position: relative; overflow: hidden;
+  padding: 140px 5% 80px;
+}
+#book-hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 45%);
+}
+.book-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px; align-items: center;
+  max-width: 1200px; margin: 0 auto;
+  width: 100%; position: relative; z-index: 1;
+}
+.book-hero-info {}
+.bh-eyebrow {
+  font-size: 0.63rem; letter-spacing: 0.45em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 20px; display: block;
+}
+.bh-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300; color: var(--white);
+  line-height: 1.08; margin-bottom: 24px;
+}
+.bh-title em { font-style: italic; color: var(--gold-light); }
+.bh-text { font-size: 0.92rem; color: var(--gray); line-height: 1.9; margin-bottom: 44px; }
+.bh-checklist { list-style: none; margin-bottom: 44px; }
+.bh-checklist li {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  font-size: 0.88rem; color: var(--gray-light);
+}
+.bh-checklist li i { color: var(--gold); font-size: 0.7rem; width: 14px; }
+.bh-contact-strip {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.bh-contact-item {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 0.85rem; color: var(--gray-light);
+}
+.bh-contact-item i { color: var(--gold); width: 16px; font-size: 0.85rem; }
+.bh-contact-item a { color: var(--gold-light); text-decoration: none; transition: color 0.3s; }
+.bh-contact-item a:hover { color: var(--gold); }
+
+/* ---- BOOKING FORM CARD ---- */
+.book-form-card {
+  background: var(--black);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 56px 48px;
+  position: relative; overflow: hidden;
+}
+.book-form-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.bf-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; font-weight: 300;
+  color: var(--white); margin-bottom: 6px;
+}
+.bf-sub { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.12em; margin-bottom: 36px; }
+.bf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.bf-group { display: flex; flex-direction: column; gap: 8px; }
+.bf-group.full { grid-column: 1 / -1; }
+.bf-submit {
+  width: 100%; padding: 18px; margin-top: 20px;
+  background: var(--gold); border: none;
+  color: var(--black); font-family: var(--font-sans);
+  font-size: 0.8rem; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 500;
+  cursor: none; transition: var(--transition);
+}
+.bf-submit:hover { background: var(--gold-light); }
+.bf-note { font-size: 0.72rem; color: var(--gray); text-align: center; margin-top: 14px; line-height: 1.7; }
+.bf-success {
+  display: none; text-align: center; padding: 52px 28px;
+}
+.bf-success i { font-size: 3.5rem; color: var(--gold); display: block; margin-bottom: 20px; }
+.bf-success h3 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--white); margin-bottom: 12px; }
+.bf-success p { font-size: 0.88rem; color: var(--gray); line-height: 1.8; }
+.bf-success .gold-line { margin: 28px auto 0; }
+
+/* ---- HOW IT WORKS ---- */
+#how-it-works { background: var(--black); }
+.hiw-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; max-width: 1200px; margin: 0 auto;
+}
+.hiw-step { background: var(--dark); padding: 48px 36px; text-align: center; position: relative; overflow: hidden; }
+.hiw-step::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--gold); transition:width 0.5s ease; }
+.hiw-step:hover::after { width:100%; }
+.hiw-num {
+  font-family: var(--font-serif); font-size: 4rem; font-weight: 300;
+  color: rgba(201,168,76,0.08); line-height: 1; margin-bottom: 20px; display: block;
+}
+.hiw-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 20px; display: block; transition: transform 0.4s; }
+.hiw-step:hover .hiw-icon { transform: scale(1.15); }
+.hiw-title { font-family: var(--font-serif); font-size: 1.15rem; color: var(--white); margin-bottom: 12px; }
+.hiw-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.85; }
+
+/* ---- TESTIMONIALS MINI ---- */
+#mini-testi { background: var(--dark); }
+.mini-testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1200px; margin: 0 auto; }
+.mt-card { background: var(--black); padding: 44px 36px; position: relative; overflow: hidden; }
+.mt-card::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:1px; background:linear-gradient(90deg, var(--gold), transparent); }
+.mt-stars { color: var(--gold); font-size: 0.75rem; letter-spacing:4px; margin-bottom:20px; }
+.mt-text { font-family: var(--font-serif); font-size: 1.05rem; font-style: italic; color: var(--white); line-height: 1.7; margin-bottom: 28px; font-weight: 300; }
+.mt-client { display: flex; align-items: center; gap: 14px; }
+.mt-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--dark-2); border: 1px solid rgba(201,168,76,0.22);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1rem; color: var(--gold);
+}
+.mt-name { font-family: var(--font-serif); font-size: 0.9rem; color: var(--white); }
+.mt-event { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 3px; }
+
+/* ---- FAQ ---- */
+#book-faq { background: var(--black); }
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(201,168,76,0.1); overflow: hidden; }
+.faq-question { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: none; font-family: var(--font-serif); font-size: 1.05rem; color: var(--white); transition: color 0.3s; }
+.faq-question:hover, .faq-question.open { color: var(--gold-light); }
+.faq-icon { width: 28px; height: 28px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.75rem; transition: transform 0.3s; }
+.faq-question.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+.faq-answer-inner { padding: 0 0 20px; color: var(--gray); font-size: 0.88rem; line-height: 1.9; }
+
+/* ---- URGENCY STRIP ---- */
+#urgency {
+  background: linear-gradient(90deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 50%, rgba(201,168,76,0.08) 100%);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 32px 5%; text-align: center;
+}
+.urgency-text {
+  font-family: var(--font-serif);
+  font-size: 1rem; color: var(--white);
+  letter-spacing: 0.06em;
+}
+.urgency-text span { color: var(--gold); }
+.urgency-sub { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.15em; margin-top: 6px; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .book-hero-layout { grid-template-columns: 1fr; max-width: 700px; }
+  .book-form-card { padding: 44px 36px; }
+  .hiw-grid { grid-template-columns: repeat(2, 1fr); }
+  .mini-testi-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .bf-grid { grid-template-columns: 1fr; }
+  .book-form-card { padding: 36px 24px; }
+  .hiw-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill active" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- URGENCY STRIP -->
+<div id="urgency" style="margin-top:80px">
+  <div class="urgency-text">🗓 <span>Limited Dates Available</span> for Wedding Season 2025–26</div>
+  <div class="urgency-sub">We accept only 4 wedding bookings per month — secure your date today</div>
+</div>
+
+<!-- BOOK HERO + FORM -->
+<section id="book-hero">
+  <div class="book-hero-layout">
+
+    <!-- INFO COLUMN -->
+    <div class="book-hero-info" data-aos="fade-right">
+      <span class="bh-eyebrow">Begin Your Story</span>
+      <h1 class="bh-title">Book Your<br><em>Photography Session</em></h1>
+      <p class="bh-text">Every extraordinary photograph begins with a single conversation. Fill in the form and we'll reach out within 24 hours to discuss your vision, date and package in detail.</p>
+
+      <ul class="bh-checklist">
+        <li><i class="fas fa-check"></i>Free 30-minute consultation call</li>
+        <li><i class="fas fa-check"></i>No obligation — explore options freely</li>
+        <li><i class="fas fa-check"></i>Bespoke packages available</li>
+        <li><i class="fas fa-check"></i>Flexible payment schedule</li>
+        <li><i class="fas fa-check"></i>Date hold with minimal advance</li>
+        <li><i class="fas fa-check"></i>Response guaranteed within 24 hours</li>
+      </ul>
+
+      <div class="bh-contact-strip">
+        <div class="bh-contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp: <a href="https://wa.me/919447000000">+91 94470 00000</a></span>
+        </div>
+        <div class="bh-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>Email: <a href="mailto:hello@lazypandaphoto.com">hello@lazypandaphoto.com</a></span>
+        </div>
+        <div class="bh-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Response within 24 hours, Mon–Sat</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM COLUMN -->
+    <div data-aos="fade-left" data-aos-delay="120">
+      <div class="book-form-card">
+        <div class="bf-title">Enquiry Form</div>
+        <div class="bf-sub">Fill in as much detail as you can — it helps us craft the best response for you.</div>
+
+        <div id="bookingFormMain">
+          <div class="bf-grid">
+            <div class="bf-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="Your name" id="bf-name" required>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" placeholder="your@email.com" id="bf-email" required>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Phone / WhatsApp *</label>
+              <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX" id="bf-phone" required>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Service Required *</label>
+              <select class="form-control" id="bf-service">
+                <option value="">Select service</option>
+                <option>Wedding Photography</option>
+                <option>Pre-Wedding Shoot</option>
+                <option>Portrait Session</option>
+                <option>Fashion Photography</option>
+                <option>Product Photography</option>
+                <option>Event Coverage</option>
+                <option>Drone Photography</option>
+                <option>Cinematic Videography</option>
+                <option>Baby & Family Shoot</option>
+                <option>Custom / Multiple Services</option>
+              </select>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Preferred Package</label>
+              <select class="form-control">
+                <option value="">Select (optional)</option>
+                <option>Basic / Silver</option>
+                <option>Premium / Gold</option>
+                <option>Luxury / Platinum</option>
+                <option>Custom Quote</option>
+                <option>Not Sure — Help Me Choose</option>
+              </select>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Event / Shoot Date</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Event Location</label>
+              <input type="text" class="form-control" placeholder="City, venue or destination">
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Approximate Budget</label>
+              <select class="form-control">
+                <option value="">Select range</option>
+                <option>Under ₹20,000</option>
+                <option>₹20,000 – ₹50,000</option>
+                <option>₹50,000 – ₹1,00,000</option>
+                <option>₹1,00,000 – ₹2,00,000</option>
+                <option>₹2,00,000+</option>
+                <option>Flexible — Tell Me More</option>
+              </select>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">Number of Guests / Subjects</label>
+              <select class="form-control">
+                <option value="">Select</option>
+                <option>Just Me (1)</option>
+                <option>2 – 10</option>
+                <option>10 – 50</option>
+                <option>50 – 200</option>
+                <option>200 – 500</option>
+                <option>500+</option>
+              </select>
+            </div>
+            <div class="bf-group">
+              <label class="form-label">How Did You Hear About Us?</label>
+              <select class="form-control">
+                <option value="">Select</option>
+                <option>Instagram</option>
+                <option>Google</option>
+                <option>Friend / Family</option>
+                <option>WeddingWire / Shaadi.com</option>
+                <option>Facebook</option>
+                <option>YouTube</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="bf-group full">
+              <label class="form-label">Tell Us About Your Vision *</label>
+              <textarea class="form-control" id="bf-message" placeholder="Share your vision, mood, inspirations, must-have shots, special requirements or anything that will help us understand your dream session perfectly..." required style="min-height:130px"></textarea>
+            </div>
+          </div>
+
+          <button type="button" class="bf-submit" onclick="submitBooking()">
+            Send My Enquiry &nbsp; →
+          </button>
+          <p class="bf-note">Or reach us instantly via <a href="https://wa.me/919447000000" target="_blank" style="color:var(--gold);text-decoration:none">WhatsApp</a>. We typically respond within a few hours during business days.</p>
+        </div>
+
+        <div class="bf-success" id="bfSuccess">
+          <i class="fas fa-paper-plane"></i>
+          <h3>Enquiry Received!</h3>
+          <p>Thank you for reaching out to Lazy Panda Photography. Your enquiry has been received and we'll get back to you within 24 hours to discuss your vision in detail.<br><br>In the meantime, explore our portfolio or read our blog for inspiration.</p>
+          <div style="display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+            <a href="portfolio.html" class="btn-gold" style="padding:12px 28px;font-size:0.72rem">View Portfolio</a>
+            <a href="https://wa.me/919447000000" class="btn-gold-fill" style="padding:12px 28px;font-size:0.72rem" target="_blank">WhatsApp Us</a>
+          </div>
+          <div class="gold-line" style="margin-top:36px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="section-pad">
+  <span class="section-label" data-aos="fade-up">The Process</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">What Happens <em>Next</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">From enquiry to delivered gallery — a seamless, joyful experience every step of the way.</p>
+  <div class="hiw-grid">
+    <div class="hiw-step" data-aos="fade-up" data-aos-delay="0">
+      <span class="hiw-num">01</span>
+      <i class="fas fa-paper-plane hiw-icon"></i>
+      <div class="hiw-title">You Send an Enquiry</div>
+      <p class="hiw-desc">Fill out the form above or WhatsApp us with your date, service needed and brief vision. We read every enquiry personally.</p>
+    </div>
+    <div class="hiw-step" data-aos="fade-up" data-aos-delay="80">
+      <span class="hiw-num">02</span>
+      <i class="fas fa-phone hiw-icon"></i>
+      <div class="hiw-title">We Schedule a Consultation</div>
+      <p class="hiw-desc">Within 24 hours, we'll reach out to schedule a free 30-minute discovery call to align on vision, package, and details.</p>
+    </div>
+    <div class="hiw-step" data-aos="fade-up" data-aos-delay="160">
+      <span class="hiw-num">03</span>
+      <i class="fas fa-file-signature hiw-icon"></i>
+      <div class="hiw-title">We Confirm Your Booking</div>
+      <p class="hiw-desc">A personalised proposal is sent. On acceptance, a 30% advance secures your date. Agreement and prep guide follow.</p>
+    </div>
+    <div class="hiw-step" data-aos="fade-up" data-aos-delay="240">
+      <span class="hiw-num">04</span>
+      <i class="fas fa-images hiw-icon"></i>
+      <div class="hiw-title">We Create & Deliver</div>
+      <p class="hiw-desc">We photograph your story with full artistic care. Your edited gallery lands in your inbox within the agreed timeline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS MINI -->
+<section id="mini-testi" class="section-pad">
+  <span class="section-label" data-aos="fade-up">What Clients Say</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Trusted by <em>850+ Clients</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+  <div class="mini-testi-grid">
+    <div class="mt-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="mt-stars">★★★★★</div>
+      <p class="mt-text">"From the first call to the final gallery, Lazy Panda made every step feel effortless. The photographs are breathtakingly beautiful — we still can't believe these are of our wedding."</p>
+      <div class="mt-client">
+        <div class="mt-avatar">P</div>
+        <div><div class="mt-name">Priya & Vikram Nair</div><div class="mt-event">Wedding Photography</div></div>
+      </div>
+    </div>
+    <div class="mt-card" data-aos="fade-up" data-aos-delay="80">
+      <div class="mt-stars">★★★★★</div>
+      <p class="mt-text">"The booking process was so smooth and professional. Arjun understood exactly what we wanted before we even finished explaining. The photos tell our story perfectly."</p>
+      <div class="mt-client">
+        <div class="mt-avatar">R</div>
+        <div><div class="mt-name">Rahul & Ananya Sharma</div><div class="mt-event">Pre-Wedding Shoot</div></div>
+      </div>
+    </div>
+    <div class="mt-card" data-aos="fade-up" data-aos-delay="160">
+      <div class="mt-stars">★★★★★</div>
+      <p class="mt-text">"I was nervous about the portrait session but the team put me at ease immediately. The results exceeded every expectation — these images genuinely look like editorial spreads."</p>
+      <div class="mt-client">
+        <div class="mt-avatar">S</div>
+        <div><div class="mt-name">Sneha Krishnaswamy</div><div class="mt-event">Portrait Session</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="book-faq" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Common Questions</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Before You <em>Book</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+  <div class="faq-wrap">
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">How much advance is needed to secure my date? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">A 30% advance payment secures your booking. For peak-season weddings we recommend booking 6–12 months ahead. Once the advance is received, your date is locked and removed from our availability calendar.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Can I book a consultation without committing to a package? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Absolutely. Our initial consultation call is completely free and carries no obligation. We encourage you to speak with us, review our work, and take your time before deciding. We'd rather earn your trust than rush a booking.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">What if I don't know which package is right for me? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">That's what the consultation call is for! Tell us your vision, budget and requirements — we'll recommend the package that makes the most sense. We can also build a completely custom package if needed.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Is the booking form confidential? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes — all enquiry information is treated with complete confidentiality and is used solely to understand your requirements and respond to your enquiry. We never share or sell personal data.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">How quickly will you respond to my enquiry? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We aim to respond to every enquiry within 24 hours on business days (Monday–Saturday). For urgent enquiries, WhatsApp is the fastest route — we typically respond within a few hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="services.html">Wedding Photography</a></li>
+        <li><a href="services.html">Pre-Wedding Shoots</a></li>
+        <li><a href="services.html">Portrait Sessions</a></li>
+        <li><a href="services.html">Fashion Photography</a></li>
+        <li><a href="services.html">Drone Coverage</a></li>
+        <li><a href="services.html">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });
+
+function submitBooking() {
+  const name    = document.getElementById('bf-name');
+  const email   = document.getElementById('bf-email');
+  const phone   = document.getElementById('bf-phone');
+  const message = document.getElementById('bf-message');
+  let valid = true;
+  [name, email, phone, message].forEach(f => {
+    if (!f.value.trim()) { f.style.borderColor = 'rgba(255,80,80,0.5)'; valid = false; }
+    else f.style.borderColor = '';
+  });
+  if (!valid) {
+    name.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  document.getElementById('bookingFormMain').style.display = 'none';
+  document.getElementById('bfSuccess').style.display = 'block';
+  document.querySelector('.book-form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>

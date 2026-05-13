@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Lazy Panda Photography — studio address, phone, email, business hours and Google Maps location in Thiruvananthapuram, Kerala.">
+<title>Contact | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background: var(--dark); }
+.page-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 40% 60%, rgba(201,168,76,0.07) 0%, transparent 55%); }
+
+/* ---- CONTACT LAYOUT ---- */
+#contact-main { background: var(--black); }
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px; align-items: start;
+  max-width: 1200px; margin: 0 auto;
+}
+.contact-sidebar {}
+.contact-block { margin-bottom: 44px; }
+.cb-label {
+  font-size: 0.6rem; letter-spacing: 0.42em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 12px; display: block;
+}
+.cb-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300; color: var(--white);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.cb-title em { font-style: italic; color: var(--gold-light); }
+.cb-text { font-size: 0.9rem; color: var(--gray); line-height: 1.9; }
+.contact-info-list { list-style: none; margin-top: 36px; }
+.ci-item {
+  display: flex; align-items: flex-start;
+  gap: 18px; padding: 20px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.ci-item:first-child { border-top: 1px solid rgba(201,168,76,0.08); }
+.ci-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.9rem; margin-top: 2px;
+}
+.ci-label {
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 5px; display: block;
+}
+.ci-val { font-family: var(--font-serif); font-size: 1rem; color: var(--white); line-height: 1.6; }
+.ci-note { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+.hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 24px; }
+.hours-item { padding: 14px 16px; background: var(--dark); }
+.hours-day { font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; display: block; }
+.hours-time { font-family: var(--font-serif); font-size: 0.95rem; color: var(--white); }
+.hours-item.closed .hours-time { color: var(--gray); }
+.contact-social-row { display: flex; gap: 10px; margin-top: 28px; }
+.cs-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  border: 1px solid rgba(201,168,76,0.18);
+  color: var(--gray); text-decoration: none;
+  font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: none;
+  transition: var(--transition);
+}
+.cs-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.05); }
+.cs-link i { font-size: 0.9rem; }
+
+/* ---- CONTACT FORM ---- */
+.contact-form-wrap {}
+.form-header { margin-bottom: 36px; }
+.form-header-label { font-size: 0.62rem; letter-spacing: 0.38em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 10px; }
+.form-header-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300; color: var(--white); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fg { display: flex; flex-direction: column; gap: 8px; }
+.fg.full { grid-column: 1 / -1; }
+.cf-submit {
+  width: 100%; padding: 18px; margin-top: 16px;
+  background: var(--gold); border: none;
+  color: var(--black); font-family: var(--font-sans);
+  font-size: 0.78rem; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 500;
+  cursor: none; transition: var(--transition);
+}
+.cf-submit:hover { background: var(--gold-light); }
+.cf-success {
+  display: none; text-align: center;
+  padding: 52px 32px;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.04);
+}
+.cf-success i { font-size: 3rem; color: var(--gold); display: block; margin-bottom: 20px; }
+.cf-success h3 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 300; color: var(--white); margin-bottom: 12px; }
+.cf-success p { color: var(--gray); font-size: 0.88rem; }
+.wa-contact-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; width: 100%; padding: 15px;
+  background: #25d366; color: white;
+  text-decoration: none; font-size: 0.75rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-top: 12px; transition: var(--transition); cursor: none;
+}
+.wa-contact-btn:hover { background: #1fb858; }
+
+/* ---- MAP ---- */
+#map-section { background: var(--dark); }
+.map-container {
+  max-width: 1400px; margin: 0 auto;
+  aspect-ratio: 21/8;
+  background: var(--dark-2);
+  border: 1px solid rgba(201,168,76,0.12);
+  position: relative; overflow: hidden;
+}
+.map-container::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.map-placeholder-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+}
+.map-pin-pulse {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-pin-pulse::before {
+  content: '';
+  position: absolute;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(201,168,76,0.1);
+  animation: mapPulse 2s ease infinite;
+}
+.map-pin-pulse::after {
+  content: '';
+  position: absolute;
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(201,168,76,0.05);
+  animation: mapPulse 2s 0.4s ease infinite;
+}
+@keyframes mapPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+}
+.map-pin-pulse i { font-size: 2.5rem; color: var(--gold); position: relative; z-index: 2; }
+.map-label { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: var(--white); letter-spacing: 0.12em; }
+.map-sub { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gray); text-transform: uppercase; }
+.map-directions {
+  margin-top: 20px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 24px;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold); text-decoration: none;
+  font-size: 0.68rem; letter-spacing: 0.22em;
+  text-transform: uppercase; transition: var(--transition); cursor: none;
+}
+.map-directions:hover { background: rgba(201,168,76,0.08); }
+
+/* ---- NEARBY / DIRECTIONS ---- */
+#nearby { background: var(--black); }
+.nearby-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+.nearby-card { background: var(--dark); padding: 36px 28px; position: relative; overflow: hidden; }
+.nearby-card::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--gold); transition:width 0.4s ease; }
+.nearby-card:hover::after { width:100%; }
+.nb-icon { font-size: 1.5rem; color: rgba(201,168,76,0.4); margin-bottom: 16px; display: block; transition: color 0.3s; }
+.nearby-card:hover .nb-icon { color: var(--gold); }
+.nb-name { font-family: var(--font-serif); font-size: 1.05rem; color: var(--white); margin-bottom: 8px; }
+.nb-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.8; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 52px; }
+  .nearby-grid { grid-template-columns: 1fr 1fr; }
+  .map-container { aspect-ratio: 16/9; }
+}
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .hours-grid { grid-template-columns: 1fr; }
+  .nearby-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .contact-social-row { flex-wrap: wrap; }
+  .map-container { aspect-ratio: 4/3; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" class="active" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Come Say Hello</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Let's Start a<br><em>Conversation</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">We'd love to hear about your vision. Reach us by form, phone, email or walk into the studio — we're always happy to talk photography.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- MAIN CONTACT -->
+<section id="contact-main" class="section-pad">
+  <div class="contact-layout">
+
+    <!-- SIDEBAR -->
+    <div class="contact-sidebar" data-aos="fade-right">
+      <div class="contact-block">
+        <span class="cb-label">Studio Details</span>
+        <h2 class="cb-title">Visit Our <em>Studio</em></h2>
+        <p class="cb-text">Our studio is open six days a week for consultations, portfolio viewings and walk-in enquiries. Studio sessions are by appointment — reach us ahead of your visit.</p>
+      </div>
+
+      <ul class="contact-info-list">
+        <li class="ci-item">
+          <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <span class="ci-label">Studio Address</span>
+            <div class="ci-val">42 Kowdiar Avenue<br>Thiruvananthapuram — 695 003<br>Kerala, India</div>
+            <div class="ci-note">Near Kowdiar Palace Junction</div>
+          </div>
+        </li>
+        <li class="ci-item">
+          <div class="ci-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <span class="ci-label">Phone / WhatsApp</span>
+            <div class="ci-val">+91 94470 00000</div>
+            <div class="ci-note">Mon–Sat, 9 AM – 7 PM</div>
+          </div>
+        </li>
+        <li class="ci-item">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <span class="ci-label">Email</span>
+            <div class="ci-val">hello@lazypandaphoto.com</div>
+            <div class="ci-note">We respond within 24 hours</div>
+          </div>
+        </li>
+        <li class="ci-item">
+          <div class="ci-icon"><i class="fas fa-camera"></i></div>
+          <div>
+            <span class="ci-label">Bookings</span>
+            <div class="ci-val">bookings@lazypandaphoto.com</div>
+            <div class="ci-note">For session enquiries & packages</div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- HOURS -->
+      <div style="margin-top:44px">
+        <span class="cb-label">Business Hours</span>
+        <div class="hours-grid">
+          <div class="hours-item">
+            <span class="hours-day">Monday – Friday</span>
+            <div class="hours-time">9:00 AM – 7:00 PM</div>
+          </div>
+          <div class="hours-item">
+            <span class="hours-day">Saturday</span>
+            <div class="hours-time">10:00 AM – 6:00 PM</div>
+          </div>
+          <div class="hours-item closed">
+            <span class="hours-day">Sunday</span>
+            <div class="hours-time">By Appointment</div>
+          </div>
+          <div class="hours-item">
+            <span class="hours-day">Public Holidays</span>
+            <div class="hours-time">Call to Confirm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div style="margin-top:40px">
+        <span class="cb-label" style="margin-bottom:16px">Follow Us</span>
+        <div class="contact-social-row">
+          <a href="#" class="cs-link"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#" class="cs-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="#" class="cs-link"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap" data-aos="fade-left" data-aos-delay="100">
+      <div class="form-header">
+        <span class="form-header-label">Send a Message</span>
+        <div class="form-header-title">We'd Love to Hear From You</div>
+      </div>
+
+      <div id="contactForm">
+        <div class="form-grid">
+          <div class="fg">
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-control" placeholder="Your first name" required>
+          </div>
+          <div class="fg">
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-control" placeholder="Your last name">
+          </div>
+          <div class="fg">
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-control" placeholder="your@email.com" required>
+          </div>
+          <div class="fg">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX">
+          </div>
+          <div class="fg">
+            <label class="form-label">I'm Interested In</label>
+            <select class="form-control">
+              <option value="">Select a service</option>
+              <option>Wedding Photography</option>
+              <option>Pre-Wedding Shoot</option>
+              <option>Portrait Session</option>
+              <option>Fashion Photography</option>
+              <option>Product Photography</option>
+              <option>Event Coverage</option>
+              <option>Drone Photography</option>
+              <option>Cinematic Videography</option>
+              <option>Baby & Family Shoot</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="form-label">How Did You Find Us?</label>
+            <select class="form-control">
+              <option value="">Select one</option>
+              <option>Instagram</option>
+              <option>Google Search</option>
+              <option>Friend / Family Referral</option>
+              <option>Wedding Platform</option>
+              <option>Facebook</option>
+              <option>YouTube</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label class="form-label">Your Message *</label>
+            <textarea class="form-control" placeholder="Tell us about your project, event date, location, or any questions you have. The more you share, the better we can help!" required></textarea>
+          </div>
+        </div>
+        <button type="button" class="cf-submit" onclick="submitContact()">Send Message &nbsp; →</button>
+        <a href="https://wa.me/919447000000?text=Hi%20Lazy%20Panda%20Photography!%20I'd%20like%20to%20enquire%20about%20a%20booking." class="wa-contact-btn" target="_blank">
+          <i class="fab fa-whatsapp" style="font-size:1.1rem"></i> Or Chat Directly on WhatsApp
+        </a>
+      </div>
+
+      <div class="cf-success" id="cfSuccess">
+        <i class="fas fa-check-circle"></i>
+        <h3>Message Sent!</h3>
+        <p>Thank you for reaching out to Lazy Panda Photography. We'll review your enquiry and get back to you within 24 hours — usually sooner!</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map-section" class="section-pad" style="padding-top:0">
+  <div class="map-container">
+    <div class="map-placeholder-inner">
+      <div class="map-pin-pulse">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <div class="map-label">Lazy Panda Photography</div>
+      <div class="map-sub">42 Kowdiar Avenue, Thiruvananthapuram — 695 003</div>
+      <a href="https://maps.google.com" target="_blank" class="map-directions">
+        <i class="fas fa-directions"></i> Get Directions
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEARBY -->
+<section id="nearby" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Getting Here</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Finding the <em>Studio</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Well-connected and easy to reach — here's how to get to us from key landmarks.</p>
+  <div class="nearby-grid">
+    <div class="nearby-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-plane nb-icon"></i>
+      <div class="nb-name">Trivandrum International Airport</div>
+      <p class="nb-desc">~12 km from the studio. Approximately 25–35 minutes by cab. Pre-booking recommended on peak days.</p>
+    </div>
+    <div class="nearby-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-train nb-icon"></i>
+      <div class="nb-name">Thiruvananthapuram Central Railway Station</div>
+      <p class="nb-desc">~5 km from the studio. 15–20 minutes by auto-rickshaw or cab. Frequent services from all major cities.</p>
+    </div>
+    <div class="nearby-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-bus nb-icon"></i>
+      <div class="nb-name">KSRTC Central Bus Station</div>
+      <p class="nb-desc">~6 km from the studio. Auto or cab recommended. City bus Route 6 stops near Kowdiar Junction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="services.html">Wedding Photography</a></li>
+        <li><a href="services.html">Pre-Wedding Shoots</a></li>
+        <li><a href="services.html">Portrait Sessions</a></li>
+        <li><a href="services.html">Fashion Photography</a></li>
+        <li><a href="services.html">Drone Coverage</a></li>
+        <li><a href="services.html">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });
+function submitContact() {
+  const required = document.querySelectorAll('#contactForm [required]');
+  let valid = true;
+  required.forEach(f => {
+    if (!f.value.trim()) { f.style.borderColor = 'rgba(255,80,80,0.5)'; valid = false; }
+    else f.style.borderColor = '';
+  });
+  if (!valid) return;
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('cfSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>

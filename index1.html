@@ -1,0 +1,3284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lazy Panda Photography – Capturing Moments. Creating Stories. Premium wedding, portrait, fashion & cinematic photography studio.">
+<title>Lazy Panda Photography | Capturing Moments. Creating Stories.</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- AOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+
+<style>
+/* ==============================
+   CSS VARIABLES & RESET
+============================== */
+:root {
+  --black: #0a0a0a;
+  --dark: #111111;
+  --dark-2: #1a1a1a;
+  --dark-3: #222222;
+  --gray: #888888;
+  --gray-light: #cccccc;
+  --white: #f5f0eb;
+  --pure-white: #ffffff;
+  --gold: #c9a84c;
+  --gold-light: #e4c97e;
+  --gold-dark: #a07830;
+  --gold-glow: rgba(201,168,76,0.15);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', sans-serif;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --shadow-gold: 0 0 40px rgba(201,168,76,0.12);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ==============================
+   CUSTOM CURSOR
+============================== */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: normal;
+}
+.cursor-follower {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transition: all 0.18s ease;
+  mix-blend-mode: normal;
+}
+.cursor-follower.hover { transform: scale(2); border-color: var(--gold); background: rgba(201,168,76,0.07); }
+
+/* ==============================
+   LOADING SCREEN
+============================== */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 99997;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.12em;
+}
+.loader-logo span { color: var(--gold); }
+.loader-bar {
+  width: 200px; height: 1px;
+  background: var(--dark-3);
+  position: relative;
+  overflow: hidden;
+}
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: loaderSweep 1.6s ease forwards;
+}
+@keyframes loaderSweep {
+  to { left: 100%; }
+}
+.loader-pct {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+/* ==============================
+   PARTICLES CANVAS
+============================== */
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* ==============================
+   NAVBAR
+============================== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 22px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(20px);
+  padding: 14px 5%;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+.nav-logo-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.08em;
+}
+.nav-logo-name span { color: var(--gold); }
+.nav-logo-tagline {
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-top: 3px;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray-light);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.btn-gold {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: none;
+}
+.btn-gold:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+.btn-gold-fill {
+  padding: 10px 24px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: none;
+}
+.btn-gold-fill:hover { background: var(--gold-light); border-color: var(--gold-light); }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 26px; height: 1px;
+  background: var(--white);
+  transition: var(--transition);
+}
+
+/* ==============================
+   HERO SECTION
+============================== */
+#hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-slides {
+  position: absolute; inset: 0;
+}
+.hero-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  background-size: cover;
+  background-position: center;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.7) 0%,
+    rgba(0,0,0,0.3) 50%,
+    rgba(0,0,0,0.6) 100%
+  );
+}
+/* Placeholder hero images using gradient art */
+.hero-slide-1 { background: linear-gradient(120deg, #0a0a0a 0%, #1a1209 40%, #0d0a05 100%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3CradialGradient id='g' cx='30%25' cy='40%25'%3E%3Cstop offset='0' stop-color='%23c9a84c' stop-opacity='.18'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' width='800' height='600'/%3E%3C/svg%3E"); background-blend-mode: screen; }
+.hero-slide-2 { background: linear-gradient(200deg, #0a0a0a 0%, #0d0d14 50%, #0a0808 100%); }
+.hero-slide-3 { background: linear-gradient(60deg, #0a0a0a 0%, #120d08 60%, #0a0a0a 100%); }
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeUp 1s 0.8s forwards;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 1s 1.1s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--gray-light);
+  letter-spacing: 0.08em;
+  margin-bottom: 52px;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeUp 1s 1.4s forwards;
+}
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeUp 1s 1.7s forwards;
+}
+.hero-buttons .btn-gold, .hero-buttons .btn-gold-fill {
+  padding: 16px 40px;
+  font-size: 0.78rem;
+}
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: heroFadeUp 1s 2.2s forwards;
+}
+.hero-scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  animation: scrollPulse 2s ease infinite;
+}
+.hero-scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+.hero-social {
+  position: absolute;
+  left: 40px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  animation: heroFadeUp 1s 2s forwards;
+}
+.hero-social a {
+  color: var(--gray);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.3s;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.15em;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+.hero-social a:hover { color: var(--gold); }
+.hero-counter {
+  position: absolute;
+  bottom: 40px; right: 5%;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.2em;
+}
+.hero-counter span { color: var(--gold); }
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Slide nav dots */
+.hero-dots {
+  position: absolute;
+  bottom: 44px; left: 50%;
+  transform: translateX(-50%) translateX(-60px);
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+.hero-dot {
+  width: 24px; height: 2px;
+  background: rgba(255,255,255,0.25);
+  transition: var(--transition);
+  cursor: none;
+}
+.hero-dot.active { background: var(--gold); width: 40px; }
+
+/* ==============================
+   SECTION GLOBALS
+============================== */
+section { position: relative; z-index: 1; }
+.section-pad { padding: 120px 5%; }
+.section-pad-sm { padding: 80px 5%; }
+.gold-divider {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 20px auto 0;
+}
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  text-align: center;
+  color: var(--white);
+  line-height: 1.12;
+  margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--gold-light); }
+.section-desc {
+  text-align: center;
+  color: var(--gray);
+  max-width: 560px;
+  margin: 0 auto 70px;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+.gold-line {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto 20px;
+}
+
+/* ==============================
+   ABOUT SECTION
+============================== */
+#about { background: var(--dark); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-image-wrap {
+  position: relative;
+}
+.about-img-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, var(--dark-3) 0%, #1c1508 100%);
+  position: relative;
+  overflow: hidden;
+}
+.about-img-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(201,168,76,0.06) 0%, transparent 50%);
+}
+.about-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+.about-img-placeholder i { font-size: 3rem; opacity: 0.4; }
+.about-gold-frame {
+  position: absolute;
+  top: -16px; right: -16px;
+  bottom: 16px; left: 16px;
+  border: 1px solid rgba(201,168,76,0.25);
+  pointer-events: none;
+}
+.about-badge {
+  position: absolute;
+  bottom: -20px; left: -20px;
+  background: var(--black);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.about-badge-num {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--gold);
+  font-weight: 300;
+  line-height: 1;
+}
+.about-badge-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.about-content { padding: 20px 0; }
+.about-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.about-title em { color: var(--gold-light); font-style: italic; }
+.about-text {
+  color: var(--gray);
+  font-size: 0.92rem;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.about-signature {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--gold);
+  margin: 32px 0 16px;
+}
+.about-founder-role {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 60px;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.stat-item {
+  padding: 36px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(201,168,76,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-glow);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.stat-item:hover::before { opacity: 1; }
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* ==============================
+   SERVICES SECTION
+============================== */
+#services { background: var(--black); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--dark);
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: var(--transition);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 0;
+  background: linear-gradient(to top, rgba(201,168,76,0.08) 0%, transparent 100%);
+  transition: height 0.5s ease;
+}
+.service-card:hover::before { height: 100%; }
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.5s ease;
+}
+.service-card:hover::after { width: 100%; }
+.service-icon {
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.service-card:hover .service-icon { transform: scale(1.15); }
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+.service-card:hover .service-name { color: var(--gold-light); }
+.service-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.service-price {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+}
+.service-link {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--gray);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 3px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.service-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ==============================
+   PORTFOLIO SECTION
+============================== */
+#portfolio { background: var(--dark); }
+.portfolio-filters {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-bottom: 52px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 9px 22px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gray);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: var(--transition);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
+.portfolio-grid {
+  columns: 3;
+  column-gap: 3px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.portfolio-item {
+  break-inside: avoid;
+  margin-bottom: 3px;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.portfolio-img {
+  width: 100%;
+  display: block;
+  transition: transform 0.7s ease;
+}
+.portfolio-item:hover .portfolio-img { transform: scale(1.06); }
+.portfolio-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+}
+.portfolio-item:hover .portfolio-overlay { opacity: 1; }
+.portfolio-info { }
+.portfolio-cat {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.portfolio-title-small {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--white);
+}
+.portfolio-expand {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: all 0.4s ease;
+  background: rgba(0,0,0,0.3);
+}
+.portfolio-item:hover .portfolio-expand { opacity: 1; }
+/* Placeholder portfolio images */
+.ph-port {
+  width: 100%;
+  display: block;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+}
+.ph-port::before {
+  content: '';
+  position: absolute; inset: 0;
+}
+.ph-1 { aspect-ratio: 2/3; background: linear-gradient(145deg, #1a1209 0%, #0d0a05 100%); }
+.ph-2 { aspect-ratio: 3/4; background: linear-gradient(145deg, #0d1015 0%, #0a0d0f 100%); }
+.ph-3 { aspect-ratio: 1/1; background: linear-gradient(145deg, #120e0a 0%, #0a0a0a 100%); }
+.ph-4 { aspect-ratio: 4/5; background: linear-gradient(145deg, #0f120e 0%, #0a0c0a 100%); }
+.ph-5 { aspect-ratio: 2/3; background: linear-gradient(145deg, #100d13 0%, #0a080d 100%); }
+.ph-6 { aspect-ratio: 3/2; background: linear-gradient(145deg, #14100a 0%, #0d0b08 100%); }
+.ph-7 { aspect-ratio: 1/1; background: linear-gradient(145deg, #0d1010 0%, #0a0d0d 100%); }
+.ph-8 { aspect-ratio: 4/5; background: linear-gradient(145deg, #12100d 0%, #0a0a0a 100%); }
+.ph-inner {
+  position: absolute; inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+.ph-inner i { font-size: 2.5rem; color: rgba(201,168,76,0.2); }
+.ph-inner span {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: rgba(201,168,76,0.35);
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+/* Glow dots on placeholders */
+.ph-port::after {
+  content: '';
+  position: absolute;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  top: 30%; left: 30%;
+}
+
+/* ==============================
+   CINEMATIC SHOWCASE
+============================== */
+#cinematic {
+  background: var(--black);
+  padding: 0;
+  overflow: hidden;
+}
+.cinematic-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cinematic-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, #0a0a0a 0%, #120f08 50%, #0a0a0a 100%);
+}
+.cinematic-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.07) 0%, transparent 40%);
+}
+.cinematic-reel {
+  position: absolute; inset: 0;
+  display: flex;
+  align-items: center;
+}
+.film-strip {
+  display: flex;
+  gap: 3px;
+  animation: filmRoll 20s linear infinite;
+  opacity: 0.12;
+}
+.film-frame {
+  width: 140px; height: 100%;
+  background: var(--dark-2);
+  flex-shrink: 0;
+}
+@keyframes filmRoll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.cinematic-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 80px 20px;
+}
+.cinematic-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+}
+.cinematic-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.cinematic-title em { font-style: italic; color: var(--gold-light); }
+.cinematic-desc {
+  color: var(--gray);
+  font-size: 0.95rem;
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 40px;
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  cursor: none;
+}
+.play-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); color: var(--gold); }
+.play-btn i { font-size: 1rem; color: var(--gold); }
+.bts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 1300px;
+  margin: 3px auto 0;
+}
+.bts-item {
+  aspect-ratio: 16/10;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.bts-item::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(10,10,10,0.8) 0%, rgba(18,14,8,0.5) 100%);
+  z-index: 1;
+  transition: opacity 0.4s;
+}
+.bts-item:hover::before { opacity: 0.5; }
+.bts-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 70%);
+}
+.bts-label {
+  position: absolute;
+  bottom: 24px; left: 24px;
+  z-index: 2;
+}
+.bts-cat {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.bts-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--white);
+}
+.bts-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px; height: 52px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+  z-index: 2;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.bts-item:hover .bts-play { opacity: 1; border-color: var(--gold); color: var(--gold); }
+
+/* ==============================
+   BEFORE/AFTER SLIDER
+============================== */
+#before-after {
+  background: var(--dark);
+  padding: 100px 5%;
+}
+.ba-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.ba-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  cursor: none;
+  user-select: none;
+}
+.ba-before, .ba-after {
+  position: absolute; inset: 0;
+}
+.ba-before {
+  background: linear-gradient(120deg, #1a1209 0%, #0d0a05 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ba-after {
+  background: linear-gradient(120deg, #111820 0%, #0a0e14 100%);
+  clip-path: inset(0 50% 0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: clip-path 0.05s ease;
+}
+.ba-placeholder {
+  position: absolute; inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+.ba-placeholder i { font-size: 4rem; }
+.ba-placeholder span {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+.ba-before .ba-placeholder { color: rgba(201,168,76,0.35); }
+.ba-after .ba-placeholder { color: rgba(100,160,220,0.35); }
+.ba-divider {
+  position: absolute;
+  top: 0; left: 50%;
+  height: 100%; width: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.ba-handle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px; height: 48px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-size: 0.85rem;
+  z-index: 11;
+  box-shadow: 0 0 20px rgba(201,168,76,0.4);
+}
+.ba-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.ba-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* ==============================
+   TESTIMONIALS
+============================== */
+#testimonials { background: var(--black); }
+.testimonials-swiper {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: visible;
+  padding-bottom: 60px;
+}
+.testimonial-card {
+  background: var(--dark);
+  padding: 52px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px; left: 30px;
+  font-family: var(--font-serif);
+  font-size: 12rem;
+  color: rgba(201,168,76,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.t-stars {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  margin-bottom: 28px;
+}
+.t-text {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+.t-client {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.t-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dark-3), var(--dark-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(201,168,76,0.25);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+.t-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--white);
+  font-weight: 400;
+}
+.t-event {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.swiper-pagination-bullet { background: var(--gray) !important; opacity: 0.5; }
+.swiper-pagination-bullet-active { background: var(--gold) !important; opacity: 1; }
+
+/* ==============================
+   PRICING
+============================== */
+#pricing { background: var(--dark); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pricing-card {
+  background: var(--black);
+  padding: 52px 40px;
+  position: relative;
+  transition: var(--transition);
+  overflow: hidden;
+}
+.pricing-card.featured {
+  background: var(--dark-2);
+  border: 1px solid rgba(201,168,76,0.3);
+  z-index: 2;
+}
+.pricing-badge {
+  position: absolute;
+  top: 24px; right: 24px;
+  padding: 5px 14px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pricing-tier {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+.pricing-name {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.pricing-price {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.pricing-price sup { font-size: 1.4rem; vertical-align: top; margin-top: 12px; display: inline-block; }
+.pricing-period {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+.pricing-divider {
+  width: 100%; height: 1px;
+  background: rgba(201,168,76,0.12);
+  margin-bottom: 32px;
+}
+.pricing-features { list-style: none; margin-bottom: 44px; }
+.pricing-features li {
+  padding: 10px 0;
+  color: var(--gray);
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pricing-features li i {
+  color: var(--gold);
+  font-size: 0.7rem;
+  width: 16px;
+}
+.pricing-cta {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: var(--transition);
+}
+.pricing-card:not(.featured) .pricing-cta {
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+}
+.pricing-card:not(.featured) .pricing-cta:hover { background: rgba(201,168,76,0.08); }
+.pricing-card.featured .pricing-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 500;
+}
+.pricing-card.featured .pricing-cta:hover { background: var(--gold-light); }
+
+/* ==============================
+   BOOKING FORM
+============================== */
+#booking {
+  background: var(--black);
+  position: relative;
+}
+.booking-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+.booking-info { }
+.booking-info-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.booking-info-title em { color: var(--gold-light); font-style: italic; }
+.booking-info-text {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  margin-bottom: 48px;
+}
+.booking-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.booking-contact-icon {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.booking-contact-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 5px;
+}
+.booking-contact-val {
+  color: var(--gray-light);
+  font-size: 0.88rem;
+}
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  background: #25d366;
+  color: white;
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 20px;
+  transition: var(--transition);
+  cursor: none;
+}
+.wa-btn:hover { background: #1fb858; }
+.booking-form-wrap { }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group.full { grid-column: 1 / -1; }
+.form-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.form-control {
+  width: 100%;
+  background: var(--dark);
+  border: 1px solid rgba(201,168,76,0.15);
+  color: var(--white);
+  padding: 14px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 300;
+  transition: border-color 0.3s;
+  outline: none;
+  appearance: none;
+}
+.form-control:focus {
+  border-color: rgba(201,168,76,0.5);
+  background: rgba(201,168,76,0.03);
+}
+.form-control::placeholder { color: var(--gray); }
+textarea.form-control { resize: vertical; min-height: 120px; }
+select.form-control option { background: var(--dark-2); }
+.form-submit {
+  margin-top: 24px;
+  width: 100%;
+  padding: 18px;
+  background: var(--gold);
+  border: none;
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: none;
+  transition: var(--transition);
+}
+.form-submit:hover { background: var(--gold-light); }
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.05);
+}
+.form-success i { font-size: 2.5rem; color: var(--gold); margin-bottom: 16px; display: block; }
+.form-success p {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--white);
+}
+
+/* ==============================
+   SOCIAL / INSTAGRAM
+============================== */
+#social { background: var(--dark); }
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  max-width: 1300px;
+  margin: 0 auto 52px;
+}
+.insta-item {
+  aspect-ratio: 1;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.insta-item::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(201,168,76,0.12);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.insta-item:hover::before { opacity: 1; }
+.insta-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.15);
+  z-index: 0;
+  transition: all 0.3s;
+}
+.insta-item:hover .insta-icon { color: var(--gold); transform: translate(-50%, -50%) scale(1.2); z-index: 2; }
+.insta-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.social-links-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.social-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  cursor: none;
+}
+.social-follow-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+.social-follow-btn i { font-size: 0.95rem; }
+
+/* ==============================
+   BLOG
+============================== */
+#blog { background: var(--black); }
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.blog-card {
+  background: var(--dark);
+  overflow: hidden;
+  cursor: none;
+  transition: var(--transition);
+}
+.blog-card:hover { background: var(--dark-2); }
+.blog-img {
+  aspect-ratio: 16/10;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+}
+.blog-card.featured .blog-img { aspect-ratio: 4/3; }
+.blog-img-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.blog-img-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: rgba(201,168,76,0.2);
+}
+.blog-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+}
+.blog-content { padding: 32px 28px; }
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.blog-cat {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.blog-date {
+  font-size: 0.62rem;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+.blog-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+.blog-card:hover .blog-title { color: var(--gold-light); }
+.blog-card.featured .blog-title { font-size: 1.6rem; }
+.blog-excerpt {
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-read-more {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 3px;
+  transition: border-color 0.3s;
+}
+.blog-read-more:hover { border-color: var(--gold); }
+
+/* ==============================
+   FAQ
+============================== */
+#faq { background: var(--dark); }
+.faq-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  overflow: hidden;
+}
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  cursor: none;
+  transition: color 0.3s;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 400;
+}
+.faq-question:hover { color: var(--gold-light); }
+.faq-question.open { color: var(--gold-light); }
+.faq-icon {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-question.open .faq-icon { transform: rotate(45deg); background: rgba(201,168,76,0.1); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.faq-answer-inner {
+  padding: 0 0 24px;
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+
+/* ==============================
+   CONTACT
+============================== */
+#contact { background: var(--black); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.contact-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.contact-info-group { }
+.contact-info-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.contact-info-val {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  line-height: 1.6;
+}
+.contact-hours {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.9;
+}
+.map-placeholder {
+  aspect-ratio: 16/10;
+  background: var(--dark);
+  border: 1px solid rgba(201,168,76,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(201,168,76,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.map-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.map-placeholder i { font-size: 3rem; }
+.map-placeholder span {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+.map-placeholder p { font-size: 0.75rem; color: rgba(201,168,76,0.2); letter-spacing: 0.1em; }
+
+/* ==============================
+   AWARDS / CLIENTS
+============================== */
+#awards { background: var(--dark); padding: 80px 5%; }
+.awards-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.awards-title {
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border: 1px solid rgba(201,168,76,0.1);
+}
+.award-item {
+  padding: 32px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.award-item:last-child { border-right: none; }
+.award-item:hover { background: rgba(201,168,76,0.04); }
+.award-icon { font-size: 1.8rem; color: rgba(201,168,76,0.4); margin-bottom: 12px; display: block; }
+.award-name {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--gray);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ==============================
+   FLOATING WHATSAPP
+============================== */
+.wa-float {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  width: 54px; height: 54px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+  text-decoration: none;
+  z-index: 500;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: waFloat 3s ease infinite;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+@keyframes waFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.wa-float:hover { animation: none; }
+
+/* ==============================
+   BACK TO TOP
+============================== */
+.back-top {
+  position: fixed;
+  bottom: 32px; left: 32px;
+  width: 44px; height: 44px;
+  border: 1px solid rgba(201,168,76,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.75rem;
+  cursor: none;
+  z-index: 500;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  background: var(--black);
+}
+.back-top.show { opacity: 1; transform: translateY(0); }
+.back-top:hover { background: var(--gold); color: var(--black); }
+
+/* ==============================
+   FOOTER
+============================== */
+footer {
+  background: var(--dark-2);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  padding: 80px 5% 32px;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.footer-brand { }
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.footer-logo span { color: var(--gold); }
+.footer-tagline {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+}
+.footer-desc {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+.footer-social {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: var(--transition);
+  cursor: none;
+}
+.footer-social:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+.footer-col-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+  text-decoration: none;
+  color: var(--gray);
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.newsletter-input {
+  background: var(--dark);
+  border: 1px solid rgba(201,168,76,0.15);
+  color: var(--white);
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.83rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.newsletter-input:focus { border-color: rgba(201,168,76,0.4); }
+.newsletter-input::placeholder { color: var(--gray); }
+.newsletter-btn {
+  padding: 12px;
+  background: var(--gold);
+  border: none;
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: none;
+  transition: var(--transition);
+}
+.newsletter-btn:hover { background: var(--gold-light); }
+.footer-bottom {
+  border-top: 1px solid rgba(201,168,76,0.08);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+}
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+.footer-legal a {
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+.footer-legal a:hover { color: var(--gold); }
+
+/* ==============================
+   NEWSLETTER POPUP
+============================== */
+.popup-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(8px);
+}
+.popup-overlay.show { opacity: 1; visibility: visible; }
+.popup-box {
+  background: var(--dark);
+  max-width: 480px;
+  width: 90%;
+  padding: 56px 48px;
+  position: relative;
+  border: 1px solid rgba(201,168,76,0.2);
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+}
+.popup-overlay.show .popup-box { transform: translateY(0); }
+.popup-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 1.1rem;
+  cursor: none;
+  transition: color 0.3s;
+}
+.popup-close:hover { color: var(--gold); }
+.popup-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+.popup-title {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.popup-title em { font-style: italic; color: var(--gold-light); }
+.popup-text {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.popup-form { display: flex; flex-direction: column; gap: 12px; }
+.popup-skip {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.68rem;
+  color: var(--gray);
+  letter-spacing: 0.15em;
+}
+.popup-skip button {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-decoration: underline;
+  cursor: none;
+  transition: color 0.3s;
+}
+.popup-skip button:hover { color: var(--gold); }
+
+/* ==============================
+   MOBILE MENU
+============================== */
+.mobile-menu {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu .nav-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+.mobile-menu .nav-links a { font-size: 1.1rem; }
+
+/* ==============================
+   LIGHTBOX
+============================== */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox-inner {
+  max-width: 800px;
+  width: 90%;
+  aspect-ratio: 4/3;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.lightbox-close {
+  position: absolute;
+  top: -48px; right: 0;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  width: 36px; height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: rgba(201,168,76,0.3);
+}
+.lightbox-content i { font-size: 4rem; }
+.lightbox-content span {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+
+/* ==============================
+   TIMELINE SECTION
+============================== */
+#timeline { background: var(--dark); padding: 100px 5%; }
+.timeline-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.timeline-wrap::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 20%, rgba(201,168,76,0.3) 80%, transparent);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 52px;
+  position: relative;
+}
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+.timeline-item:nth-child(even) .timeline-content { text-align: right; }
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
+  width: 12px; height: 12px;
+  border: 2px solid var(--gold);
+  background: var(--dark);
+  border-radius: 50%;
+  z-index: 2;
+}
+.timeline-year {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.timeline-content {
+  flex: 1;
+  padding-bottom: 12px;
+}
+.timeline-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.timeline-text {
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.timeline-spacer { flex: 1; }
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr; gap: 52px; }
+  .about-image-wrap { max-width: 500px; margin: 0 auto; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { columns: 2; }
+  .bts-grid { grid-template-columns: repeat(2, 1fr); }
+  .bts-grid .bts-item:last-child { grid-column: 1 / -1; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 500px; }
+  .pricing-card.featured { transform: none; }
+  .booking-inner { grid-template-columns: 1fr; gap: 52px; }
+  .instagram-grid { grid-template-columns: repeat(4, 1fr); }
+  .blog-grid { grid-template-columns: 1fr; max-width: 600px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .awards-grid { grid-template-columns: repeat(3, 1fr); }
+  .timeline-wrap::before { left: 0; }
+  .timeline-item { flex-direction: column; gap: 0; padding-left: 36px; }
+  .timeline-item:nth-child(even) { flex-direction: column; }
+  .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+  .timeline-dot { left: 0; transform: none; }
+  .timeline-spacer { display: none; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .hero-social { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { columns: 1; }
+  .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .awards-grid { grid-template-columns: repeat(2, 1fr); }
+  .ba-container { aspect-ratio: 4/3; }
+  .section-pad { padding: 80px 5%; }
+}
+@media (max-width: 480px) {
+  .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .bts-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div class="loader-pct" id="loaderPct">Loading...</div>
+</div>
+
+<!-- PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose"><i class="fas fa-times"></i></button>
+    <span class="popup-label">Exclusive Offer</span>
+    <h3 class="popup-title">Get <em>10% Off</em> Your First Booking</h3>
+    <p class="popup-text">Subscribe to our newsletter and receive exclusive photography tips, behind-the-scenes stories, and special offers.</p>
+    <div class="popup-form">
+      <input type="email" class="newsletter-input" placeholder="Your email address">
+      <button class="newsletter-btn">Claim My Discount</button>
+    </div>
+    <div class="popup-skip"><button id="popupSkip">No thanks, I'll pay full price</button></div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="#about" onclick="closeMobile()">About</a></li>
+    <li><a href="#services" onclick="closeMobile()">Services</a></li>
+    <li><a href="#portfolio" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="#pricing" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="#blog" onclick="closeMobile()">Blog</a></li>
+    <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="#booking" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#portfolio" class="btn-gold">View Work</a>
+    <a href="#booking" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="hero-slide hero-slide-1 active"></div>
+    <div class="hero-slide hero-slide-2"></div>
+    <div class="hero-slide hero-slide-3"></div>
+  </div>
+
+  <div class="hero-social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">YouTube</a>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Lazy Panda Photography &nbsp;·&nbsp; Est. 2015</p>
+    <h1 class="hero-title">Every Frame<br>Tells a <em>Story</em></h1>
+    <p class="hero-subtitle">Capturing Moments. Creating Stories.</p>
+    <div class="hero-buttons">
+      <a href="#booking" class="btn-gold-fill">Book a Session</a>
+      <a href="#portfolio" class="btn-gold">View Portfolio</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll</span>
+  </div>
+
+  <div class="hero-dots">
+    <div class="hero-dot active" onclick="goSlide(0)"></div>
+    <div class="hero-dot" onclick="goSlide(1)"></div>
+    <div class="hero-dot" onclick="goSlide(2)"></div>
+  </div>
+
+  <div class="hero-counter"><span id="slideNum">01</span> / 03</div>
+</section>
+
+<!-- ============== ABOUT ============== -->
+<section id="about" class="section-pad">
+  <div class="about-grid">
+    <div class="about-image-wrap" data-aos="fade-right" data-aos-duration="900">
+      <div class="about-img-frame">
+        <div class="about-img-placeholder">
+          <i class="fas fa-camera"></i>
+          <span>Studio Portrait</span>
+        </div>
+      </div>
+      <div class="about-gold-frame"></div>
+      <div class="about-badge">
+        <div class="about-badge-num">10+</div>
+        <div class="about-badge-label">Years of Excellence</div>
+      </div>
+    </div>
+
+    <div class="about-content" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+      <span class="about-label">Our Story</span>
+      <h2 class="about-title">Where Art Meets<br><em>Authentic Emotion</em></h2>
+      <p class="about-text">We believe every photograph is a doorway to a memory — a frozen heartbeat, an unspoken feeling, a chapter in someone's irreplaceable story. Lazy Panda Photography was born from a deep love for human connection and the art of visual storytelling.</p>
+      <p class="about-text">Founded by Arjun Mehta, our studio blends cinematic precision with candid warmth. Whether it's the first glance at the altar, the chaos of a fashion set, or the quiet joy of a family portrait — we find the extraordinary in every ordinary moment.</p>
+      <div class="about-signature">Arjun Mehta</div>
+      <div class="about-founder-role">Founder & Lead Photographer</div>
+    </div>
+  </div>
+
+  <div class="stats-grid" data-aos="fade-up" data-aos-delay="200">
+    <div class="stat-item">
+      <div class="stat-number counter" data-target="10">0</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number counter" data-target="850">0</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number counter" data-target="1200">0</div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number counter" data-target="28">0</div>
+      <div class="stat-label">Awards Won</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SERVICES ============== -->
+<section id="services" class="section-pad">
+  <p class="section-label" data-aos="fade-up">What We Offer</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our <em>Services</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">From intimate portraits to grand cinematic productions — each service is crafted with uncompromising artistry and personal attention.</p>
+
+  <div class="services-grid">
+    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-ring service-icon"></i>
+      <h3 class="service-name">Wedding Photography</h3>
+      <p class="service-desc">Timeless documentation of your most cherished day — from vows to revelry, every tear and every laugh preserved forever.</p>
+      <span class="service-price">Starting from ₹35,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-heart service-icon"></i>
+      <h3 class="service-name">Pre-Wedding Shoots</h3>
+      <p class="service-desc">Romantic, cinematic storytelling for couples — crafting visual narratives that celebrate your unique love story.</p>
+      <span class="service-price">Starting from ₹18,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-user-circle service-icon"></i>
+      <h3 class="service-name">Portrait Photography</h3>
+      <p class="service-desc">Striking individual and group portraits that reveal character, strength, and authentic personality with editorial elegance.</p>
+      <span class="service-price">Starting from ₹8,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-tshirt service-icon"></i>
+      <h3 class="service-name">Fashion Photography</h3>
+      <p class="service-desc">High-concept editorial and commercial fashion shoots — collaborating with designers, stylists and talent to create iconic imagery.</p>
+      <span class="service-price">Starting from ₹22,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-box service-icon"></i>
+      <h3 class="service-name">Product Photography</h3>
+      <p class="service-desc">Clean, compelling product visuals for e-commerce and branding — transforming objects into desire-inducing stories.</p>
+      <span class="service-price">Starting from ₹5,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-calendar-alt service-icon"></i>
+      <h3 class="service-name">Event Coverage</h3>
+      <p class="service-desc">Corporate events, grand celebrations, and intimate gatherings — comprehensive documentation with a journalist's eye.</p>
+      <span class="service-price">Starting from ₹15,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-drone service-icon"></i>
+      <h3 class="service-name">Drone Photography</h3>
+      <p class="service-desc">Breathtaking aerial perspectives that reveal the world from above — cinematic drone footage and stills for events and locations.</p>
+      <span class="service-price">Starting from ₹12,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-film service-icon"></i>
+      <h3 class="service-name">Cinematic Videography</h3>
+      <p class="service-desc">Emotion-driven films and highlight reels that go beyond documentation — crafted with narrative structure and cinematic soul.</p>
+      <span class="service-price">Starting from ₹45,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+    <div class="service-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-baby service-icon"></i>
+      <h3 class="service-name">Baby & Family Shoots</h3>
+      <p class="service-desc">Warm, authentic family portraits and newborn sessions that capture fleeting moments your family will treasure for generations.</p>
+      <span class="service-price">Starting from ₹10,000</span>
+      <a href="#booking" class="service-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PORTFOLIO ============== -->
+<section id="portfolio" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Our Work</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">The <em>Portfolio</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">A curated collection of our finest moments — each image a chapter in an ongoing story of beauty, emotion, and artistry.</p>
+
+  <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="180">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Weddings</button>
+    <button class="filter-btn">Portraits</button>
+    <button class="filter-btn">Fashion</button>
+    <button class="filter-btn">Events</button>
+    <button class="filter-btn">Nature</button>
+    <button class="filter-btn">Commercial</button>
+  </div>
+
+  <div class="portfolio-grid" data-aos="fade-up" data-aos-delay="200">
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-1"><div class="ph-inner"><i class="fas fa-camera"></i><span>Wedding Story</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Weddings</span><div class="portfolio-title-small">The Sharma Wedding</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-2"><div class="ph-inner"><i class="fas fa-portrait"></i><span>Fashion Capture</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Fashion</span><div class="portfolio-title-small">Editorial Collection</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-3"><div class="ph-inner"><i class="fas fa-user"></i><span>Portrait Session</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Portraits</span><div class="portfolio-title-small">Priya — Model Portfolio</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-4"><div class="ph-inner"><i class="fas fa-heart"></i><span>Pre-Wedding</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Pre-Wedding</span><div class="portfolio-title-small">Rahul & Meera</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-5"><div class="ph-inner"><i class="fas fa-leaf"></i><span>Nature Series</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Nature</span><div class="portfolio-title-small">Monsoon Collection</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-6"><div class="ph-inner"><i class="fas fa-glass-cheers"></i><span>Event Capture</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Events</span><div class="portfolio-title-small">Gala Evening 2024</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-7"><div class="ph-inner"><i class="fas fa-box"></i><span>Product Art</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Commercial</span><div class="portfolio-title-small">Luxe Brand Campaign</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="portfolio-item" onclick="openLightbox()">
+      <div class="portfolio-img ph-port ph-8"><div class="ph-inner"><i class="fas fa-baby"></i><span>Family Warmth</span></div></div>
+      <div class="portfolio-overlay"><div class="portfolio-info"><span class="portfolio-cat">Family</span><div class="portfolio-title-small">The Kapoor Family</div></div></div>
+      <div class="portfolio-expand"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CINEMATIC ============== -->
+<section id="cinematic">
+  <div class="cinematic-hero">
+    <div class="cinematic-bg"></div>
+    <div class="cinematic-content" data-aos="fade-up">
+      <span class="cinematic-label">Featured Work</span>
+      <h2 class="cinematic-title">Beyond the<br><em>Shutter Click</em></h2>
+      <p class="cinematic-desc">Dive into our cinematic world — behind the scenes, on set, and behind the lens. Stories that move, moments that breathe.</p>
+      <a href="#" class="play-btn"><i class="fas fa-play"></i> Watch Highlight Reel</a>
+    </div>
+  </div>
+  <div class="bts-grid">
+    <div class="bts-item" data-aos="fade-up" data-aos-delay="0">
+      <div class="bts-glow" style="background:radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.1) 0%, transparent 60%)"></div>
+      <div class="bts-label"><span class="bts-cat">Behind the Scenes</span><div class="bts-title">Wedding Day Chronicles</div></div>
+      <div class="bts-play"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="bts-item" data-aos="fade-up" data-aos-delay="100">
+      <div class="bts-glow" style="background:radial-gradient(ellipse at 70% 40%, rgba(100,140,200,0.08) 0%, transparent 60%)"></div>
+      <div class="bts-label"><span class="bts-cat">Fashion Shoot</span><div class="bts-title">Monsoon Couture Set</div></div>
+      <div class="bts-play"><i class="fas fa-play"></i></div>
+    </div>
+    <div class="bts-item" data-aos="fade-up" data-aos-delay="200">
+      <div class="bts-glow" style="background:radial-gradient(ellipse at 50% 30%, rgba(180,100,100,0.08) 0%, transparent 60%)"></div>
+      <div class="bts-label"><span class="bts-cat">Drone Film</span><div class="bts-title">Kerala Backwaters</div></div>
+      <div class="bts-play"><i class="fas fa-play"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BEFORE/AFTER ============== -->
+<section id="before-after">
+  <p class="section-label" data-aos="fade-up">Post Processing</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Before <em>&</em> After</h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Our editing transforms raw captures into cinematic masterpieces — drag to compare.</p>
+  <div class="ba-wrapper" data-aos="fade-up" data-aos-delay="200">
+    <div class="ba-container" id="baContainer">
+      <div class="ba-before">
+        <div class="ba-placeholder"><i class="fas fa-image" style="color:rgba(201,168,76,0.3)"></i><span style="color:rgba(201,168,76,0.3)">RAW Capture</span></div>
+      </div>
+      <div class="ba-after" id="baAfter">
+        <div class="ba-placeholder"><i class="fas fa-magic" style="color:rgba(100,160,220,0.3)"></i><span style="color:rgba(100,160,220,0.3)">Edited Master</span></div>
+      </div>
+      <div class="ba-divider" id="baDivider"></div>
+      <div class="ba-handle" id="baHandle"><i class="fas fa-arrows-alt-h"></i></div>
+    </div>
+    <div class="ba-labels">
+      <span class="ba-label"><i class="fas fa-circle" style="color:rgba(201,168,76,0.5);margin-right:6px"></i>Before</span>
+      <span class="ba-label">After <i class="fas fa-circle" style="color:rgba(100,160,220,0.5);margin-left:6px"></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TESTIMONIALS ============== -->
+<section id="testimonials" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Client Words</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Stories <em>Told</em> By Clients</h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up" data-aos-delay="140"></div>
+
+  <div class="swiper testimonials-swiper" data-aos="fade-up" data-aos-delay="200">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Lazy Panda Photography turned our wedding into a cinematic dream. Every photograph feels like a painting — Arjun has an extraordinary eye for emotion and light. We're still speechless a year later."</p>
+          <div class="t-client">
+            <div class="t-avatar">P</div>
+            <div>
+              <div class="t-name">Priya & Vikram Nair</div>
+              <div class="t-event">Wedding Photography</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"Our pre-wedding shoot in Munnar was absolute magic. The team made us feel completely comfortable, and the results look like something from a movie. Absolutely world-class work."</p>
+          <div class="t-client">
+            <div class="t-avatar">R</div>
+            <div>
+              <div class="t-name">Rahul & Ananya Sharma</div>
+              <div class="t-event">Pre-Wedding Shoot</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"The corporate event coverage exceeded every expectation. Professional, unobtrusive, and the final gallery was delivered ahead of schedule. Will be our go-to studio for all future events."</p>
+          <div class="t-client">
+            <div class="t-avatar">S</div>
+            <div>
+              <div class="t-name">Sanjana Krishnamurthy</div>
+              <div class="t-event">Corporate Event</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">"As a brand, visuals are everything. Lazy Panda delivered product photography that completely transformed our marketing. Sales increased 40% after we updated our website with their images."</p>
+          <div class="t-client">
+            <div class="t-avatar">A</div>
+            <div>
+              <div class="t-name">Aditya Menon</div>
+              <div class="t-event">Product Photography</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- ============== PRICING ============== -->
+<section id="pricing" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Investment</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Photography <em>Packages</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Transparent pricing, exceptional value. Choose the package that tells your story best.</p>
+
+  <div class="pricing-grid">
+    <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
+      <span class="pricing-tier">Essential</span>
+      <div class="pricing-name">Basic</div>
+      <div class="pricing-price"><sup>₹</sup>18,000</div>
+      <div class="pricing-period">Per Session</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><i class="fas fa-check"></i>4-hour session coverage</li>
+        <li><i class="fas fa-check"></i>50 edited photographs</li>
+        <li><i class="fas fa-check"></i>Online gallery delivery</li>
+        <li><i class="fas fa-check"></i>7-day turnaround</li>
+        <li><i class="fas fa-check"></i>1 photographer</li>
+        <li style="color:#444"><i class="fas fa-times" style="color:#333"></i>No drone coverage</li>
+        <li style="color:#444"><i class="fas fa-times" style="color:#333"></i>No videography</li>
+      </ul>
+      <a href="#booking" class="pricing-cta">Book Basic</a>
+    </div>
+
+    <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="100">
+      <div class="pricing-badge">Most Popular</div>
+      <span class="pricing-tier">Signature</span>
+      <div class="pricing-name">Premium</div>
+      <div class="pricing-price"><sup>₹</sup>45,000</div>
+      <div class="pricing-period">Per Session</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><i class="fas fa-check"></i>8-hour full coverage</li>
+        <li><i class="fas fa-check"></i>150 edited photographs</li>
+        <li><i class="fas fa-check"></i>Online + USB delivery</li>
+        <li><i class="fas fa-check"></i>5-day turnaround</li>
+        <li><i class="fas fa-check"></i>2 photographers</li>
+        <li><i class="fas fa-check"></i>Drone photography</li>
+        <li><i class="fas fa-check"></i>Short highlight film</li>
+      </ul>
+      <a href="#booking" class="pricing-cta">Book Premium</a>
+    </div>
+
+    <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+      <span class="pricing-tier">Elite</span>
+      <div class="pricing-name">Luxury</div>
+      <div class="pricing-price"><sup>₹</sup>95,000</div>
+      <div class="pricing-period">Per Session</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li><i class="fas fa-check"></i>Full-day exclusive coverage</li>
+        <li><i class="fas fa-check"></i>300+ edited photographs</li>
+        <li><i class="fas fa-check"></i>Premium album + USB</li>
+        <li><i class="fas fa-check"></i>3-day turnaround</li>
+        <li><i class="fas fa-check"></i>3 photographers + assistant</li>
+        <li><i class="fas fa-check"></i>Drone + aerial footage</li>
+        <li><i class="fas fa-check"></i>Full cinematic film</li>
+      </ul>
+      <a href="#booking" class="pricing-cta">Book Luxury</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TIMELINE ============== -->
+<section id="timeline">
+  <p class="section-label" data-aos="fade-up">Our Journey</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">A <em>Decade</em> of Stories</h2>
+  <div class="gold-divider" style="margin-bottom:70px" data-aos="fade-up"></div>
+  <div class="timeline-wrap">
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2015</span>
+        <div class="timeline-title">The Studio Founded</div>
+        <p class="timeline-text">Arjun Mehta launched Lazy Panda Photography from a small Trivandrum studio with a single camera and a profound vision.</p>
+      </div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2017</span>
+        <div class="timeline-title">First National Award</div>
+        <p class="timeline-text">Recognized at the India Photography Awards for Outstanding Wedding Photography — our work gained national attention.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2019</span>
+        <div class="timeline-title">Studio Expansion</div>
+        <p class="timeline-text">Expanded into fashion and commercial photography; opened a dedicated studio space with professional lighting setup.</p>
+      </div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2022</span>
+        <div class="timeline-title">Cinematic Division Launch</div>
+        <p class="timeline-text">Launched our cinematic videography wing and drone division — delivering complete audio-visual storytelling packages.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2025</span>
+        <div class="timeline-title">1000+ Stories Told</div>
+        <p class="timeline-text">Crossed 1000 projects milestone with clients across India — and the story continues, one frame at a time.</p>
+      </div>
+      <div class="timeline-spacer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BOOKING ============== -->
+<section id="booking" class="section-pad">
+  <div class="booking-inner">
+    <div class="booking-info" data-aos="fade-right">
+      <span class="section-label" style="text-align:left">Get In Touch</span>
+      <h2 class="booking-info-title">Let's Create<br>Something <em>Beautiful</em></h2>
+      <p class="booking-info-text">Every great photograph begins with a conversation. Tell us about your vision, and we'll craft an experience that exceeds it.</p>
+
+      <div class="booking-contact-item">
+        <div class="booking-contact-icon"><i class="fas fa-phone"></i></div>
+        <div><span class="booking-contact-label">Phone</span><div class="booking-contact-val">+91 94470 00000</div></div>
+      </div>
+      <div class="booking-contact-item">
+        <div class="booking-contact-icon"><i class="fas fa-envelope"></i></div>
+        <div><span class="booking-contact-label">Email</span><div class="booking-contact-val">hello@lazypandaphoto.com</div></div>
+      </div>
+      <div class="booking-contact-item">
+        <div class="booking-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div><span class="booking-contact-label">Studio</span><div class="booking-contact-val">Kowdiar, Thiruvananthapuram<br>Kerala, India</div></div>
+      </div>
+
+      <a href="https://wa.me/919447000000" class="wa-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="booking-form-wrap" data-aos="fade-left" data-aos-delay="100">
+      <div id="bookingForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-control" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-control" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Type *</label>
+            <select class="form-control">
+              <option value="">Select service</option>
+              <option>Wedding Photography</option>
+              <option>Pre-Wedding Shoot</option>
+              <option>Portrait Session</option>
+              <option>Fashion Photography</option>
+              <option>Product Photography</option>
+              <option>Event Coverage</option>
+              <option>Drone Photography</option>
+              <option>Cinematic Videography</option>
+              <option>Baby & Family Shoot</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Date</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <input type="text" class="form-control" placeholder="City / Venue">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Budget Range</label>
+            <select class="form-control">
+              <option value="">Select budget</option>
+              <option>Under ₹20,000</option>
+              <option>₹20,000 – ₹50,000</option>
+              <option>₹50,000 – ₹1,00,000</option>
+              <option>₹1,00,000+</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-control" placeholder="Tell us about your vision, special requirements, or any questions..."></textarea>
+          </div>
+        </div>
+        <button type="button" class="form-submit" onclick="submitForm()">Send Inquiry &nbsp; →</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <i class="fas fa-check-circle"></i>
+        <p>Thank you! We'll be in touch within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SOCIAL ============== -->
+<section id="social" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Follow Our Journey</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">@lazypandaphoto on <em>Instagram</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Behind the lens, between the frames — follow for daily inspiration and stories.</p>
+
+  <div class="instagram-grid" data-aos="fade-up" data-aos-delay="200">
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-camera insta-icon"></i></div>
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-heart insta-icon"></i></div>
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-ring insta-icon"></i></div>
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-portrait insta-icon"></i></div>
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-leaf insta-icon"></i></div>
+    <div class="insta-item"><div class="insta-glow"></div><i class="fas fa-film insta-icon"></i></div>
+  </div>
+
+  <div class="social-links-row" data-aos="fade-up" data-aos-delay="200">
+    <a href="#" class="social-follow-btn"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="#" class="social-follow-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+    <a href="#" class="social-follow-btn"><i class="fab fa-youtube"></i> YouTube</a>
+    <a href="#" class="social-follow-btn"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+  </div>
+</section>
+
+<!-- ============== BLOG ============== -->
+<section id="blog" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Stories & Insights</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">From the <em>Journal</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Behind the frames — photography guides, client stories, and glimpses into the craft.</p>
+
+  <div class="blog-grid" data-aos="fade-up" data-aos-delay="200">
+    <div class="blog-card featured">
+      <div class="blog-img">
+        <div class="blog-img-glow"></div>
+        <i class="blog-img-icon fas fa-ring"></i>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span class="blog-cat">Wedding Stories</span>
+          <span class="blog-date">May 2, 2025</span>
+        </div>
+        <h3 class="blog-title">How We Captured Priya & Vikram's Monsoon Wedding in 36 Cinematic Hours</h3>
+        <p class="blog-excerpt">When Priya called us three months before her wedding, she had a vision unlike anything we'd heard before — a monsoon ceremony in the backwaters of Alleppey, rain and all, with a golden sunset finale...</p>
+        <a href="#" class="blog-read-more">Read Full Story →</a>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img">
+        <div class="blog-img-glow"></div>
+        <i class="blog-img-icon fas fa-lightbulb"></i>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span class="blog-cat">Photography Tips</span>
+          <span class="blog-date">Apr 18, 2025</span>
+        </div>
+        <h3 class="blog-title">5 Lighting Secrets We Use on Every Wedding Day</h3>
+        <p class="blog-excerpt">Light is everything. Here's how we consistently create that cinematic, golden feel regardless of venue or weather...</p>
+        <a href="#" class="blog-read-more">Read More →</a>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-img">
+        <div class="blog-img-glow"></div>
+        <i class="blog-img-icon fas fa-camera"></i>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span class="blog-cat">Behind the Scenes</span>
+          <span class="blog-date">Mar 30, 2025</span>
+        </div>
+        <h3 class="blog-title">Inside Our Drone Setup for Aerial Wedding Photography</h3>
+        <p class="blog-excerpt">The magic of aerial wedding photography — and the meticulous preparation required to pull it off safely and beautifully...</p>
+        <a href="#" class="blog-read-more">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== AWARDS ============== -->
+<section id="awards">
+  <div class="awards-content">
+    <div class="awards-title">Trusted By & Recognized For</div>
+    <div class="awards-grid">
+      <div class="award-item" data-aos="fade-up" data-aos-delay="0">
+        <i class="fas fa-award award-icon"></i>
+        <div class="award-name">India Photography Awards 2023</div>
+      </div>
+      <div class="award-item" data-aos="fade-up" data-aos-delay="60">
+        <i class="fas fa-trophy award-icon"></i>
+        <div class="award-name">Best Wedding Studio Kerala 2022</div>
+      </div>
+      <div class="award-item" data-aos="fade-up" data-aos-delay="120">
+        <i class="fas fa-star award-icon"></i>
+        <div class="award-name">Junebug Weddings Featured</div>
+      </div>
+      <div class="award-item" data-aos="fade-up" data-aos-delay="180">
+        <i class="fas fa-medal award-icon"></i>
+        <div class="award-name">WeddingWire Couples Choice</div>
+      </div>
+      <div class="award-item" data-aos="fade-up" data-aos-delay="240">
+        <i class="fas fa-certificate award-icon"></i>
+        <div class="award-name">ISO Certified Studio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section id="faq" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Questions Answered</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Frequently Asked <em>Questions</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+
+  <div class="faq-wrap">
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="0">
+      <div class="faq-question" onclick="toggleFaq(this)">How do I book a session with Lazy Panda Photography? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Simply fill out our inquiry form above, call us, or reach us on WhatsApp. We'll schedule a consultation call to discuss your vision, answer all questions, and confirm availability. A 30% advance secures your booking.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="60">
+      <div class="faq-question" onclick="toggleFaq(this)">How long does photo editing and delivery take? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Typically 5–10 business days for standard packages, and 3–5 days for premium packages. We deliver via a private online gallery link. Printed albums take an additional 15 days after gallery approval.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="120">
+      <div class="faq-question" onclick="toggleFaq(this)">Do you travel outside Thiruvananthapuram? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Absolutely! We regularly travel across Kerala, Tamil Nadu, and beyond. For destination shoots and outstation weddings, travel and accommodation costs are added to the package. We've photographed in Rajasthan, Goa, and even abroad.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="0">
+      <div class="faq-question" onclick="toggleFaq(this)">What is your cancellation and rescheduling policy? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Cancellations 60+ days before the event receive a full refund minus the booking fee. Within 60 days, 50% of the advance is retained. Rescheduling is accommodated once at no charge, subject to availability.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="60">
+      <div class="faq-question" onclick="toggleFaq(this)">What payment methods do you accept? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We accept bank transfers (NEFT/IMPS/RTGS), UPI (Google Pay, PhonePe), and cheques. A 30% advance is required at booking, 40% one week before the event, and the remaining 30% on the day.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up" data-aos-delay="120">
+      <div class="faq-question" onclick="toggleFaq(this)">In what formats are photos delivered? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">All edited photographs are delivered in high-resolution JPEG format via a private gallery (printable resolution). RAW files are retained for 6 months. Video films are delivered in MP4 format (4K or 1080p depending on package).</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT ============== -->
+<section id="contact" class="section-pad">
+  <p class="section-label" data-aos="fade-up">Find Us</p>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Visit the <em>Studio</em></h2>
+  <div class="gold-divider" style="margin-bottom:70px" data-aos="fade-up"></div>
+
+  <div class="contact-grid">
+    <div class="contact-info-block" data-aos="fade-right">
+      <div class="contact-info-group">
+        <span class="contact-info-label">Studio Address</span>
+        <div class="contact-info-val">42 Kowdiar Avenue<br>Thiruvananthapuram<br>Kerala — 695003</div>
+      </div>
+      <div class="contact-info-group">
+        <span class="contact-info-label">Phone & Email</span>
+        <div class="contact-info-val">+91 94470 00000<br>hello@lazypandaphoto.com</div>
+      </div>
+      <div class="contact-info-group">
+        <span class="contact-info-label">Business Hours</span>
+        <div class="contact-hours">Monday – Saturday: 9am – 7pm<br>Sunday: By appointment only<br>Studio visits by prior booking</div>
+      </div>
+      <div>
+        <span class="contact-info-label" style="margin-bottom:16px;display:block">Follow Us</span>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div data-aos="fade-left" data-aos-delay="100">
+      <div class="map-placeholder">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Lazy Panda Photography</span>
+        <p>42 Kowdiar Avenue, Thiruvananthapuram</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">We don't just take pictures — we craft visual legacies. Every frame is a story waiting to be told, every session an experience designed to move you.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="#about">About Studio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="#booking">Wedding Photography</a></li>
+        <li><a href="#booking">Pre-Wedding Shoots</a></li>
+        <li><a href="#booking">Portrait Sessions</a></li>
+        <li><a href="#booking">Fashion Photography</a></li>
+        <li><a href="#booking">Drone Coverage</a></li>
+        <li><a href="#booking">Cinematic Videos</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Photography stories, tips, and exclusive offers — in your inbox.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Enter your email">
+        <button class="newsletter-btn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <div class="lightbox-content">
+      <i class="fas fa-image"></i>
+      <span>Portfolio Image Preview</span>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<!-- AOS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<!-- Swiper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
+<script>
+// ========== LOADER ==========
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  const pct = document.getElementById('loaderPct');
+  let count = 0;
+  const interval = setInterval(() => {
+    count += Math.floor(Math.random() * 12) + 5;
+    if (count >= 100) { count = 100; clearInterval(interval); }
+    pct.textContent = count + '%';
+    if (count === 100) {
+      setTimeout(() => { loader.classList.add('hidden'); }, 400);
+    }
+  }, 80);
+});
+
+// ========== POPUP ==========
+setTimeout(() => {
+  document.getElementById('popup').classList.add('show');
+}, 5000);
+document.getElementById('popupClose').addEventListener('click', () => {
+  document.getElementById('popup').classList.remove('show');
+});
+document.getElementById('popupSkip').addEventListener('click', () => {
+  document.getElementById('popup').classList.remove('show');
+});
+
+// ========== CURSOR ==========
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursorFollower');
+let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX - 4 + 'px';
+  cursor.style.top = mouseY - 4 + 'px';
+});
+function animateFollower() {
+  followerX += (mouseX - followerX - 18) * 0.12;
+  followerY += (mouseY - followerY - 18) * 0.12;
+  follower.style.left = followerX + 'px';
+  follower.style.top = followerY + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+document.querySelectorAll('a, button, .service-card, .portfolio-item, .filter-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => follower.classList.add('hover'));
+  el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
+});
+
+// ========== NAVBAR ==========
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// ========== MOBILE MENU ==========
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ========== HERO SLIDES ==========
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+const slideNums = ['01','02','03'];
+function goSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  document.getElementById('slideNum').textContent = slideNums[currentSlide];
+}
+setInterval(() => goSlide((currentSlide + 1) % slides.length), 5000);
+
+// ========== PARTICLES ==========
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1.2 + 0.3;
+    this.speedX = (Math.random() - 0.5) * 0.18;
+    this.speedY = (Math.random() - 0.5) * 0.18;
+    this.opacity = Math.random() * 0.35 + 0.05;
+    this.gold = Math.random() > 0.7;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.gold
+      ? `rgba(201,168,76,${this.opacity})`
+      : `rgba(245,240,235,${this.opacity * 0.4})`;
+    ctx.fill();
+  }
+}
+for (let i = 0; i < 90; i++) particles.push(new Particle());
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ========== COUNTER ==========
+const counters = document.querySelectorAll('.counter');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = +el.dataset.target;
+      let count = 0;
+      const inc = Math.ceil(target / 80);
+      const timer = setInterval(() => {
+        count = Math.min(count + inc, target);
+        el.textContent = count + (target > 100 ? '+' : '+');
+        if (count >= target) clearInterval(timer);
+      }, 25);
+      io.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => io.observe(c));
+
+// ========== PORTFOLIO FILTER ==========
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Filter logic would apply data-category attributes on real images
+  });
+});
+
+// ========== FAQ ==========
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-question.open').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.style.maxHeight = null;
+  });
+  if (!isOpen) {
+    el.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// ========== BEFORE/AFTER ==========
+const baContainer = document.getElementById('baContainer');
+const baAfter = document.getElementById('baAfter');
+const baDivider = document.getElementById('baDivider');
+const baHandle = document.getElementById('baHandle');
+let isDragging = false;
+function setBA(x) {
+  const rect = baContainer.getBoundingClientRect();
+  let pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+  const pcStr = (pct * 100) + '%';
+  baDivider.style.left = pcStr;
+  baHandle.style.left = pcStr;
+  baAfter.style.clipPath = `inset(0 ${100 - pct * 100}% 0 0)`;
+}
+baContainer.addEventListener('mousedown', e => { isDragging = true; setBA(e.clientX); });
+document.addEventListener('mousemove', e => { if (isDragging) setBA(e.clientX); });
+document.addEventListener('mouseup', () => isDragging = false);
+baContainer.addEventListener('touchstart', e => { isDragging = true; setBA(e.touches[0].clientX); });
+document.addEventListener('touchmove', e => { if (isDragging) setBA(e.touches[0].clientX); });
+document.addEventListener('touchend', () => isDragging = false);
+
+// ========== LIGHTBOX ==========
+function openLightbox() { document.getElementById('lightbox').classList.add('open'); }
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+}
+
+// ========== FORM ==========
+function submitForm() {
+  const inputs = document.querySelectorAll('#bookingForm .form-control');
+  let valid = true;
+  inputs.forEach(i => {
+    if (i.hasAttribute('required') && !i.value) { i.style.borderColor = 'rgba(255,80,80,0.5)'; valid = false; }
+    else i.style.borderColor = '';
+  });
+  if (!valid) return;
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// ========== BACK TO TOP ==========
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+// ========== AOS ==========
+AOS.init({ duration: 800, once: true, offset: 80, easing: 'ease-out-cubic' });
+
+// ========== SWIPER ==========
+new Swiper('.testimonials-swiper', {
+  slidesPerView: 1,
+  spaceBetween: 32,
+  loop: true,
+  autoplay: { delay: 5000, disableOnInteraction: false },
+  pagination: { el: '.swiper-pagination', clickable: true },
+});
+
+// ========== SMOOTH ACTIVE NAV ==========
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = '';
+    if (a.getAttribute('href') === '#' + current) a.style.color = 'var(--gold)';
+  });
+});
+</script>
+</body>
+</html>

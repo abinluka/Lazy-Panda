@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photography stories, wedding guides, tips and behind-the-scenes articles from Lazy Panda Photography.">
+<title>Blog & Stories | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background: var(--dark); }
+.page-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.07) 0%, transparent 55%); }
+
+/* ---- SEARCH + FILTER ---- */
+.blog-controls {
+  display: flex; gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; margin: 0 auto 52px;
+  flex-wrap: wrap;
+  padding: 0 5%;
+}
+.blog-search {
+  display: flex; align-items: center;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: var(--dark);
+  padding: 0 16px;
+  flex: 1; max-width: 340px; min-width: 220px;
+}
+.blog-search i { color: var(--gold); font-size: 0.8rem; margin-right: 12px; }
+.blog-search input {
+  background: none; border: none; outline: none;
+  color: var(--white); font-family: var(--font-sans);
+  font-size: 0.85rem; padding: 12px 0; flex: 1;
+}
+.blog-search input::placeholder { color: var(--gray); }
+.blog-cats {
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.blog-cat-btn {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.18);
+  color: var(--gray);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: none; transition: var(--transition);
+}
+.blog-cat-btn.active, .blog-cat-btn:hover {
+  background: var(--gold); border-color: var(--gold); color: var(--black);
+}
+
+/* ---- FEATURED ARTICLE ---- */
+#featured-article { background: var(--black); }
+.feat-article {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3px;
+  max-width: 1300px; margin: 0 auto;
+  background: var(--dark);
+  overflow: hidden;
+}
+.fa-visual {
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, #1a1209 0%, #0d0a05 100%);
+  position: relative; overflow: hidden; cursor: none;
+}
+.fa-visual-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 18px; transition: transform 0.7s ease;
+}
+.feat-article:hover .fa-visual-inner { transform: scale(1.05); }
+.fa-visual-inner i { font-size: 5rem; color: rgba(201,168,76,0.2); }
+.fa-visual-inner span { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; letter-spacing: 0.15em; color: rgba(201,168,76,0.25); }
+.fa-visual::after { content:''; position:absolute; inset:0; background: linear-gradient(to right, transparent 70%, var(--dark) 100%); }
+.fa-content {
+  padding: 60px 52px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.fa-tag {
+  display: inline-block;
+  padding: 5px 14px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  font-size: 0.6rem; letter-spacing: 0.3em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 20px; width: fit-content;
+}
+.fa-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
+.fa-date { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.1em; }
+.fa-read-time { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.1em; }
+.fa-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300; color: var(--white);
+  line-height: 1.25; margin-bottom: 20px;
+  transition: color 0.3s;
+}
+.feat-article:hover .fa-title { color: var(--gold-light); }
+.fa-excerpt { font-size: 0.88rem; color: var(--gray); line-height: 1.9; margin-bottom: 32px; }
+.fa-author { display: flex; align-items: center; gap: 14px; margin-top: auto; }
+.fa-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1rem; color: var(--gold);
+}
+.fa-author-name { font-family: var(--font-serif); font-size: 0.9rem; color: var(--white); }
+.fa-author-role { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 2px; }
+.read-more-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.68rem; letter-spacing: 0.25em;
+  color: var(--gold); text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  padding-bottom: 3px; margin-bottom: 28px;
+  width: fit-content; transition: border-color 0.3s;
+}
+.read-more-link:hover { border-color: var(--gold); }
+
+/* ---- BLOG GRID ---- */
+#blog-grid { background: var(--dark); }
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1300px; margin: 0 auto;
+}
+.article-card {
+  background: var(--black);
+  overflow: hidden; cursor: none;
+  transition: var(--transition);
+  display: flex; flex-direction: column;
+}
+.article-card:hover { background: var(--dark-2); }
+.art-visual {
+  aspect-ratio: 16/10;
+  position: relative; overflow: hidden;
+}
+.art-visual-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 14px;
+  transition: transform 0.7s ease;
+}
+.article-card:hover .art-visual-bg { transform: scale(1.06); }
+.art-visual-bg i { font-size: 3rem; }
+.art-visual::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%); }
+.art-content { padding: 32px 28px; flex: 1; display: flex; flex-direction: column; }
+.art-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.art-cat-tag {
+  font-size: 0.58rem; letter-spacing: 0.28em;
+  color: var(--gold); text-transform: uppercase;
+}
+.art-date { font-size: 0.62rem; color: var(--gray); }
+.art-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem; font-weight: 400;
+  color: var(--white); line-height: 1.4;
+  margin-bottom: 12px; transition: color 0.3s;
+}
+.article-card:hover .art-title { color: var(--gold-light); }
+.art-excerpt { font-size: 0.82rem; color: var(--gray); line-height: 1.8; margin-bottom: 24px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.art-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.art-read { font-size: 0.63rem; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); padding-bottom: 2px; transition: border-color 0.3s; }
+.art-read:hover { border-color: var(--gold); }
+.art-read-time { font-size: 0.62rem; color: var(--gray); }
+
+/* ---- SIDEBAR + LOAD ---- */
+#blog-sidebar { background: var(--black); }
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 60px;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 5%;
+}
+.load-more-wrap { text-align: center; margin: 60px 0 0; }
+.load-more {
+  padding: 16px 48px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold); font-family: var(--font-sans);
+  font-size: 0.72rem; letter-spacing: 0.22em;
+  text-transform: uppercase; cursor: none;
+  transition: var(--transition);
+}
+.load-more:hover { background: rgba(201,168,76,0.08); }
+.sidebar {}
+.sb-widget { margin-bottom: 44px; }
+.sb-title {
+  font-size: 0.62rem; letter-spacing: 0.38em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  display: block;
+}
+.sb-recent-item { display: flex; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.sb-thumb {
+  width: 64px; height: 64px; background: var(--dark-2);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.sb-thumb i { font-size: 1.4rem; color: rgba(201,168,76,0.25); }
+.sb-item-title { font-family: var(--font-serif); font-size: 0.95rem; color: var(--white); line-height: 1.4; margin-bottom: 6px; transition: color 0.3s; }
+.sb-recent-item:hover .sb-item-title { color: var(--gold-light); }
+.sb-item-date { font-size: 0.62rem; color: var(--gray); }
+.sb-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.sb-tag {
+  padding: 6px 14px;
+  border: 1px solid rgba(201,168,76,0.15);
+  font-size: 0.62rem; letter-spacing: 0.15em;
+  color: var(--gray); text-transform: uppercase;
+  cursor: none; transition: var(--transition);
+}
+.sb-tag:hover { border-color: var(--gold); color: var(--gold); }
+.sb-newsletter { background: var(--dark); padding: 28px 24px; border: 1px solid rgba(201,168,76,0.12); }
+.sb-nl-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--white); margin-bottom: 10px; }
+.sb-nl-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1100px) {
+  .articles-grid { grid-template-columns: repeat(2, 1fr); }
+  .sidebar-layout { grid-template-columns: 1fr; }
+  .feat-article { grid-template-columns: 1fr; }
+  .fa-visual::after { display: none; }
+  .fa-content { padding: 40px 36px; }
+}
+@media (max-width: 768px) {
+  .articles-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .blog-controls { flex-direction: column; align-items: flex-start; }
+  .blog-search { max-width: 100%; min-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" class="active" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Stories & Insights</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">The <em>Journal</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">Behind the frames — photography guides, wedding stories, tips from the field, and glimpses into the craft.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- FEATURED ARTICLE -->
+<section id="featured-article" class="section-pad" style="padding-bottom:0">
+  <span class="section-label" data-aos="fade-up">Editor's Pick</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Featured <em>Story</em></h2>
+  <div class="gold-divider" style="margin-bottom:52px" data-aos="fade-up"></div>
+  <div class="feat-article" data-aos="fade-up" data-aos-delay="100">
+    <div class="fa-visual">
+      <div class="fa-visual-inner">
+        <i class="fas fa-ring"></i>
+        <span>Wedding Story</span>
+      </div>
+    </div>
+    <div class="fa-content">
+      <div class="fa-tag">Wedding Stories</div>
+      <div class="fa-meta">
+        <span class="fa-date">May 2, 2025</span>
+        <span style="color:var(--gold);opacity:0.4">·</span>
+        <span class="fa-read-time">8 min read</span>
+      </div>
+      <h2 class="fa-title">How We Captured Priya & Vikram's Monsoon Wedding in 36 Cinematic Hours</h2>
+      <p class="fa-excerpt">When Priya called us three months before her wedding, she had a vision unlike anything we'd heard before — a monsoon ceremony on the backwaters of Alleppey, rain and all, with a golden sunset finale on a houseboat. We said yes immediately. What followed was the most emotionally rich, logistically audacious, and visually extraordinary project of our studio's history...</p>
+      <a href="#" class="read-more-link">Read Full Story <i class="fas fa-arrow-right" style="font-size:0.6rem"></i></a>
+      <div class="fa-author">
+        <div class="fa-avatar">A</div>
+        <div>
+          <div class="fa-author-name">Arjun Mehta</div>
+          <div class="fa-author-role">Founder & Lead Photographer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG CONTROLS -->
+<section id="blog-grid" class="section-pad">
+  <span class="section-label" data-aos="fade-up">All Articles</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">From the <em>Archive</em></h2>
+  <div class="gold-divider" style="margin-bottom:52px" data-aos="fade-up"></div>
+
+  <div class="blog-controls" data-aos="fade-up" data-aos-delay="100">
+    <div class="blog-search">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search stories & guides...">
+    </div>
+    <div class="blog-cats">
+      <button class="blog-cat-btn active">All</button>
+      <button class="blog-cat-btn">Wedding Stories</button>
+      <button class="blog-cat-btn">Photography Tips</button>
+      <button class="blog-cat-btn">Behind the Scenes</button>
+      <button class="blog-cat-btn">Client Stories</button>
+    </div>
+  </div>
+
+  <div class="articles-grid" id="articlesGrid">
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="art-visual" style="background:linear-gradient(135deg,#1a1209,#0d0a05)">
+        <div class="art-visual-bg" style="color:rgba(201,168,76,0.25)"><i class="fas fa-lightbulb"></i><span style="font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:rgba(201,168,76,0.2);letter-spacing:0.1em">Photography Tips</span></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Photography Tips</span><span class="art-date">Apr 18, 2025</span></div>
+        <h3 class="art-title">5 Lighting Secrets We Use on Every Single Wedding Day</h3>
+        <p class="art-excerpt">Light is the language of photography — and these five principles have shaped every image we've ever made. From the golden hour to harsh midday sun, here's how we consistently create that warm, cinematic feel regardless of conditions.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">6 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="art-visual" style="background:linear-gradient(135deg,#0d1015,#0a0d0f)">
+        <div class="art-visual-bg" style="color:rgba(100,160,220,0.2)"><i class="fas fa-drone"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Behind the Scenes</span><span class="art-date">Mar 30, 2025</span></div>
+        <h3 class="art-title">Inside Our Drone Setup: Aerial Wedding Photography Demystified</h3>
+        <p class="art-excerpt">Drone photography is one of our most requested services — and one of our most misunderstood. Here's exactly what goes into planning, clearance, flying and delivering spectacular aerial wedding images.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">7 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="art-visual" style="background:linear-gradient(135deg,#100d13,#0a080d)">
+        <div class="art-visual-bg" style="color:rgba(200,140,180,0.2)"><i class="fas fa-tshirt"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Fashion</span><span class="art-date">Mar 12, 2025</span></div>
+        <h3 class="art-title">From Concept to Campaign: The Monsoon Couture Shoot Story</h3>
+        <p class="art-excerpt">How a single mood board became a three-location, all-day production for Label Riviera — and what we learned about the art of fashion storytelling along the way.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">9 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="art-visual" style="background:linear-gradient(135deg,#0f120e,#0a0c0a)">
+        <div class="art-visual-bg" style="color:rgba(120,180,100,0.2)"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Client Stories</span><span class="art-date">Feb 28, 2025</span></div>
+        <h3 class="art-title">Rahul & Ananya: A Love Story Shot Across Munnar's Tea Gardens</h3>
+        <p class="art-excerpt">A pre-wedding shoot that became a personal journey — how we chased golden light through Kerala's misty hills and captured something neither we nor the couple expected: pure, unguarded joy.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">5 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="art-visual" style="background:linear-gradient(135deg,#12100d,#0a0a0a)">
+        <div class="art-visual-bg" style="color:rgba(201,168,76,0.22)"><i class="fas fa-camera-retro"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Photography Tips</span><span class="art-date">Feb 10, 2025</span></div>
+        <h3 class="art-title">The Art of the Candid: How We Capture Real Emotions Without Posing</h3>
+        <p class="art-excerpt">Posed photographs are beautiful — but candid moments are unforgettable. Here's the psychological and technical approach we use to become invisible and capture authenticity.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">8 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="art-visual" style="background:linear-gradient(135deg,#0d1010,#0a0d0d)">
+        <div class="art-visual-bg" style="color:rgba(100,180,160,0.2)"><i class="fas fa-baby"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Client Stories</span><span class="art-date">Jan 22, 2025</span></div>
+        <h3 class="art-title">Baby Aiden at 3 Weeks: Our Approach to Newborn Photography</h3>
+        <p class="art-excerpt">Newborn photography is perhaps our most delicate speciality — every angle, every light placement, every moment requiring the patience of stillness and the speed of instinct. Here's how we do it.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">6 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="art-visual" style="background:linear-gradient(135deg,#14100a,#0d0b08)">
+        <div class="art-visual-bg" style="color:rgba(200,180,100,0.2)"><i class="fas fa-palette"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Behind the Scenes</span><span class="art-date">Jan 8, 2025</span></div>
+        <h3 class="art-title">Our Colour Grading Philosophy: Why Less Is Always More</h3>
+        <p class="art-excerpt">Post-processing has the power to elevate an image — or destroy the truth within it. Here's how our editing team approaches colour grading to preserve emotion while delivering our signature cinematic look.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">10 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="art-visual" style="background:linear-gradient(135deg,#0a0f14,#080c10)">
+        <div class="art-visual-bg" style="color:rgba(160,200,220,0.2)"><i class="fas fa-map-marked-alt"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Photography Tips</span><span class="art-date">Dec 14, 2024</span></div>
+        <h3 class="art-title">Kerala's Most Photogenic Wedding Venues — Our Top 12 Picks</h3>
+        <p class="art-excerpt">From backwater bungalows in Alleppey to heritage forts in Thrissur — these are the venues that consistently deliver extraordinary photographic opportunities, and the unique challenges of each.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">12 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="art-visual" style="background:linear-gradient(135deg,#111009,#0d0c07)">
+        <div class="art-visual-bg" style="color:rgba(201,168,76,0.18)"><i class="fas fa-film"></i></div>
+      </div>
+      <div class="art-content">
+        <div class="art-meta"><span class="art-cat-tag">Wedding Stories</span><span class="art-date">Nov 30, 2024</span></div>
+        <h3 class="art-title">The Wedding Film That Made the Whole Family Cry — Three Times</h3>
+        <p class="art-excerpt">The Nair–Menon wedding film was our most emotionally demanding project to date. Sixty guests. Three ceremonies. One day. Here's how we wove it into a 12-minute story that still moves us every time we watch it.</p>
+        <div class="art-footer">
+          <a href="#" class="art-read">Read Article →</a>
+          <span class="art-read-time">7 min read</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="load-more-wrap" data-aos="fade-up">
+    <button class="load-more" onclick="this.textContent='Loading...'">Load More Stories</button>
+  </div>
+</section>
+
+<!-- NEWSLETTER CTA -->
+<section style="background:var(--dark-2);padding:80px 5%;text-align:center;border-top:1px solid rgba(201,168,76,0.1)">
+  <span style="font-size:0.65rem;letter-spacing:0.45em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:16px" data-aos="fade-up">Never Miss a Story</span>
+  <h2 style="font-family:var(--font-serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:14px" data-aos="fade-up" data-aos-delay="80">Subscribe to the <em style="color:var(--gold-light);font-style:italic">Journal</em></h2>
+  <p style="color:var(--gray);font-size:0.9rem;max-width:440px;margin:0 auto 36px;line-height:1.9" data-aos="fade-up" data-aos-delay="140">Receive our latest stories, photography tips and exclusive studio updates directly in your inbox — no spam, ever.</p>
+  <div style="display:flex;gap:0;max-width:480px;margin:0 auto" data-aos="fade-up" data-aos-delay="200">
+    <input type="email" class="form-control" placeholder="Your email address" style="border-right:none">
+    <button class="btn-gold-fill" style="padding:14px 28px;white-space:nowrap;font-size:0.72rem;border:1px solid var(--gold)">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Blog Topics</span>
+      <ul class="footer-links">
+        <li><a href="#">Wedding Stories</a></li>
+        <li><a href="#">Photography Tips</a></li>
+        <li><a href="#">Behind the Scenes</a></li>
+        <li><a href="#">Client Experiences</a></li>
+        <li><a href="#">Gear & Tech</a></li>
+        <li><a href="#">Destination Shoots</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });
+document.querySelectorAll('.blog-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

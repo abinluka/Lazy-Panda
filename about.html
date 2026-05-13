@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About Lazy Panda Photography — our story, philosophy, team, and decade-long journey of creating visual legacies.">
+<title>About Us | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ---- PAGE-SPECIFIC ---- */
+.page-hero { background: var(--dark); }
+.page-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 20% 60%, rgba(201,168,76,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 45%);
+}
+
+/* ---- PHILOSOPHY ---- */
+#philosophy { background: var(--black); }
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  max-width: 1200px;
+  margin: 0 auto 3px;
+}
+.philosophy-card {
+  padding: 56px 48px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+.philosophy-card::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0;
+  width:0; height:2px;
+  background:var(--gold);
+  transition:width 0.5s ease;
+}
+.philosophy-card:hover::after { width:100%; }
+.phi-num {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.1);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.phi-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.phi-text { font-size: 0.88rem; color: var(--gray); line-height:1.9; }
+.philosophy-full {
+  background: var(--dark);
+  padding: 64px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.phi-quote {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.4;
+  border-left: 2px solid var(--gold);
+  padding-left: 32px;
+}
+.phi-quote span { color: var(--gold-light); }
+
+/* ---- FOUNDER ---- */
+#founder { background: var(--dark); }
+.founder-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.founder-portrait {
+  position: relative;
+}
+.portrait-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #1a1209 0%, #0d0a05 100%);
+  position: relative;
+  overflow: hidden;
+}
+.portrait-glow {
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 40% 30%, rgba(201,168,76,0.15) 0%, transparent 60%);
+}
+.portrait-placeholder {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
+  color:rgba(201,168,76,0.3);
+}
+.portrait-placeholder i { font-size:5rem; }
+.portrait-placeholder span { font-family:var(--font-serif); font-size:1rem; font-style:italic; letter-spacing:0.15em; }
+.portrait-border {
+  position:absolute;
+  top:-14px; right:-14px; bottom:14px; left:14px;
+  border: 1px solid rgba(201,168,76,0.2);
+  pointer-events:none;
+}
+.founder-award {
+  position:absolute;
+  bottom:-20px; right:-20px;
+  background:var(--black);
+  border:1px solid rgba(201,168,76,0.3);
+  padding:20px 24px;
+  display:flex; align-items:center; gap:14px;
+}
+.founder-award i { font-size:1.5rem; color:var(--gold); }
+.fa-label { font-size:0.6rem; letter-spacing:0.2em; color:var(--gray); text-transform:uppercase; }
+.fa-val { font-family:var(--font-serif); font-size:1rem; color:var(--white); margin-top:2px; }
+.founder-content {}
+.founder-eyebrow { font-size:0.65rem; letter-spacing:0.45em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:16px; }
+.founder-name { font-family:var(--font-serif); font-size:clamp(2rem,3.5vw,3rem); font-weight:300; color:var(--white); margin-bottom:6px; }
+.founder-role { font-size:0.72rem; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:32px; display:block; }
+.founder-bio { font-size:0.9rem; color:var(--gray); line-height:1.9; margin-bottom:20px; }
+.founder-skills {
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;
+}
+.skill-tag {
+  padding:7px 16px;
+  border:1px solid rgba(201,168,76,0.2);
+  font-size:0.65rem;
+  letter-spacing:0.2em;
+  color:var(--gray-light);
+  text-transform:uppercase;
+}
+
+/* ---- TEAM ---- */
+#team { background: var(--black); }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.team-card {
+  background: var(--dark);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+}
+.team-img {
+  aspect-ratio: 3/4;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+}
+.team-img-bg {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:14px;
+  color:rgba(201,168,76,0.2);
+  transition:transform 0.6s ease;
+}
+.team-card:hover .team-img-bg { transform:scale(1.08); }
+.team-img-bg i { font-size:3.5rem; }
+.team-img::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%);
+}
+.team-info { padding:28px 24px; }
+.team-name { font-family:var(--font-serif); font-size:1.2rem; color:var(--white); margin-bottom:6px; }
+.team-role { font-size:0.62rem; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:14px; }
+.team-desc { font-size:0.82rem; color:var(--gray); line-height:1.8; }
+.team-social { display:flex; gap:10px; margin-top:18px; }
+.team-soc { width:30px; height:30px; border:1px solid rgba(201,168,76,0.2); display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:0.7rem; text-decoration:none; transition:var(--transition); cursor:none; }
+.team-soc:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ---- STATS BANNER ---- */
+#stats-banner { background: var(--dark-2); border-top:1px solid rgba(201,168,76,0.1); border-bottom:1px solid rgba(201,168,76,0.1); }
+.stats-row { display:grid; grid-template-columns:repeat(5,1fr); max-width:1200px; margin:0 auto; }
+.stat-col { padding:52px 20px; text-align:center; border-right:1px solid rgba(201,168,76,0.1); position:relative; overflow:hidden; }
+.stat-col:last-child { border-right:none; }
+.stat-col::before { content:''; position:absolute; inset:0; background:var(--gold-glow); opacity:0; transition:opacity 0.4s; }
+.stat-col:hover::before { opacity:1; }
+.stat-big { font-family:var(--font-serif); font-size:3.5rem; font-weight:300; color:var(--gold); line-height:1; margin-bottom:10px; }
+.stat-lbl { font-size:0.65rem; letter-spacing:0.3em; color:var(--gray); text-transform:uppercase; }
+
+/* ---- TIMELINE ---- */
+#timeline-about { background: var(--black); }
+.tl-wrap { max-width:840px; margin:0 auto; position:relative; }
+.tl-wrap::before {
+  content:'';
+  position:absolute;
+  left:50%; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 15%, rgba(201,168,76,0.3) 85%, transparent);
+  transform:translateX(-50%);
+}
+.tl-item { display:flex; gap:0; margin-bottom:60px; position:relative; align-items:flex-start; }
+.tl-item:nth-child(even) { flex-direction:row-reverse; }
+.tl-item:nth-child(even) .tl-content { text-align:right; }
+.tl-side { flex:1; padding:0 48px; }
+.tl-dot {
+  position:absolute; left:50%; top:10px;
+  transform:translateX(-50%);
+  width:14px; height:14px;
+  border:2px solid var(--gold);
+  background:var(--black);
+  border-radius:50%; z-index:2;
+}
+.tl-year { font-family:var(--font-serif); font-size:0.72rem; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:10px; display:block; }
+.tl-title { font-family:var(--font-serif); font-size:1.3rem; color:var(--white); margin-bottom:10px; }
+.tl-text { font-size:0.85rem; color:var(--gray); line-height:1.85; }
+
+/* ---- GEAR ---- */
+#gear { background: var(--dark); }
+.gear-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; max-width:1100px; margin:0 auto; }
+.gear-card { background:var(--black); padding:40px 36px; position:relative; overflow:hidden; }
+.gear-card::before { content:''; position:absolute; inset:0; background:var(--gold-glow); opacity:0; transition:opacity 0.4s; }
+.gear-card:hover::before { opacity:1; }
+.gear-icon { font-size:1.8rem; color:rgba(201,168,76,0.5); margin-bottom:20px; display:block; transition:color 0.3s; }
+.gear-card:hover .gear-icon { color:var(--gold); }
+.gear-brand { font-size:0.6rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; margin-bottom:8px; display:block; }
+.gear-name { font-family:var(--font-serif); font-size:1.1rem; color:var(--white); margin-bottom:10px; }
+.gear-desc { font-size:0.82rem; color:var(--gray); line-height:1.8; }
+
+/* ---- AWARDS ---- */
+#awards-about { background: var(--black); }
+.awards-list { max-width:900px; margin:0 auto; }
+.award-row {
+  display:flex; align-items:center; gap:24px;
+  padding:28px 0;
+  border-bottom:1px solid rgba(201,168,76,0.08);
+  transition:var(--transition);
+}
+.award-row:last-child { border-bottom:none; }
+.award-row:hover { padding-left:12px; }
+.award-icon2 { width:48px; height:48px; border:1px solid rgba(201,168,76,0.25); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1rem; flex-shrink:0; }
+.award-info { flex:1; }
+.award-title2 { font-family:var(--font-serif); font-size:1.1rem; color:var(--white); margin-bottom:4px; }
+.award-body { font-size:0.8rem; color:var(--gray); }
+.award-year2 { font-family:var(--font-serif); font-size:1.8rem; font-weight:300; color:rgba(201,168,76,0.3); flex-shrink:0; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width:1024px) {
+  .philosophy-grid { grid-template-columns:1fr; }
+  .philosophy-full { grid-template-columns:1fr; padding:40px; gap:40px; }
+  .founder-layout { grid-template-columns:1fr; max-width:600px; }
+  .portrait-border { display:none; }
+  .founder-award { bottom:0; right:0; }
+  .team-grid { grid-template-columns:repeat(2,1fr); }
+  .stats-row { grid-template-columns:repeat(3,1fr); }
+  .stat-col:nth-child(3) { border-right:none; }
+  .gear-grid { grid-template-columns:repeat(2,1fr); }
+  .tl-wrap::before { left:0; }
+  .tl-item, .tl-item:nth-child(even) { flex-direction:column; }
+  .tl-item:nth-child(even) .tl-content { text-align:left; }
+  .tl-dot { left:0; transform:none; }
+  .tl-side { padding:0 0 0 32px; }
+}
+@media (max-width:768px) {
+  .team-grid { grid-template-columns:1fr; max-width:400px; margin:0 auto; }
+  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .gear-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" class="active" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Our Story</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Where Art Meets<br><em>Authentic Emotion</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">A decade of stories, a thousand moments frozen in time — and still, every frame feels like the first.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- STATS BANNER -->
+<section id="stats-banner">
+  <div class="stats-row">
+    <div class="stat-col" data-aos="fade-up" data-aos-delay="0">
+      <div class="stat-big counter" data-target="10">0</div>
+      <div class="stat-lbl">Years of Excellence</div>
+    </div>
+    <div class="stat-col" data-aos="fade-up" data-aos-delay="60">
+      <div class="stat-big counter" data-target="850">0</div>
+      <div class="stat-lbl">Happy Clients</div>
+    </div>
+    <div class="stat-col" data-aos="fade-up" data-aos-delay="120">
+      <div class="stat-big counter" data-target="1200">0</div>
+      <div class="stat-lbl">Projects Completed</div>
+    </div>
+    <div class="stat-col" data-aos="fade-up" data-aos-delay="180">
+      <div class="stat-big counter" data-target="28">0</div>
+      <div class="stat-lbl">Awards Won</div>
+    </div>
+    <div class="stat-col" data-aos="fade-up" data-aos-delay="240">
+      <div class="stat-big counter" data-target="15">0</div>
+      <div class="stat-lbl">Cities Covered</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="section-pad">
+  <span class="section-label" data-aos="fade-up">What Drives Us</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our Creative <em>Philosophy</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Every great image is born from a belief — and these are ours.</p>
+
+  <div class="philosophy-grid">
+    <div class="philosophy-card" data-aos="fade-right">
+      <div class="phi-num">01</div>
+      <h3 class="phi-title">Light Is the Language</h3>
+      <p class="phi-text">We don't chase light — we listen to it. Every shoot begins before the camera is raised, with reading the quality, direction and emotion of available light. Whether golden-hour warmth or dramatic studio contrast, we sculpt with light as our primary medium.</p>
+    </div>
+    <div class="philosophy-card" data-aos="fade-left">
+      <div class="phi-num">02</div>
+      <h3 class="phi-title">Emotions First, Techniques Second</h3>
+      <p class="phi-text">Technical mastery is merely the foundation. What elevates a photograph from good to unforgettable is the authentic human emotion within the frame. We invest time in knowing our subjects, earning their trust, and capturing who they truly are.</p>
+    </div>
+    <div class="philosophy-card" data-aos="fade-right" data-aos-delay="80">
+      <div class="phi-num">03</div>
+      <h3 class="phi-title">Storytelling Through Sequence</h3>
+      <p class="phi-text">A single photograph captures a moment; a series captures a story. We approach every assignment with a narrative arc in mind — a beginning, middle, and emotional conclusion that together form a visual story your children will share with their children.</p>
+    </div>
+    <div class="philosophy-card" data-aos="fade-left" data-aos-delay="80">
+      <div class="phi-num">04</div>
+      <h3 class="phi-title">Less Editing, More Truth</h3>
+      <p class="phi-text">Post-processing should enhance, not replace, reality. Our editing philosophy preserves skin tones, genuine expressions and the true colours of your day — layering only the cinematic feel that makes our work distinctive, never distorting what actually happened.</p>
+    </div>
+  </div>
+
+  <div class="philosophy-full" data-aos="fade-up" data-aos-delay="100" style="margin-top:3px">
+    <p class="phi-quote">"We don't just take pictures — we <span>craft visual legacies</span> that outlive the moment."</p>
+    <div>
+      <p style="color:var(--gray);font-size:0.9rem;line-height:1.9;margin-bottom:20px">Our studio was built on a simple conviction: that every person, every couple, every family deserves images that will move them — not just now, but twenty years from now when they gather around a table and remember what it felt like to be exactly there.</p>
+      <p style="color:var(--gray);font-size:0.9rem;line-height:1.9">We bring this conviction to every booking, whether it's a grand wedding with 800 guests or an intimate portrait session for one. The commitment is the same. The care is identical. The result is always something extraordinary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder" class="section-pad">
+  <div class="founder-layout">
+    <div class="founder-portrait" data-aos="fade-right">
+      <div class="portrait-frame">
+        <div class="portrait-glow"></div>
+        <div class="portrait-placeholder">
+          <i class="fas fa-user"></i>
+          <span>Arjun Mehta</span>
+        </div>
+      </div>
+      <div class="portrait-border"></div>
+      <div class="founder-award">
+        <i class="fas fa-award"></i>
+        <div>
+          <div class="fa-label">National Award</div>
+          <div class="fa-val">Best Wedding Photographer 2023</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="founder-content" data-aos="fade-left" data-aos-delay="100">
+      <span class="founder-eyebrow">Meet the Founder</span>
+      <h2 class="founder-name">Arjun Mehta</h2>
+      <span class="founder-role">Founder & Lead Photographer</span>
+      <p class="founder-bio">Born in Thiruvananthapuram with a filmmaker's eye and a poet's soul, Arjun Mehta picked up his first camera at sixteen and never put it down. After a Fine Arts degree from NID Ahmedabad and an apprenticeship under renowned photojournalist Rajan Pillai, he returned to Kerala with a vision — to bring world-class visual storytelling to the intimate moments that matter most.</p>
+      <p class="founder-bio">Over ten years and a thousand projects later, Arjun's work has been featured in Vogue India, Harper's Bazaar Bride, and The Hindu Bridal. His cinematic, emotionally rich style has made Lazy Panda Photography one of South India's most sought-after studios.</p>
+      <p class="founder-bio">When not behind a camera, Arjun mentors emerging photographers, teaches weekend masterclasses, and occasionally disappears into the Western Ghats with a film camera.</p>
+      <div class="founder-skills">
+        <span class="skill-tag">Wedding Photography</span>
+        <span class="skill-tag">Fashion Editorials</span>
+        <span class="skill-tag">Cinematic Video</span>
+        <span class="skill-tag">Drone Certified</span>
+        <span class="skill-tag">Studio Lighting</span>
+        <span class="skill-tag">Photo Editing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section-pad">
+  <span class="section-label" data-aos="fade-up">The People</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Meet the <em>Team</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">A collective of artists, storytellers and creatives — each bringing a unique lens to every project.</p>
+
+  <div class="team-grid">
+    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="team-img">
+        <div class="team-img-bg"><i class="fas fa-camera" style="color:rgba(201,168,76,0.3)"></i><span style="font-family:var(--font-serif);font-size:0.9rem;color:rgba(201,168,76,0.2);font-style:italic">Arjun Mehta</span></div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Arjun Mehta</div>
+        <span class="team-role">Founder & Lead Photographer</span>
+        <p class="team-desc">10 years of cinematic wedding & fashion photography. NID graduate, national award winner.</p>
+        <div class="team-social">
+          <a href="#" class="team-soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="team-soc"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="team-img">
+        <div class="team-img-bg"><i class="fas fa-video" style="color:rgba(100,160,220,0.25)"></i><span style="font-family:var(--font-serif);font-size:0.9rem;color:rgba(100,160,220,0.2);font-style:italic">Deepa Nair</span></div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Deepa Nair</div>
+        <span class="team-role">Cinematographer & Video Editor</span>
+        <p class="team-desc">Award-winning cinematographer specialising in cinematic wedding films and brand storytelling.</p>
+        <div class="team-social">
+          <a href="#" class="team-soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="team-soc"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="team-img">
+        <div class="team-img-bg"><i class="fas fa-drone" style="color:rgba(180,200,100,0.2)"></i><span style="font-family:var(--font-serif);font-size:0.9rem;color:rgba(180,200,100,0.18);font-style:italic">Rahul Kumar</span></div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Rahul Kumar</div>
+        <span class="team-role">Drone Pilot & Aerial Photographer</span>
+        <p class="team-desc">DGCA-certified drone pilot with 5 years of aerial photography for weddings and events across India.</p>
+        <div class="team-social">
+          <a href="#" class="team-soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="team-soc"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card" data-aos="fade-up" data-aos-delay="180">
+      <div class="team-img">
+        <div class="team-img-bg"><i class="fas fa-paint-brush" style="color:rgba(200,140,160,0.25)"></i><span style="font-family:var(--font-serif);font-size:0.9rem;color:rgba(200,140,160,0.2);font-style:italic">Sneha Varma</span></div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Sneha Varma</div>
+        <span class="team-role">Photo Editor & Colour Artist</span>
+        <p class="team-desc">Post-processing specialist who brings the cinematic, warm-gold aesthetic that defines Lazy Panda's signature look.</p>
+        <div class="team-social">
+          <a href="#" class="team-soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="team-soc"><i class="fab fa-behance"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline-about" class="section-pad">
+  <span class="section-label" data-aos="fade-up">A Decade of Stories</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our <em>Journey</em></h2>
+  <div class="gold-divider" style="margin-bottom:70px" data-aos="fade-up"></div>
+  <div class="tl-wrap">
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2015</span>
+          <div class="tl-title">The Studio Is Born</div>
+          <p class="tl-text">Arjun Mehta launches Lazy Panda Photography from a modest studio in Kowdiar, Thiruvananthapuram — with one camera, one light stand, and an unshakeable vision.</p>
+        </div>
+      </div>
+      <div class="tl-side"></div>
+    </div>
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-side"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2017</span>
+          <div class="tl-title">First National Recognition</div>
+          <p class="tl-text">Wins the India Photography Award for Outstanding Wedding Photography. Work featured in Harper's Bazaar Bride. Client enquiries triple overnight.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2019</span>
+          <div class="tl-title">Fashion & Commercial Expansion</div>
+          <p class="tl-text">Opens a dedicated professional studio space with full lighting infrastructure. Launches fashion and commercial photography verticals; onboards first two team members.</p>
+        </div>
+      </div>
+      <div class="tl-side"></div>
+    </div>
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-side"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2021</span>
+          <div class="tl-title">Going Digital — Stories Beyond Kerala</div>
+          <p class="tl-text">Destination weddings in Rajasthan, Goa and Sri Lanka. Pivot to short-form cinematic content. YouTube channel crosses 50,000 subscribers.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item" data-aos="fade-right">
+      <div class="tl-dot"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2022</span>
+          <div class="tl-title">Drone & Cinematic Division</div>
+          <p class="tl-text">Launches aerial photography and full cinematic videography service. DGCA-certified drone pilot joins the team. First feature-length wedding documentary released.</p>
+        </div>
+      </div>
+      <div class="tl-side"></div>
+    </div>
+    <div class="tl-item" data-aos="fade-left">
+      <div class="tl-dot"></div>
+      <div class="tl-side"></div>
+      <div class="tl-side">
+        <div class="tl-content">
+          <span class="tl-year">2025</span>
+          <div class="tl-title">1,000 Stories — and Counting</div>
+          <p class="tl-text">Crosses 1,000 completed projects. Wins Best Wedding Studio Kerala for the third consecutive year. The story continues — one frame at a time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEAR -->
+<section id="gear" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Professional Equipment</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our <em>Arsenal</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">World-class gear maintained to perfection — because every pixel of your memory deserves the finest tools.</p>
+  <div class="gear-grid">
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-camera gear-icon"></i>
+      <span class="gear-brand">Sony / Nikon</span>
+      <div class="gear-name">Full-Frame Mirrorless Bodies</div>
+      <p class="gear-desc">Sony α1 and Nikon Z9 — 50MP resolution, 30fps burst, unmatched low-light performance for every lighting condition.</p>
+    </div>
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-eye gear-icon"></i>
+      <span class="gear-brand">Prime & Zoom Lenses</span>
+      <div class="gear-name">Cinema-Grade Glass</div>
+      <p class="gear-desc">Zeiss Otus 55mm, Sony 85mm f/1.4 GM, 24-70mm f/2.8 — tack-sharp with signature cinematic bokeh.</p>
+    </div>
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-drone gear-icon"></i>
+      <span class="gear-brand">DJI</span>
+      <div class="gear-name">Mavic 3 Pro & Inspire 3</div>
+      <p class="gear-desc">Professional drones with Hasselblad-calibrated sensors for breathtaking 4K aerial shots and smooth cinematic flyovers.</p>
+    </div>
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-lightbulb gear-icon"></i>
+      <span class="gear-brand">Profoto</span>
+      <div class="gear-name">B10X Studio Strobes</div>
+      <p class="gear-desc">750Ws portable strobes with HSS capability — consistent, beautiful light in-studio or on location worldwide.</p>
+    </div>
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-film gear-icon"></i>
+      <span class="gear-brand">Zhiyun / DJI</span>
+      <div class="gear-name">3-Axis Cinema Gimbals</div>
+      <p class="gear-desc">Ultra-smooth cinematic movement for video — transforming handheld footage into flowing, professional motion pictures.</p>
+    </div>
+    <div class="gear-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-desktop gear-icon"></i>
+      <span class="gear-brand">Retouching Studio</span>
+      <div class="gear-name">Pro-Grade Editing Suite</div>
+      <p class="gear-desc">Calibrated 5K Retina displays, Capture One Pro, DaVinci Resolve — for colour-accurate post-processing that honours reality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards-about" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Recognition</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Awards & <em>Accolades</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+  <div class="awards-list">
+    <div class="award-row" data-aos="fade-up" data-aos-delay="0">
+      <div class="award-icon2"><i class="fas fa-trophy"></i></div>
+      <div class="award-info">
+        <div class="award-title2">India Photography Awards — Outstanding Wedding Photography</div>
+        <div class="award-body">National recognition for cinematic storytelling and emotional depth in wedding documentation.</div>
+      </div>
+      <div class="award-year2">2023</div>
+    </div>
+    <div class="award-row" data-aos="fade-up" data-aos-delay="60">
+      <div class="award-icon2"><i class="fas fa-award"></i></div>
+      <div class="award-info">
+        <div class="award-title2">Best Wedding Studio Kerala — Photography Council</div>
+        <div class="award-body">Voted by a panel of industry professionals for consistent quality and client experience.</div>
+      </div>
+      <div class="award-year2">2022</div>
+    </div>
+    <div class="award-row" data-aos="fade-up" data-aos-delay="120">
+      <div class="award-icon2"><i class="fas fa-star"></i></div>
+      <div class="award-info">
+        <div class="award-title2">Junebug Weddings — Top 10 Wedding Photographers India</div>
+        <div class="award-body">International platform feature among the world's top wedding photographers.</div>
+      </div>
+      <div class="award-year2">2021</div>
+    </div>
+    <div class="award-row" data-aos="fade-up" data-aos-delay="0">
+      <div class="award-icon2"><i class="fas fa-medal"></i></div>
+      <div class="award-info">
+        <div class="award-title2">WeddingWire Couples' Choice Award</div>
+        <div class="award-body">Five consecutive years of five-star ratings — awarded based purely on client reviews.</div>
+      </div>
+      <div class="award-year2">2019–24</div>
+    </div>
+    <div class="award-row" data-aos="fade-up" data-aos-delay="60">
+      <div class="award-icon2"><i class="fas fa-certificate"></i></div>
+      <div class="award-info">
+        <div class="award-title2">Featured in Harper's Bazaar Bride India</div>
+        <div class="award-body">Editorial coverage of the Priya & Vikram Nair monsoon wedding — a career-defining publication.</div>
+      </div>
+      <div class="award-year2">2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">We don't just take pictures — we craft visual legacies. Every frame is a story, every session an experience.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="services.html">Wedding Photography</a></li>
+        <li><a href="services.html">Pre-Wedding Shoots</a></li>
+        <li><a href="services.html">Portrait Sessions</a></li>
+        <li><a href="services.html">Fashion Photography</a></li>
+        <li><a href="services.html">Drone Coverage</a></li>
+        <li><a href="services.html">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Photography stories, tips & exclusive offers.</p>
+      <input type="email" class="newsletter-input" placeholder="Enter your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });</script>
+</body>
+</html>

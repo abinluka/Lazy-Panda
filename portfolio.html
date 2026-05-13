@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photography portfolio by Lazy Panda Photography — weddings, portraits, fashion, events, nature, and commercial work.">
+<title>Portfolio | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background: var(--dark); }
+.page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 55%); }
+
+/* ---- FILTER BAR ---- */
+.filter-bar {
+  display: flex; gap: 4px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 4px;
+  max-width: 1300px; margin: 0 auto 4px;
+  padding: 0 5%;
+}
+.filter-btn {
+  padding: 9px 22px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gray);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: var(--transition);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
+
+/* ---- MASONRY GRID ---- */
+.port-grid-wrap { padding: 0; }
+.masonry {
+  columns: 4;
+  column-gap: 3px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.port-item {
+  break-inside: avoid;
+  margin-bottom: 3px;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+.port-img {
+  display: block; width: 100%;
+  transition: transform 0.7s ease;
+}
+.port-item:hover .port-img { transform: scale(1.07); }
+.port-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 28px;
+}
+.port-item:hover .port-overlay { opacity: 1; }
+.port-cat { font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:7px; }
+.port-name { font-family:var(--font-serif); font-size:1.1rem; color:var(--white); }
+.port-expand {
+  position:absolute; top:20px; right:20px;
+  width:38px; height:38px;
+  border:1px solid rgba(255,255,255,0.3);
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-size:0.75rem;
+  opacity:0; transition:all 0.4s;
+  background:rgba(0,0,0,0.3);
+}
+.port-item:hover .port-expand { opacity:1; }
+
+/* Placeholder colours for portfolio items */
+.pc-1 { background:linear-gradient(145deg,#1a1209,#0d0a05); }
+.pc-2 { background:linear-gradient(145deg,#0d1015,#0a0d0f); }
+.pc-3 { background:linear-gradient(145deg,#120e0a,#0a0a0a); }
+.pc-4 { background:linear-gradient(145deg,#0f120e,#0a0c0a); }
+.pc-5 { background:linear-gradient(145deg,#100d13,#0a080d); }
+.pc-6 { background:linear-gradient(145deg,#14100a,#0d0b08); }
+.pc-7 { background:linear-gradient(145deg,#0d1010,#0a0d0d); }
+.pc-8 { background:linear-gradient(145deg,#12100d,#0a0a0a); }
+.pc-9 { background:linear-gradient(145deg,#0e1012,#0a0b0d); }
+.pc-10 { background:linear-gradient(145deg,#130f0a,#0c0a07); }
+.pc-11 { background:linear-gradient(145deg,#0f0d12,#0a090d); }
+.pc-12 { background:linear-gradient(145deg,#111009,#0d0c07); }
+
+.ph-block { width:100%; display:block; position:relative; }
+.ph-block::before { content:''; display:block; }
+.ph-block::after {
+  content:''; position:absolute;
+  width:100px; height:100px; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  top:35%; left:40%;
+}
+.ph-inner-p {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:12px;
+}
+.ph-inner-p i { font-size:2.5rem; }
+.ph-inner-p span { font-family:var(--font-serif); font-size:0.85rem; font-style:italic; letter-spacing:0.1em; }
+
+/* Heights for masonry variety */
+.h-tall::before { padding-bottom:140%; }
+.h-med::before { padding-bottom:110%; }
+.h-wide::before { padding-bottom:75%; }
+.h-sq::before { padding-bottom:100%; }
+.h-short::before { padding-bottom:65%; }
+
+/* ---- FEATURED PROJECTS ---- */
+#featured { background: var(--dark); }
+.featured-swiper { max-width:1200px; margin:0 auto; overflow:hidden; }
+.featured-slide {
+  display:grid; grid-template-columns:1fr 1fr; gap:3px;
+}
+.feat-visual {
+  aspect-ratio:4/3; background:var(--dark-2);
+  position:relative; overflow:hidden;
+}
+.feat-img-inner {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:18px; transition:transform 0.8s ease;
+}
+.featured-slide:hover .feat-img-inner { transform:scale(1.05); }
+.feat-img-inner i { font-size:4rem; }
+.feat-content {
+  background:var(--dark-3);
+  padding:64px 56px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.feat-label { font-size:0.62rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; margin-bottom:16px; display:block; }
+.feat-title { font-family:var(--font-serif); font-size:2rem; font-weight:300; color:var(--white); margin-bottom:20px; line-height:1.2; }
+.feat-desc { font-size:0.88rem; color:var(--gray); line-height:1.9; margin-bottom:32px; }
+.feat-meta { display:flex; gap:32px; }
+.feat-meta-item { }
+.feat-meta-label { font-size:0.6rem; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:5px; display:block; }
+.feat-meta-val { font-family:var(--font-serif); font-size:0.95rem; color:var(--white); }
+.swiper-button-next, .swiper-button-prev { color:var(--gold) !important; --swiper-navigation-size:18px; }
+.swiper-button-next::after, .swiper-button-prev::after { font-size:18px !important; }
+
+/* ---- LIGHTBOX ---- */
+.lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.96); z-index:3000; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:all 0.3s ease; }
+.lightbox.open { opacity:1; visibility:visible; }
+.lightbox-inner { max-width:760px; width:90%; position:relative; }
+.lb-close { position:absolute; top:-48px; right:0; background:none; border:1px solid rgba(255,255,255,0.2); color:white; width:36px; height:36px; display:flex; align-items:center; justify-content:center; cursor:none; font-size:0.85rem; transition:all 0.3s; }
+.lb-close:hover { border-color:var(--gold); color:var(--gold); }
+.lb-visual { aspect-ratio:4/3; background:var(--dark); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px; border:1px solid rgba(201,168,76,0.15); }
+.lb-visual i { font-size:4rem; color:rgba(201,168,76,0.25); }
+.lb-meta { padding:20px 0 0; display:flex; justify-content:space-between; align-items:flex-end; }
+.lb-cat { font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:6px; }
+.lb-title { font-family:var(--font-serif); font-size:1.3rem; color:var(--white); }
+.lb-nav { display:flex; gap:8px; }
+.lb-nav button { width:36px; height:36px; border:1px solid rgba(201,168,76,0.3); background:none; color:var(--gold); font-size:0.8rem; cursor:none; transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
+.lb-nav button:hover { background:var(--gold); color:var(--black); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width:1200px) { .masonry { columns:3; } }
+@media (max-width:900px) { .masonry { columns:2; } .featured-slide { grid-template-columns:1fr; } .feat-content { padding:40px 36px; } }
+@media (max-width:600px) { .masonry { columns:1; max-width:500px; margin:0 auto; } }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lb-close" onclick="closeLightbox(event)"><i class="fas fa-times"></i></button>
+    <div class="lb-visual"><i class="fas fa-image"></i></div>
+    <div class="lb-meta">
+      <div>
+        <span class="lb-cat" id="lb-cat">Category</span>
+        <div class="lb-title" id="lb-title">Project Title</div>
+      </div>
+      <div class="lb-nav">
+        <button onclick="lbPrev()"><i class="fas fa-arrow-left"></i></button>
+        <button onclick="lbNext()"><i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" class="active" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="book.html" class="btn-gold">Book a Session</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">The Work</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">A Thousand<br><em>Moments Preserved</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">Each image a chapter, each gallery a complete story — browse our curated portfolio below.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- FILTER + GRID -->
+<section id="gallery" class="section-pad" style="padding-bottom:0">
+  <div class="filter-bar" data-aos="fade-up">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="weddings">Weddings</button>
+    <button class="filter-btn" data-filter="portraits">Portraits</button>
+    <button class="filter-btn" data-filter="fashion">Fashion</button>
+    <button class="filter-btn" data-filter="events">Events</button>
+    <button class="filter-btn" data-filter="nature">Nature</button>
+    <button class="filter-btn" data-filter="commercial">Commercial</button>
+  </div>
+</section>
+
+<section class="port-grid-wrap" style="padding-top:20px">
+  <div class="masonry" id="masonryGrid">
+
+    <div class="port-item" data-category="weddings" onclick="openItem(0)">
+      <div class="ph-block pc-1 h-tall"><div class="ph-inner-p" style="color:rgba(201,168,76,0.3)"><i class="fas fa-ring"></i><span>Wedding Story</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Weddings</span><div class="port-name">The Sharma Wedding</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="fashion" onclick="openItem(1)">
+      <div class="ph-block pc-2 h-wide"><div class="ph-inner-p" style="color:rgba(150,140,200,0.25)"><i class="fas fa-tshirt"></i><span>Fashion Editorial</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Fashion</span><div class="port-name">Monsoon Couture</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="portraits" onclick="openItem(2)">
+      <div class="ph-block pc-3 h-med"><div class="ph-inner-p" style="color:rgba(201,168,76,0.25)"><i class="fas fa-user"></i><span>Model Portfolio</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Portraits</span><div class="port-name">Priya — Model Portfolio</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="nature" onclick="openItem(3)">
+      <div class="ph-block pc-4 h-sq"><div class="ph-inner-p" style="color:rgba(120,180,100,0.2)"><i class="fas fa-leaf"></i><span>Western Ghats</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Nature</span><div class="port-name">Monsoon Series</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="weddings" onclick="openItem(4)">
+      <div class="ph-block pc-5 h-tall"><div class="ph-inner-p" style="color:rgba(201,130,76,0.25)"><i class="fas fa-heart"></i><span>Pre-Wedding</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Pre-Wedding</span><div class="port-name">Rahul & Ananya, Munnar</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="events" onclick="openItem(5)">
+      <div class="ph-block pc-6 h-med"><div class="ph-inner-p" style="color:rgba(200,180,100,0.22)"><i class="fas fa-glass-cheers"></i><span>Corporate Event</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Events</span><div class="port-name">Gala Evening 2024</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="commercial" onclick="openItem(6)">
+      <div class="ph-block pc-7 h-wide"><div class="ph-inner-p" style="color:rgba(160,200,220,0.2)"><i class="fas fa-box-open"></i><span>Product Campaign</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Commercial</span><div class="port-name">Luxe Jewellery Campaign</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="portraits" onclick="openItem(7)">
+      <div class="ph-block pc-8 h-sq"><div class="ph-inner-p" style="color:rgba(201,168,76,0.22)"><i class="fas fa-baby"></i><span>Newborn Session</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Family</span><div class="port-name">Baby Aiden — 3 Weeks</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="fashion" onclick="openItem(8)">
+      <div class="ph-block pc-9 h-tall"><div class="ph-inner-p" style="color:rgba(200,140,180,0.22)"><i class="fas fa-crown"></i><span>Bridal Fashion</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Fashion</span><div class="port-name">Bridal Couture 2024</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="nature" onclick="openItem(9)">
+      <div class="ph-block pc-10 h-med"><div class="ph-inner-p" style="color:rgba(100,180,160,0.2)"><i class="fas fa-water"></i><span>Backwaters</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Nature</span><div class="port-name">Kerala Backwaters at Dawn</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="weddings" onclick="openItem(10)">
+      <div class="ph-block pc-11 h-wide"><div class="ph-inner-p" style="color:rgba(201,168,76,0.28)"><i class="fas fa-church"></i><span>Ceremony</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Weddings</span><div class="port-name">The Nair Wedding — Alleppey</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <div class="port-item" data-category="commercial" onclick="openItem(11)">
+      <div class="ph-block pc-12 h-sq"><div class="ph-inner-p" style="color:rgba(180,200,220,0.2)"><i class="fas fa-building"></i><span>Architecture</span></div></div>
+      <div class="port-overlay"><span class="port-cat">Commercial</span><div class="port-name">Architectural Series</div></div>
+      <div class="port-expand"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+<section id="featured" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Curated Stories</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Featured <em>Projects</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Our most celebrated work — stories that moved us and moved the people in them.</p>
+
+  <div class="swiper featured-swiper" data-aos="fade-up" data-aos-delay="200">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <div class="featured-slide">
+          <div class="feat-visual" style="background:linear-gradient(135deg,#1a1209,#0d0a05)">
+            <div class="feat-img-inner" style="color:rgba(201,168,76,0.25)">
+              <i class="fas fa-ring" style="font-size:5rem"></i>
+              <span style="font-family:var(--font-serif);font-style:italic;font-size:1rem;letter-spacing:0.15em">Priya & Vikram</span>
+            </div>
+          </div>
+          <div class="feat-content">
+            <span class="feat-label">Featured Wedding</span>
+            <h3 class="feat-title">Priya & Vikram Nair<br>— Alleppey Backwaters</h3>
+            <p class="feat-desc">A monsoon wedding on the Kerala backwaters — rain, candlelight, and the most emotionally charged first look we've ever witnessed. Featured in Harper's Bazaar Bride India.</p>
+            <div class="feat-meta">
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Location</span>
+                <div class="feat-meta-val">Alleppey, Kerala</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Coverage</span>
+                <div class="feat-meta-val">3 Days</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Deliverables</span>
+                <div class="feat-meta-val">320 Photos + Film</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="featured-slide">
+          <div class="feat-visual" style="background:linear-gradient(135deg,#100d13,#0a080d)">
+            <div class="feat-img-inner" style="color:rgba(180,140,210,0.22)">
+              <i class="fas fa-tshirt" style="font-size:5rem"></i>
+              <span style="font-family:var(--font-serif);font-style:italic;font-size:1rem;letter-spacing:0.15em">Monsoon Couture</span>
+            </div>
+          </div>
+          <div class="feat-content">
+            <span class="feat-label">Featured Fashion</span>
+            <h3 class="feat-title">Monsoon Couture<br>— Label Riviera</h3>
+            <p class="feat-desc">An editorial shoot for Kerala designer Label Riviera — shot across three locations in one marathon day. The resulting campaign generated 10x client engagement growth.</p>
+            <div class="feat-meta">
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Client</span>
+                <div class="feat-meta-val">Label Riviera</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Images</span>
+                <div class="feat-meta-val">180 Final Edits</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Usage</span>
+                <div class="feat-meta-val">Print & Digital</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="featured-slide">
+          <div class="feat-visual" style="background:linear-gradient(135deg,#0a0f14,#080c10)">
+            <div class="feat-img-inner" style="color:rgba(100,160,220,0.2)">
+              <i class="fas fa-drone" style="font-size:5rem"></i>
+              <span style="font-family:var(--font-serif);font-style:italic;font-size:1rem;letter-spacing:0.15em">Aerial Series</span>
+            </div>
+          </div>
+          <div class="feat-content">
+            <span class="feat-label">Featured Aerial</span>
+            <h3 class="feat-title">Kerala From Above<br>— Drone Series 2024</h3>
+            <p class="feat-desc">A personal passion project — documenting the geometry, colour and life of Kerala as seen from 400 feet. The series won the National Drone Photography Award 2024.</p>
+            <div class="feat-meta">
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Locations</span>
+                <div class="feat-meta-val">8 Districts</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Duration</span>
+                <div class="feat-meta-val">6 Months</div>
+              </div>
+              <div class="feat-meta-item">
+                <span class="feat-meta-label">Award</span>
+                <div class="feat-meta-val">National Winner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--dark-2);padding:80px 5%;text-align:center;border-top:1px solid rgba(201,168,76,0.1)">
+  <span style="font-size:0.65rem;letter-spacing:0.45em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:20px" data-aos="fade-up">Your Story Awaits</span>
+  <h2 style="font-family:var(--font-serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:16px" data-aos="fade-up" data-aos-delay="80">Ready to Create Your <em style="color:var(--gold-light);font-style:italic">Own Story?</em></h2>
+  <p style="color:var(--gray);font-size:0.9rem;max-width:400px;margin:0 auto 36px;line-height:1.9" data-aos="fade-up" data-aos-delay="140">Every project in this portfolio began with a single enquiry. Yours could be next.</p>
+  <a href="book.html" class="btn-gold-fill" style="padding:16px 48px;font-size:0.8rem" data-aos="fade-up" data-aos-delay="200">Start Your Story</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="services.html">Wedding Photography</a></li>
+        <li><a href="services.html">Pre-Wedding Shoots</a></li>
+        <li><a href="services.html">Portrait Sessions</a></li>
+        <li><a href="services.html">Fashion Photography</a></li>
+        <li><a href="services.html">Drone Coverage</a></li>
+        <li><a href="services.html">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });
+
+new Swiper('.featured-swiper', {
+  slidesPerView:1, loop:true,
+  autoplay:{ delay:6000, disableOnInteraction:false },
+  navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' }
+});
+
+// ---- FILTER ----
+const btns = document.querySelectorAll('.filter-btn');
+const items = document.querySelectorAll('.port-item');
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    items.forEach(item => {
+      const show = f === 'all' || item.dataset.category === f;
+      item.style.display = show ? 'block' : 'none';
+      item.style.opacity = show ? '1' : '0';
+    });
+  });
+});
+
+// ---- LIGHTBOX ----
+const portData = [
+  { cat:'Weddings', title:'The Sharma Wedding' },
+  { cat:'Fashion', title:'Monsoon Couture Editorial' },
+  { cat:'Portraits', title:'Priya — Model Portfolio' },
+  { cat:'Nature', title:'Monsoon Series — Western Ghats' },
+  { cat:'Pre-Wedding', title:'Rahul & Ananya, Munnar' },
+  { cat:'Events', title:'Gala Evening 2024' },
+  { cat:'Commercial', title:'Luxe Jewellery Campaign' },
+  { cat:'Family', title:'Baby Aiden — Newborn Session' },
+  { cat:'Fashion', title:'Bridal Couture 2024' },
+  { cat:'Nature', title:'Kerala Backwaters at Dawn' },
+  { cat:'Weddings', title:'The Nair Wedding — Alleppey' },
+  { cat:'Commercial', title:'Architectural Series' }
+];
+let currentLb = 0;
+window.openItem = function(i) {
+  currentLb = i;
+  document.getElementById('lb-cat').textContent = portData[i].cat;
+  document.getElementById('lb-title').textContent = portData[i].title;
+  document.getElementById('lightbox').classList.add('open');
+};
+window.lbNext = function() { currentLb = (currentLb + 1) % portData.length; window.openItem(currentLb); };
+window.lbPrev = function() { currentLb = (currentLb - 1 + portData.length) % portData.length; window.openItem(currentLb); };
+window.closeLightbox = function(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.tagName === 'BUTTON') {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+};
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') lbNext();
+  if (e.key === 'ArrowLeft') lbPrev();
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+});
+</script>
+</body>
+</html>

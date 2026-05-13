@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background:var(--dark); }
+.page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 55%); }
+#policy { background:var(--black); }
+.policy-layout { display:grid; grid-template-columns:240px 1fr; gap:60px; max-width:1100px; margin:0 auto; align-items:start; }
+.policy-nav { position:sticky; top:100px; }
+.pn-title { font-size:0.6rem; letter-spacing:0.38em; color:var(--gold); text-transform:uppercase; margin-bottom:20px; display:block; border-bottom:1px solid rgba(201,168,76,0.15); padding-bottom:14px; }
+.pn-links { list-style:none; }
+.pn-links li { margin-bottom:4px; }
+.pn-links a { display:block; padding:9px 14px; font-size:0.78rem; color:var(--gray); text-decoration:none; border-left:2px solid transparent; transition:all 0.3s; letter-spacing:0.08em; }
+.pn-links a:hover { color:var(--gold); border-left-color:var(--gold); padding-left:18px; }
+.policy-content { }
+.policy-section { margin-bottom:56px; padding-bottom:56px; border-bottom:1px solid rgba(201,168,76,0.08); }
+.policy-section:last-child { border-bottom:none; }
+.ps-num { font-size:0.6rem; letter-spacing:0.38em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:12px; }
+.ps-title { font-family:var(--font-serif); font-size:1.6rem; font-weight:300; color:var(--white); margin-bottom:20px; line-height:1.2; }
+.ps-text { font-size:0.9rem; color:var(--gray); line-height:2; margin-bottom:16px; }
+.ps-list { list-style:none; margin:16px 0; }
+.ps-list li { padding:8px 0; color:var(--gray); font-size:0.88rem; line-height:1.8; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; gap:14px; align-items:flex-start; }
+.ps-list li i { color:var(--gold); font-size:0.65rem; margin-top:6px; flex-shrink:0; }
+.ps-highlight { background:var(--dark); border-left:2px solid var(--gold); padding:20px 24px; margin:24px 0; }
+.ps-highlight p { font-size:0.88rem; color:var(--gray-light); line-height:1.9; margin:0; }
+.policy-updated { font-size:0.72rem; letter-spacing:0.15em; color:var(--gray); margin-top:52px; padding-top:28px; border-top:1px solid rgba(201,168,76,0.08); }
+.policy-updated span { color:var(--gold); }
+@media(max-width:900px) { .policy-layout { grid-template-columns:1fr; } .policy-nav { display:none; } }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader"><div class="loader-logo">Lazy <span>Panda</span> Photography</div><div class="loader-bar"></div><div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div></div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span class="nav-logo-name">Lazy <span>Panda</span></span><span class="nav-logo-tagline">Photography</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta"><a href="portfolio.html" class="btn-gold">View Work</a><a href="book.html" class="btn-gold-fill">Book Now</a></div>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Legal</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Privacy <em>Policy</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">How we collect, use, protect and respect your personal information.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<section id="policy" class="section-pad">
+  <div class="policy-layout">
+    <aside class="policy-nav" data-aos="fade-right">
+      <span class="pn-title">Contents</span>
+      <ul class="pn-links">
+        <li><a href="#sec-intro">Introduction</a></li>
+        <li><a href="#sec-collect">Data We Collect</a></li>
+        <li><a href="#sec-use">How We Use It</a></li>
+        <li><a href="#sec-share">Sharing Policy</a></li>
+        <li><a href="#sec-photos">Photography Rights</a></li>
+        <li><a href="#sec-cookies">Cookies</a></li>
+        <li><a href="#sec-security">Data Security</a></li>
+        <li><a href="#sec-rights">Your Rights</a></li>
+        <li><a href="#sec-contact">Contact Us</a></li>
+      </ul>
+    </aside>
+
+    <div class="policy-content" data-aos="fade-left">
+
+      <div class="policy-section" id="sec-intro">
+        <span class="ps-num">Section 01</span>
+        <h2 class="ps-title">Introduction</h2>
+        <p class="ps-text">Lazy Panda Photography ("we", "our", "us") is committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, disclose and safeguard your personal information when you visit our website, contact us, or engage our services.</p>
+        <p class="ps-text">By using our website or services, you consent to the data practices described in this policy. We encourage you to read this document carefully. If you have any questions, please contact us at <a href="mailto:hello@lazypandaphoto.com" style="color:var(--gold)">hello@lazypandaphoto.com</a>.</p>
+        <div class="ps-highlight"><p>This policy applies to all data collected through our website (lazypandaphoto.com), booking forms, email communications, WhatsApp interactions and any other means by which you contact or engage with us.</p></div>
+      </div>
+
+      <div class="policy-section" id="sec-collect">
+        <span class="ps-num">Section 02</span>
+        <h2 class="ps-title">Data We Collect</h2>
+        <p class="ps-text">We collect information you voluntarily provide to us and information automatically collected when you visit our website.</p>
+        <p class="ps-text"><strong style="color:var(--white)">Information You Provide:</strong></p>
+        <ul class="ps-list">
+          <li><i class="fas fa-circle"></i>Name, email address and phone number submitted via contact or booking forms</li>
+          <li><i class="fas fa-circle"></i>Event details including dates, locations, and service requirements</li>
+          <li><i class="fas fa-circle"></i>Budget and package preferences</li>
+          <li><i class="fas fa-circle"></i>Messages and correspondence sent to us via any channel</li>
+          <li><i class="fas fa-circle"></i>Newsletter subscription email addresses</li>
+          <li><i class="fas fa-circle"></i>Payment information (processed securely by third-party payment providers — we do not store card details)</li>
+        </ul>
+        <p class="ps-text" style="margin-top:20px"><strong style="color:var(--white)">Automatically Collected Information:</strong></p>
+        <ul class="ps-list">
+          <li><i class="fas fa-circle"></i>IP address and browser type</li>
+          <li><i class="fas fa-circle"></i>Pages visited and time spent on our website</li>
+          <li><i class="fas fa-circle"></i>Referring website and search terms</li>
+          <li><i class="fas fa-circle"></i>Device type and operating system</li>
+        </ul>
+      </div>
+
+      <div class="policy-section" id="sec-use">
+        <span class="ps-num">Section 03</span>
+        <h2 class="ps-title">How We Use Your Information</h2>
+        <p class="ps-text">We use the information we collect for the following purposes:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-check"></i>To respond to enquiries and communicate about bookings</li>
+          <li><i class="fas fa-check"></i>To provide, manage and deliver our photography services</li>
+          <li><i class="fas fa-check"></i>To send booking confirmations, contracts and invoices</li>
+          <li><i class="fas fa-check"></i>To deliver your photographs and videos via our gallery system</li>
+          <li><i class="fas fa-check"></i>To send our newsletter (only to subscribers who have opted in)</li>
+          <li><i class="fas fa-check"></i>To improve our website, services and client experience</li>
+          <li><i class="fas fa-check"></i>To comply with legal obligations</li>
+        </ul>
+        <div class="ps-highlight"><p>We will never sell your personal data to third parties, and we will never use it for any purpose other than those listed above without your explicit consent.</p></div>
+      </div>
+
+      <div class="policy-section" id="sec-share">
+        <span class="ps-num">Section 04</span>
+        <h2 class="ps-title">Sharing Your Information</h2>
+        <p class="ps-text">We do not sell, trade or transfer your personal information to third parties except in the following limited circumstances:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Service providers:</strong> Trusted platforms such as gallery delivery services, cloud storage, accounting software and email providers — who are contractually obligated to protect your data</li>
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Legal requirements:</strong> When required by law, court order or governmental authority</li>
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Business transfer:</strong> In the event of a merger, acquisition or sale of assets, your data may be transferred — you will be notified in advance</li>
+        </ul>
+      </div>
+
+      <div class="policy-section" id="sec-photos">
+        <span class="ps-num">Section 05</span>
+        <h2 class="ps-title">Photography Rights & Image Use</h2>
+        <p class="ps-text">Photographs and videos we create during your session may be used by Lazy Panda Photography for the following purposes, unless you explicitly opt out in writing:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-circle"></i>Portfolio display on our website and social media</li>
+          <li><i class="fas fa-circle"></i>Marketing materials including brochures and advertisements</li>
+          <li><i class="fas fa-circle"></i>Award submissions and industry competitions</li>
+          <li><i class="fas fa-circle"></i>Editorial features in photography publications</li>
+        </ul>
+        <p class="ps-text">We will never sell your images to stock photography agencies or third-party commercial entities. You may request that your images not be used in our marketing by notifying us in writing before or after your session. This opt-out does not affect the quality or delivery of your final images.</p>
+        <div class="ps-highlight"><p>Your delivered images are for personal use. Commercial use of delivered photographs requires a separate licensing agreement. Please contact us for commercial licensing enquiries.</p></div>
+      </div>
+
+      <div class="policy-section" id="sec-cookies">
+        <span class="ps-num">Section 06</span>
+        <h2 class="ps-title">Cookies</h2>
+        <p class="ps-text">Our website uses cookies — small text files stored on your device — to improve your browsing experience. We use the following types:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Essential cookies:</strong> Required for the website to function correctly</li>
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Analytics cookies:</strong> Help us understand how visitors interact with our site (anonymised data)</li>
+          <li><i class="fas fa-circle"></i><strong style="color:var(--white)">Preference cookies:</strong> Remember your settings and preferences</li>
+        </ul>
+        <p class="ps-text">You can control cookie preferences through your browser settings. Disabling cookies may affect some website functionality.</p>
+      </div>
+
+      <div class="policy-section" id="sec-security">
+        <span class="ps-num">Section 07</span>
+        <h2 class="ps-title">Data Security</h2>
+        <p class="ps-text">We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure or destruction. These include:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-check"></i>SSL/TLS encryption for all website data transmission</li>
+          <li><i class="fas fa-check"></i>Secure password-protected client gallery delivery</li>
+          <li><i class="fas fa-check"></i>Limited staff access to personal data on a need-to-know basis</li>
+          <li><i class="fas fa-check"></i>Regular security reviews of our systems</li>
+          <li><i class="fas fa-check"></i>Secure cloud backup of all client files</li>
+        </ul>
+        <p class="ps-text">While we take every reasonable precaution, no method of data transmission over the internet is 100% secure. If you become aware of any security breach, please contact us immediately.</p>
+      </div>
+
+      <div class="policy-section" id="sec-rights">
+        <span class="ps-num">Section 08</span>
+        <h2 class="ps-title">Your Rights</h2>
+        <p class="ps-text">Under applicable data protection laws, you have the following rights regarding your personal information:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Access:</strong> Request a copy of the personal data we hold about you</li>
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Rectification:</strong> Request correction of inaccurate or incomplete data</li>
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Erasure:</strong> Request deletion of your data, subject to legal obligations</li>
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Portability:</strong> Request transfer of your data to another service provider</li>
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Objection:</strong> Object to processing of your data for marketing purposes</li>
+          <li><i class="fas fa-check"></i><strong style="color:var(--white)">Withdrawal of consent:</strong> Withdraw consent for newsletter subscription at any time</li>
+        </ul>
+        <p class="ps-text">To exercise any of these rights, contact us at <a href="mailto:hello@lazypandaphoto.com" style="color:var(--gold)">hello@lazypandaphoto.com</a>. We will respond within 30 days.</p>
+      </div>
+
+      <div class="policy-section" id="sec-contact">
+        <span class="ps-num">Section 09</span>
+        <h2 class="ps-title">Contact Us</h2>
+        <p class="ps-text">If you have any questions, concerns or requests regarding this Privacy Policy or your personal data, please contact us:</p>
+        <ul class="ps-list">
+          <li><i class="fas fa-envelope"></i>Email: <a href="mailto:hello@lazypandaphoto.com" style="color:var(--gold)">hello@lazypandaphoto.com</a></li>
+          <li><i class="fas fa-phone"></i>Phone: +91 94470 00000</li>
+          <li><i class="fas fa-map-marker-alt"></i>Address: 42 Kowdiar Avenue, Thiruvananthapuram — 695 003, Kerala, India</li>
+        </ul>
+      </div>
+
+      <div class="policy-updated">
+        Last updated: <span>1 January 2025</span> &nbsp;·&nbsp; This policy may be updated periodically. Continued use of our services constitutes acceptance of the revised policy.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div><div class="footer-logo">Lazy <span>Panda</span></div><span class="footer-tagline">Photography</span><p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials"><a href="#" class="footer-social"><i class="fab fa-instagram"></i></a><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a><a href="#" class="footer-social"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div><span class="footer-col-title">Quick Links</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><span class="footer-col-title">Legal</span><ul class="footer-links"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms & Conditions</a></li></ul></div>
+    <div><span class="footer-col-title">Newsletter</span><p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p><input type="email" class="newsletter-input" placeholder="Your email"><button class="newsletter-btn">Subscribe</button></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div><div class="footer-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></div></div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });</script>
+</body>
+</html>

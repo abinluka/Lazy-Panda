@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photography and videography services by Lazy Panda Photography — weddings, portraits, fashion, drone, and more.">
+<title>Services | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background: var(--dark); }
+.page-hero::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 55%);
+}
+
+/* ---- SERVICE FULL CARDS ---- */
+#services-list { background: var(--black); }
+.service-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 1300px;
+  margin: 0 auto 3px;
+  background: var(--dark);
+  overflow: hidden;
+}
+.service-full:nth-child(even) { direction: rtl; }
+.service-full:nth-child(even) > * { direction: ltr; }
+.sf-visual {
+  aspect-ratio: 4/3;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+}
+.sf-visual-inner {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; gap:18px;
+  transition: transform 0.7s ease;
+}
+.service-full:hover .sf-visual-inner { transform: scale(1.06); }
+.sf-visual-inner i { font-size:4rem; opacity:0.2; }
+.sf-visual-inner span { font-family:var(--font-serif); font-size:1.1rem; font-style:italic; letter-spacing:0.15em; opacity:0.25; }
+.sf-visual::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%);
+}
+.sf-content {
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sf-number {
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.4em;
+  color: rgba(201,168,76,0.4);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+.sf-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.sf-title em { font-style:italic; color:var(--gold-light); }
+.sf-desc {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.sf-features { list-style:none; margin-bottom:36px; }
+.sf-features li {
+  padding: 8px 0;
+  color: var(--gray);
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sf-features li i { color:var(--gold); font-size:0.65rem; width:14px; }
+.sf-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.sf-price {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--gold);
+  font-weight: 300;
+}
+.sf-price small { font-size: 0.75rem; color: var(--gray); font-family: var(--font-sans); letter-spacing: 0.15em; display:block; margin-top:2px; }
+
+/* ---- PROCESS ---- */
+#process { background: var(--dark); }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.process-steps::before {
+  content:'';
+  position:absolute;
+  top: 36px; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3) 20%, rgba(201,168,76,0.3) 80%, transparent);
+}
+.process-step { padding: 0 24px 0; text-align:center; }
+.step-circle {
+  width: 72px; height: 72px;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--gold);
+  background: var(--dark);
+  position: relative;
+  transition: var(--transition);
+}
+.process-step:hover .step-circle {
+  background: rgba(201,168,76,0.1);
+  border-color: var(--gold);
+  transform: scale(1.1);
+}
+.step-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.step-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.8; }
+
+/* ---- ADD-ONS ---- */
+#addons { background: var(--black); }
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.addon-card {
+  background: var(--dark);
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: var(--transition);
+}
+.addon-card::after {
+  content:''; position:absolute;
+  bottom:0; left:0;
+  width:0; height:2px;
+  background:var(--gold);
+  transition:width 0.4s ease;
+}
+.addon-card:hover::after { width:100%; }
+.addon-icon { font-size:1.8rem; color:rgba(201,168,76,0.4); margin-bottom:16px; display:block; transition:color 0.3s; }
+.addon-card:hover .addon-icon { color:var(--gold); }
+.addon-name { font-family:var(--font-serif); font-size:1.05rem; color:var(--white); margin-bottom:10px; }
+.addon-desc { font-size:0.78rem; color:var(--gray); line-height:1.8; margin-bottom:16px; }
+.addon-price { font-size:0.8rem; color:var(--gold); letter-spacing:0.15em; }
+
+/* ---- FAQ MINI ---- */
+#services-faq { background: var(--dark); }
+.faq-item { border-bottom:1px solid rgba(201,168,76,0.1); overflow:hidden; }
+.faq-question { display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:none; font-family:var(--font-serif); font-size:1.05rem; color:var(--white); transition:color 0.3s; }
+.faq-question:hover, .faq-question.open { color:var(--gold-light); }
+.faq-icon { width:28px; height:28px; border:1px solid rgba(201,168,76,0.3); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:0.75rem; transition:transform 0.3s; }
+.faq-question.open .faq-icon { transform:rotate(45deg); }
+.faq-answer { max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+.faq-answer-inner { padding:0 0 20px; color:var(--gray); font-size:0.88rem; line-height:1.9; }
+.faq-wrap { max-width:760px; margin:0 auto; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width:1024px) {
+  .service-full, .service-full:nth-child(even) { grid-template-columns:1fr; direction:ltr; }
+  .sf-visual { aspect-ratio:16/9; }
+  .sf-content { padding:48px 40px; }
+  .process-steps { grid-template-columns:1fr 1fr; gap:40px; }
+  .process-steps::before { display:none; }
+  .addons-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  .process-steps { grid-template-columns:1fr; max-width:360px; margin:0 auto; }
+  .sf-content { padding:36px 28px; }
+  .addons-grid { grid-template-columns:1fr; max-width:400px; margin:0 auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" class="active" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">What We Create</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Every Service, a<br><em>Work of Art</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">From intimate portraits to grand cinematic productions — each offering is crafted with uncompromising artistry.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- SERVICES LIST -->
+<section id="services-list" class="section-pad" style="padding-top:0">
+
+  <!-- Wedding -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#1a1209,#0d0a05)">
+      <div class="sf-visual-inner" style="color:var(--gold)"><i class="fas fa-ring"></i><span>Wedding Photography</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 01</span>
+      <h2 class="sf-title">Wedding <em>Photography</em></h2>
+      <p class="sf-desc">Your wedding day is the most important story you'll ever live. We document every chapter — from the nervous morning preparations to the last dance — with a photojournalist's instinct and an artist's eye.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>Full-day coverage from getting ready to reception</li>
+        <li><i class="fas fa-check"></i>Two photographers for complete coverage</li>
+        <li><i class="fas fa-check"></i>Candid + traditional photography blend</li>
+        <li><i class="fas fa-check"></i>Drone photography for venue & ceremony shots</li>
+        <li><i class="fas fa-check"></i>Private online gallery within 10 days</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹35,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-Wedding -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#0d0d14,#0a0a12)">
+      <div class="sf-visual-inner" style="color:#8899cc"><i class="fas fa-heart"></i><span>Pre-Wedding</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 02</span>
+      <h2 class="sf-title">Pre-Wedding <em>Shoots</em></h2>
+      <p class="sf-desc">A love story deserves a cinematic prologue. Our pre-wedding shoots are crafted around your personality — intimate, romantic, adventurous or dramatic — wherever you choose to tell your story.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>Personalised concept & location scouting</li>
+        <li><i class="fas fa-check"></i>Golden hour & twilight sessions</li>
+        <li><i class="fas fa-check"></i>Wardrobe & styling guidance</li>
+        <li><i class="fas fa-check"></i>60–80 fully edited images</li>
+        <li><i class="fas fa-check"></i>Optional cinematic reel</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹18,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portrait -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#120e0a,#0a0909)">
+      <div class="sf-visual-inner" style="color:#c8a470"><i class="fas fa-user-circle"></i><span>Portrait Photography</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 03</span>
+      <h2 class="sf-title">Portrait <em>Photography</em></h2>
+      <p class="sf-desc">Striking portraits that reveal who you truly are. Whether for LinkedIn headshots, model portfolios, maternity sessions or personal branding — we create images that make a lasting impression.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>Studio or outdoor session options</li>
+        <li><i class="fas fa-check"></i>Professional lighting setup</li>
+        <li><i class="fas fa-check"></i>Multiple outfit changes</li>
+        <li><i class="fas fa-check"></i>25–40 retouched final images</li>
+        <li><i class="fas fa-check"></i>Express 3-day delivery available</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹8,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fashion -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#100d13,#0a080d)">
+      <div class="sf-visual-inner" style="color:#9980bb"><i class="fas fa-tshirt"></i><span>Fashion Photography</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 04</span>
+      <h2 class="sf-title">Fashion <em>Photography</em></h2>
+      <p class="sf-desc">High-concept editorial and commercial fashion photography. We collaborate with designers, stylists, MUAs and talent to create images that define seasons and launch careers.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>Full creative direction & mood boarding</li>
+        <li><i class="fas fa-check"></i>Studio or location shoot</li>
+        <li><i class="fas fa-check"></i>High-end post-processing</li>
+        <li><i class="fas fa-check"></i>Usage rights for campaigns & lookbooks</li>
+        <li><i class="fas fa-check"></i>Brand identity alignment</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹22,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drone -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#0a0f14,#080c10)">
+      <div class="sf-visual-inner" style="color:#6699cc"><i class="fas fa-drone"></i><span>Drone Photography</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 05</span>
+      <h2 class="sf-title">Drone <em>Photography</em></h2>
+      <p class="sf-desc">Breathtaking aerial perspectives that transform ordinary venues into extraordinary canvases. DGCA-certified for all Indian airspace with insurance coverage for complete peace of mind.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>DGCA-certified pilot</li>
+        <li><i class="fas fa-check"></i>4K Ultra HD aerial footage</li>
+        <li><i class="fas fa-check"></i>Both stills and video</li>
+        <li><i class="fas fa-check"></i>Regulatory clearance handled</li>
+        <li><i class="fas fa-check"></i>Available as standalone or add-on</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹12,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Videography -->
+  <div class="service-full" data-aos="fade-up">
+    <div class="sf-visual" style="background:linear-gradient(135deg,#12100d,#0a0a0a)">
+      <div class="sf-visual-inner" style="color:#bb9966"><i class="fas fa-film"></i><span>Cinematic Video</span></div>
+    </div>
+    <div class="sf-content">
+      <span class="sf-number">Service 06</span>
+      <h2 class="sf-title">Cinematic <em>Videography</em></h2>
+      <p class="sf-desc">Films, not just videos. Our cinematic wedding and event films are narrative-driven productions with original sound design, colour grading and motion graphics that belong on a screen.</p>
+      <ul class="sf-features">
+        <li><i class="fas fa-check"></i>Full-day cinematic coverage</li>
+        <li><i class="fas fa-check"></i>3–5 min highlight film</li>
+        <li><i class="fas fa-check"></i>Full ceremony + reception cuts</li>
+        <li><i class="fas fa-check"></i>Professional colour grading</li>
+        <li><i class="fas fa-check"></i>Licensed music soundtrack</li>
+      </ul>
+      <div class="sf-price-row">
+        <div class="sf-price">₹45,000 <small>Starting price</small></div>
+        <a href="book.html" class="btn-gold-fill">Book Now</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="section-pad">
+  <span class="section-label" data-aos="fade-up">How It Works</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Our <em>Process</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">From your first enquiry to the final delivery — a seamless, joyful experience every step of the way.</p>
+
+  <div class="process-steps">
+    <div class="process-step" data-aos="fade-up" data-aos-delay="0">
+      <div class="step-circle">01</div>
+      <div class="step-name">Enquiry</div>
+      <p class="step-desc">Fill out our form or reach us on WhatsApp. Tell us your story, your date, your vision.</p>
+    </div>
+    <div class="process-step" data-aos="fade-up" data-aos-delay="80">
+      <div class="step-circle">02</div>
+      <div class="step-name">Consultation</div>
+      <p class="step-desc">Free 30-min discovery call to align on style, requirements, and creative direction.</p>
+    </div>
+    <div class="process-step" data-aos="fade-up" data-aos-delay="160">
+      <div class="step-circle">03</div>
+      <div class="step-name">Booking</div>
+      <p class="step-desc">Confirm your date with a 30% advance. Receive your personalised shoot guide.</p>
+    </div>
+    <div class="process-step" data-aos="fade-up" data-aos-delay="240">
+      <div class="step-circle">04</div>
+      <div class="step-name">The Shoot</div>
+      <p class="step-desc">We arrive, we observe, we create. You live the moment — we preserve it.</p>
+    </div>
+    <div class="process-step" data-aos="fade-up" data-aos-delay="320">
+      <div class="step-circle">05</div>
+      <div class="step-name">Delivery</div>
+      <p class="step-desc">Your private gallery goes live within the agreed timeline. Download, print, share, treasure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section id="addons" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Enhance Your Package</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Premium <em>Add-Ons</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Customise your experience with thoughtfully designed extras.</p>
+
+  <div class="addons-grid">
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-book addon-icon"></i>
+      <div class="addon-name">Premium Photo Album</div>
+      <p class="addon-desc">Handcrafted lay-flat albums with Flushmount pages and personalised cover design.</p>
+      <div class="addon-price">From ₹8,500</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-print addon-icon"></i>
+      <div class="addon-name">Fine Art Prints</div>
+      <p class="addon-desc">Museum-quality giclée prints on archival paper — wall art worthy of every favourite frame.</p>
+      <div class="addon-price">From ₹2,500</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-video addon-icon"></i>
+      <div class="addon-name">Same-Day Edit</div>
+      <p class="addon-desc">A curated 3-minute film delivered on the wedding night — perfect for your after-party screen.</p>
+      <div class="addon-price">From ₹15,000</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="180">
+      <i class="fas fa-plane addon-icon"></i>
+      <div class="addon-name">Destination Travel</div>
+      <p class="addon-desc">We travel anywhere in India and internationally. Custom travel packages available.</p>
+      <div class="addon-price">Custom Quote</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="0">
+      <i class="fas fa-mobile-alt addon-icon"></i>
+      <div class="addon-name">Instagram Reels Package</div>
+      <p class="addon-desc">10 social-media-ready vertical reels from your shoot, optimised for Instagram and YouTube Shorts.</p>
+      <div class="addon-price">From ₹6,000</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="60">
+      <i class="fas fa-user-friends addon-icon"></i>
+      <div class="addon-name">Second Photographer</div>
+      <p class="addon-desc">Add a second skilled photographer for complete coverage of simultaneous moments.</p>
+      <div class="addon-price">From ₹8,000</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="120">
+      <i class="fas fa-clock addon-icon"></i>
+      <div class="addon-name">Extended Hours</div>
+      <p class="addon-desc">Add extra coverage hours to your package for longer events and late-night celebrations.</p>
+      <div class="addon-price">₹3,500 / hr</div>
+    </div>
+    <div class="addon-card" data-aos="fade-up" data-aos-delay="180">
+      <i class="fas fa-gift addon-icon"></i>
+      <div class="addon-name">Gift Vouchers</div>
+      <p class="addon-desc">Give the gift of memories — photography session vouchers for any occasion or loved one.</p>
+      <div class="addon-price">From ₹5,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="services-faq" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Common Questions</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Services <em>FAQ</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+  <div class="faq-wrap">
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">How far in advance should I book? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">For weddings, we recommend booking 6–12 months in advance, especially for peak season (October–February). Portrait sessions can often be booked 2–4 weeks ahead. Contact us for last-minute availability.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Can I customise a package to suit my needs? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Absolutely. Every booking is unique. We're happy to mix and match services, adjust coverage hours, add videography or drone, and build a completely bespoke package that fits your exact requirements and budget.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Do you provide raw/unedited photos? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We deliver only professionally edited, colour-graded final images. Raw files are part of our creative workflow and are not included in deliveries. All edits are done in-house by our dedicated post-processing team.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">What happens if it rains during an outdoor shoot? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">We always have a backup plan. For outdoor shoots we monitor weather and communicate with clients 48 hours ahead. Light rain is often beautiful on camera — we've created some of our best work in monsoon conditions. If needed, we reschedule at no extra charge.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Do you offer engagement or family sessions separately? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes! Our portrait and family sessions are available independently from wedding packages. These are available in studio, at outdoor locations, or at your home. Baby & newborn sessions are also a beloved speciality.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section style="background:var(--dark-2);padding:80px 5%;text-align:center;border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1)">
+  <span style="font-size:0.65rem;letter-spacing:0.45em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:20px" data-aos="fade-up">Ready to Begin?</span>
+  <h2 style="font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--white);margin-bottom:16px" data-aos="fade-up" data-aos-delay="80">Let's Create Something <em style="color:var(--gold-light);font-style:italic">Extraordinary</em></h2>
+  <p style="color:var(--gray);font-size:0.9rem;max-width:440px;margin:0 auto 40px;line-height:1.9" data-aos="fade-up" data-aos-delay="140">Your story is waiting to be told. Drop us an inquiry and we'll respond within 24 hours.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" data-aos="fade-up" data-aos-delay="200">
+    <a href="book.html" class="btn-gold-fill" style="padding:16px 40px;font-size:0.78rem">Book a Session</a>
+    <a href="pricing.html" class="btn-gold" style="padding:16px 40px;font-size:0.78rem">See Pricing</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre-Wedding Shoots</a></li>
+        <li><a href="#">Portrait Sessions</a></li>
+        <li><a href="#">Fashion Photography</a></li>
+        <li><a href="#">Drone Coverage</a></li>
+        <li><a href="#">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Photography tips, stories & offers.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });</script>
+</body>
+</html>

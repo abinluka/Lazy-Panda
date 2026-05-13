@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Photography pricing packages by Lazy Panda Photography — Basic, Premium and Luxury packages for weddings, portraits, fashion and more.">
+<title>Pricing | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { background: var(--dark); }
+.page-hero::before { content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.07) 0%, transparent 55%); }
+
+/* ---- CATEGORY TABS ---- */
+#pricing-section { background: var(--black); }
+.cat-tabs {
+  display: flex; gap: 0;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto 72px;
+  border: 1px solid rgba(201,168,76,0.15);
+  flex-wrap: wrap;
+}
+.cat-tab {
+  flex: 1; min-width: 120px;
+  padding: 16px 12px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(201,168,76,0.15);
+  color: var(--gray);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: var(--transition);
+  text-align: center;
+}
+.cat-tab:last-child { border-right: none; }
+.cat-tab.active, .cat-tab:hover {
+  background: rgba(201,168,76,0.08);
+  color: var(--gold);
+}
+
+/* ---- PRICING TABLES ---- */
+.pricing-table { display: none; }
+.pricing-table.active { display: block; }
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.pkg-card {
+  background: var(--dark);
+  padding: 56px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.pkg-card.featured {
+  background: var(--dark-2);
+  border: 1px solid rgba(201,168,76,0.3);
+  z-index: 2;
+}
+.pkg-card::before {
+  content:''; position:absolute; inset:0;
+  background: var(--gold-glow);
+  opacity: 0; transition: opacity 0.4s;
+}
+.pkg-card:hover::before { opacity: 1; }
+.pkg-badge {
+  position: absolute; top: 0; right: 32px;
+  padding: 8px 18px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pkg-tier {
+  font-size: 0.62rem; letter-spacing: 0.4em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 12px; display: block;
+}
+.pkg-name {
+  font-family: var(--font-serif);
+  font-size: 2rem; font-weight: 300;
+  color: var(--white); margin-bottom: 28px;
+}
+.pkg-price {
+  font-family: var(--font-serif);
+  font-size: 3.8rem; font-weight: 300;
+  color: var(--gold); line-height: 1;
+  margin-bottom: 6px;
+}
+.pkg-price sup { font-size: 1.5rem; vertical-align: top; margin-top: 12px; display: inline-block; }
+.pkg-price-note {
+  font-size: 0.68rem; letter-spacing: 0.18em;
+  color: var(--gray); text-transform: uppercase;
+  margin-bottom: 36px; display: block;
+}
+.pkg-divider { width:100%; height:1px; background:rgba(201,168,76,0.1); margin-bottom:32px; }
+.pkg-features { list-style: none; margin-bottom: 44px; }
+.pkg-features li {
+  padding: 10px 0;
+  color: var(--gray-light);
+  font-size: 0.86rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; align-items: center; gap: 12px;
+}
+.pkg-features li.off { color: var(--gray); opacity: 0.4; }
+.pkg-features li i { font-size: 0.65rem; width: 14px; flex-shrink: 0; }
+.pkg-features li:not(.off) i { color: var(--gold); }
+.pkg-features li.off i { color: var(--dark-3); }
+.pkg-btn {
+  display: block; text-align: center;
+  padding: 16px; text-decoration: none;
+  font-size: 0.72rem; letter-spacing: 0.2em;
+  text-transform: uppercase; cursor: none;
+  transition: var(--transition); font-weight: 400;
+}
+.pkg-card:not(.featured) .pkg-btn {
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+}
+.pkg-card:not(.featured) .pkg-btn:hover { background: rgba(201,168,76,0.08); }
+.pkg-card.featured .pkg-btn {
+  background: var(--gold); color: var(--black); font-weight: 500;
+}
+.pkg-card.featured .pkg-btn:hover { background: var(--gold-light); }
+
+/* ---- COMPARISON TABLE ---- */
+#compare { background: var(--dark); }
+.comp-wrap { max-width: 1100px; margin: 0 auto; overflow-x: auto; }
+.comp-table { width: 100%; border-collapse: collapse; }
+.comp-table th {
+  padding: 20px 24px;
+  font-size: 0.7rem; letter-spacing: 0.25em;
+  color: var(--gold); text-transform: uppercase;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  font-weight: 400; text-align: left;
+}
+.comp-table th:first-child { text-align: left; }
+.comp-table th:not(:first-child) { text-align: center; }
+.comp-table th.highlight-col { background: rgba(201,168,76,0.05); }
+.comp-table td {
+  padding: 16px 24px;
+  font-size: 0.86rem;
+  color: var(--gray);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.comp-table td:not(:first-child) { text-align: center; }
+.comp-table td.highlight-col { background: rgba(201,168,76,0.03); }
+.comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+.comp-table tr:hover td.highlight-col { background: rgba(201,168,76,0.06); }
+.ct-check { color: var(--gold); font-size: 0.8rem; }
+.ct-cross { color: rgba(255,255,255,0.15); font-size: 0.8rem; }
+
+/* ---- CUSTOM QUOTE ---- */
+#custom { background: var(--black); }
+.custom-wrap {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.custom-content {}
+.custom-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300; color: var(--white);
+  line-height: 1.15; margin-bottom: 20px;
+}
+.custom-title em { font-style: italic; color: var(--gold-light); }
+.custom-text { font-size: 0.9rem; color: var(--gray); line-height: 1.9; margin-bottom: 36px; }
+.custom-points { list-style: none; }
+.custom-points li {
+  padding: 10px 0;
+  font-size: 0.86rem; color: var(--gray-light);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  display: flex; gap: 14px; align-items: center;
+}
+.custom-points li i { color: var(--gold); font-size: 0.65rem; width: 14px; }
+.quote-form { background: var(--dark); padding: 40px; }
+.qf-group { margin-bottom: 16px; }
+.qf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.qf-submit {
+  width: 100%; padding: 16px;
+  background: var(--gold); border: none;
+  color: var(--black); font-family: var(--font-sans);
+  font-size: 0.75rem; letter-spacing: 0.2em;
+  text-transform: uppercase; font-weight: 500;
+  cursor: none; transition: var(--transition); margin-top: 8px;
+}
+.qf-submit:hover { background: var(--gold-light); }
+
+/* ---- FAQ ---- */
+#pricing-faq { background: var(--dark); }
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(201,168,76,0.1); overflow: hidden; }
+.faq-question { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: none; font-family: var(--font-serif); font-size: 1.05rem; color: var(--white); transition: color 0.3s; }
+.faq-question:hover, .faq-question.open { color: var(--gold-light); }
+.faq-icon { width: 28px; height: 28px; border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.75rem; transition: transform 0.3s; }
+.faq-question.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+.faq-answer-inner { padding: 0 0 20px; color: var(--gray); font-size: 0.88rem; line-height: 1.9; }
+
+/* ---- TRUST BADGES ---- */
+#trust { background: var(--dark-2); border-top: 1px solid rgba(201,168,76,0.1); padding: 60px 5%; }
+.trust-row { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+.trust-item { display: flex; align-items: center; gap: 16px; }
+.trust-icon { font-size: 1.5rem; color: var(--gold); opacity: 0.7; }
+.trust-text {}
+.trust-label { font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 3px; }
+.trust-val { font-family: var(--font-serif); font-size: 0.95rem; color: var(--white); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .pkg-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .custom-wrap { grid-template-columns: 1fr; }
+  .qf-row { grid-template-columns: 1fr; }
+  .cat-tabs { max-width: 100%; }
+}
+@media (max-width: 600px) {
+  .trust-row { gap: 32px; }
+  .pkg-card { padding: 40px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader">
+  <div class="loader-logo">Lazy <span>Panda</span> Photography</div>
+  <div class="loader-bar"></div>
+  <div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" class="active" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Transparent Investment</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Quality That<br><em>Speaks for Itself</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">No hidden fees, no surprises — clear packages built around your story and budget.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section id="pricing-section" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Choose Your Package</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Photography <em>Packages</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">Every package is tailored to deliver the best value for your story. Switch categories to find your perfect fit.</p>
+
+  <div class="cat-tabs" data-aos="fade-up" data-aos-delay="180">
+    <button class="cat-tab active" onclick="switchCat('wedding')">Wedding</button>
+    <button class="cat-tab" onclick="switchCat('prewedding')">Pre-Wedding</button>
+    <button class="cat-tab" onclick="switchCat('portrait')">Portrait</button>
+    <button class="cat-tab" onclick="switchCat('video')">Videography</button>
+    <button class="cat-tab" onclick="switchCat('event')">Events</button>
+  </div>
+
+  <!-- WEDDING -->
+  <div class="pricing-table active" id="cat-wedding" data-aos="fade-up">
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <span class="pkg-tier">Essential</span>
+        <div class="pkg-name">Silver Wedding</div>
+        <div class="pkg-price"><sup>₹</sup>35,000</div>
+        <span class="pkg-price-note">One-time package</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>6-hour coverage</li>
+          <li><i class="fas fa-check"></i>1 professional photographer</li>
+          <li><i class="fas fa-check"></i>75 edited high-res photos</li>
+          <li><i class="fas fa-check"></i>Online private gallery</li>
+          <li><i class="fas fa-check"></i>10-day delivery</li>
+          <li><i class="fas fa-check"></i>Ceremony + reception</li>
+          <li class="off"><i class="fas fa-times"></i>No drone photography</li>
+          <li class="off"><i class="fas fa-times"></i>No videography</li>
+          <li class="off"><i class="fas fa-times"></i>No printed album</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Silver</a>
+      </div>
+
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Most Popular</div>
+        <span class="pkg-tier">Signature</span>
+        <div class="pkg-name">Gold Wedding</div>
+        <div class="pkg-price"><sup>₹</sup>65,000</div>
+        <span class="pkg-price-note">One-time package</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>10-hour full-day coverage</li>
+          <li><i class="fas fa-check"></i>2 professional photographers</li>
+          <li><i class="fas fa-check"></i>200 edited high-res photos</li>
+          <li><i class="fas fa-check"></i>Online gallery + USB drive</li>
+          <li><i class="fas fa-check"></i>7-day delivery</li>
+          <li><i class="fas fa-check"></i>Drone photography included</li>
+          <li><i class="fas fa-check"></i>5-min highlight reel</li>
+          <li><i class="fas fa-check"></i>Getting ready + ceremony + reception</li>
+          <li class="off"><i class="fas fa-times"></i>No printed album</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Gold</a>
+      </div>
+
+      <div class="pkg-card">
+        <span class="pkg-tier">Elite</span>
+        <div class="pkg-name">Platinum Wedding</div>
+        <div class="pkg-price"><sup>₹</sup>1,20,000</div>
+        <span class="pkg-price-note">One-time package</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Unlimited hours — 2 full days</li>
+          <li><i class="fas fa-check"></i>3 photographers + assistant</li>
+          <li><i class="fas fa-check"></i>400+ edited high-res photos</li>
+          <li><i class="fas fa-check"></i>Gallery + USB + hardcopy prints</li>
+          <li><i class="fas fa-check"></i>5-day priority delivery</li>
+          <li><i class="fas fa-check"></i>Drone + aerial footage</li>
+          <li><i class="fas fa-check"></i>Full cinematic wedding film</li>
+          <li><i class="fas fa-check"></i>Premium lay-flat photo album</li>
+          <li><i class="fas fa-check"></i>Same-day highlight reel</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Platinum</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE-WEDDING -->
+  <div class="pricing-table" id="cat-prewedding">
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <span class="pkg-tier">Essential</span>
+        <div class="pkg-name">Classic Shoot</div>
+        <div class="pkg-price"><sup>₹</sup>18,000</div>
+        <span class="pkg-price-note">Per session</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>3-hour session</li>
+          <li><i class="fas fa-check"></i>1 location</li>
+          <li><i class="fas fa-check"></i>50 edited photos</li>
+          <li><i class="fas fa-check"></i>Online gallery</li>
+          <li><i class="fas fa-check"></i>7-day delivery</li>
+          <li class="off"><i class="fas fa-times"></i>No drone</li>
+          <li class="off"><i class="fas fa-times"></i>No video reel</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Classic</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Best Value</div>
+        <span class="pkg-tier">Romantic</span>
+        <div class="pkg-name">Cinematic Shoot</div>
+        <div class="pkg-price"><sup>₹</sup>32,000</div>
+        <span class="pkg-price-note">Per session</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>6-hour golden hour session</li>
+          <li><i class="fas fa-check"></i>2–3 locations</li>
+          <li><i class="fas fa-check"></i>100 edited photos</li>
+          <li><i class="fas fa-check"></i>Styling guidance</li>
+          <li><i class="fas fa-check"></i>5-day delivery</li>
+          <li><i class="fas fa-check"></i>90-sec Instagram reel</li>
+          <li class="off"><i class="fas fa-times"></i>No drone</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Cinematic</a>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-tier">Destination</span>
+        <div class="pkg-name">Epic Adventure</div>
+        <div class="pkg-price"><sup>₹</sup>60,000</div>
+        <span class="pkg-price-note">Excl. travel</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Full-day destination shoot</li>
+          <li><i class="fas fa-check"></i>Multiple locations</li>
+          <li><i class="fas fa-check"></i>150 edited photos</li>
+          <li><i class="fas fa-check"></i>Drone included</li>
+          <li><i class="fas fa-check"></i>3-min cinematic film</li>
+          <li><i class="fas fa-check"></i>Wardrobe coordination</li>
+          <li><i class="fas fa-check"></i>Hair & makeup liaison</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Epic</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTRAIT -->
+  <div class="pricing-table" id="cat-portrait">
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <span class="pkg-tier">Quick</span>
+        <div class="pkg-name">Mini Portrait</div>
+        <div class="pkg-price"><sup>₹</sup>8,000</div>
+        <span class="pkg-price-note">Per session</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>1-hour studio session</li>
+          <li><i class="fas fa-check"></i>1 outfit</li>
+          <li><i class="fas fa-check"></i>20 edited photos</li>
+          <li><i class="fas fa-check"></i>5-day delivery</li>
+          <li class="off"><i class="fas fa-times"></i>No outdoor location</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Mini</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Recommended</div>
+        <span class="pkg-tier">Standard</span>
+        <div class="pkg-name">Full Portrait</div>
+        <div class="pkg-price"><sup>₹</sup>15,000</div>
+        <span class="pkg-price-note">Per session</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>3-hour studio or outdoor</li>
+          <li><i class="fas fa-check"></i>3 outfit changes</li>
+          <li><i class="fas fa-check"></i>50 edited photos</li>
+          <li><i class="fas fa-check"></i>3-day delivery</li>
+          <li><i class="fas fa-check"></i>Usage rights for portfolio</li>
+          <li><i class="fas fa-check"></i>Retouching included</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Full</a>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-tier">Premium</span>
+        <div class="pkg-name">Brand Portrait</div>
+        <div class="pkg-price"><sup>₹</sup>28,000</div>
+        <span class="pkg-price-note">Per session</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Full-day personal branding</li>
+          <li><i class="fas fa-check"></i>Multiple locations</li>
+          <li><i class="fas fa-check"></i>80 edited photos</li>
+          <li><i class="fas fa-check"></i>Social media content set</li>
+          <li><i class="fas fa-check"></i>Priority 2-day delivery</li>
+          <li><i class="fas fa-check"></i>Commercial usage rights</li>
+          <li><i class="fas fa-check"></i>Video short clips</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Brand</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEOGRAPHY -->
+  <div class="pricing-table" id="cat-video">
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <span class="pkg-tier">Essential</span>
+        <div class="pkg-name">Highlight Reel</div>
+        <div class="pkg-price"><sup>₹</sup>25,000</div>
+        <span class="pkg-price-note">Per event</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>4-hour coverage</li>
+          <li><i class="fas fa-check"></i>3–5 min highlight film</li>
+          <li><i class="fas fa-check"></i>1080p delivery</li>
+          <li><i class="fas fa-check"></i>Licensed music</li>
+          <li><i class="fas fa-check"></i>14-day delivery</li>
+          <li class="off"><i class="fas fa-times"></i>No drone footage</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Reel</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Most Loved</div>
+        <span class="pkg-tier">Cinematic</span>
+        <div class="pkg-name">Wedding Film</div>
+        <div class="pkg-price"><sup>₹</sup>55,000</div>
+        <span class="pkg-price-note">Per wedding</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Full-day coverage</li>
+          <li><i class="fas fa-check"></i>5–8 min cinematic film</li>
+          <li><i class="fas fa-check"></i>Ceremony + reception full cut</li>
+          <li><i class="fas fa-check"></i>4K UHD delivery</li>
+          <li><i class="fas fa-check"></i>Colour-graded master</li>
+          <li><i class="fas fa-check"></i>Drone aerial footage</li>
+          <li><i class="fas fa-check"></i>10-day delivery</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Film</a>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-tier">Documentary</span>
+        <div class="pkg-name">Epic Feature</div>
+        <div class="pkg-price"><sup>₹</sup>95,000</div>
+        <span class="pkg-price-note">Per event</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Multi-day full coverage</li>
+          <li><i class="fas fa-check"></i>30+ min feature documentary</li>
+          <li><i class="fas fa-check"></i>Highlight + full film</li>
+          <li><i class="fas fa-check"></i>4K + DCP delivery</li>
+          <li><i class="fas fa-check"></i>Original score available</li>
+          <li><i class="fas fa-check"></i>Drone + stabilised rig</li>
+          <li><i class="fas fa-check"></i>7-day priority delivery</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Epic</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="pricing-table" id="cat-event">
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <span class="pkg-tier">Half-Day</span>
+        <div class="pkg-name">Basic Event</div>
+        <div class="pkg-price"><sup>₹</sup>12,000</div>
+        <span class="pkg-price-note">Per event</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>4-hour coverage</li>
+          <li><i class="fas fa-check"></i>1 photographer</li>
+          <li><i class="fas fa-check"></i>80 edited photos</li>
+          <li><i class="fas fa-check"></i>7-day delivery</li>
+          <li class="off"><i class="fas fa-times"></i>No video</li>
+          <li class="off"><i class="fas fa-times"></i>No drone</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Basic</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-badge">Best Value</div>
+        <span class="pkg-tier">Full Day</span>
+        <div class="pkg-name">Premium Event</div>
+        <div class="pkg-price"><sup>₹</sup>28,000</div>
+        <span class="pkg-price-note">Per event</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>8-hour coverage</li>
+          <li><i class="fas fa-check"></i>2 photographers</li>
+          <li><i class="fas fa-check"></i>200 edited photos</li>
+          <li><i class="fas fa-check"></i>5-day delivery</li>
+          <li><i class="fas fa-check"></i>2-min social reel</li>
+          <li class="off"><i class="fas fa-times"></i>No drone</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Premium</a>
+      </div>
+      <div class="pkg-card">
+        <span class="pkg-tier">Corporate</span>
+        <div class="pkg-name">Elite Event</div>
+        <div class="pkg-price"><sup>₹</sup>55,000</div>
+        <span class="pkg-price-note">Per event</span>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li><i class="fas fa-check"></i>Full-day multi-team coverage</li>
+          <li><i class="fas fa-check"></i>3 photographers</li>
+          <li><i class="fas fa-check"></i>400+ edited photos</li>
+          <li><i class="fas fa-check"></i>Priority 3-day delivery</li>
+          <li><i class="fas fa-check"></i>Full event highlight film</li>
+          <li><i class="fas fa-check"></i>Drone photography</li>
+          <li><i class="fas fa-check"></i>Brand usage rights</li>
+        </ul>
+        <a href="book.html" class="pkg-btn">Book Elite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="compare" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Side-by-Side</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Package <em>Comparison</em></h2>
+  <p class="section-desc" data-aos="fade-up" data-aos-delay="140">All wedding packages at a glance — so you can choose with confidence.</p>
+  <div class="comp-wrap" data-aos="fade-up" data-aos-delay="200">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Silver</th>
+          <th class="highlight-col">Gold ★</th>
+          <th>Platinum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Coverage Hours</td><td>6 hrs</td><td class="highlight-col">10 hrs</td><td>2 Full Days</td></tr>
+        <tr><td>Photographers</td><td>1</td><td class="highlight-col">2</td><td>3 + Assistant</td></tr>
+        <tr><td>Edited Photos</td><td>75</td><td class="highlight-col">200</td><td>400+</td></tr>
+        <tr><td>Delivery Time</td><td>10 days</td><td class="highlight-col">7 days</td><td>5 days</td></tr>
+        <tr><td>Online Gallery</td><td><i class="fas fa-check ct-check"></i></td><td class="highlight-col"><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+        <tr><td>USB Drive</td><td><i class="fas fa-times ct-cross"></i></td><td class="highlight-col"><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+        <tr><td>Drone Photography</td><td><i class="fas fa-times ct-cross"></i></td><td class="highlight-col"><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+        <tr><td>Highlight Reel</td><td><i class="fas fa-times ct-cross"></i></td><td class="highlight-col">5 min</td><td>Full Film</td></tr>
+        <tr><td>Same-Day Edit</td><td><i class="fas fa-times ct-cross"></i></td><td class="highlight-col"><i class="fas fa-times ct-cross"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+        <tr><td>Printed Album</td><td><i class="fas fa-times ct-cross"></i></td><td class="highlight-col"><i class="fas fa-times ct-cross"></i></td><td>Premium Lay-Flat</td></tr>
+        <tr><td>Travel (Local)</td><td><i class="fas fa-check ct-check"></i></td><td class="highlight-col"><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CUSTOM QUOTE -->
+<section id="custom" class="section-pad">
+  <div class="custom-wrap">
+    <div class="custom-content" data-aos="fade-right">
+      <span class="section-label" style="text-align:left">Bespoke</span>
+      <h2 class="custom-title">Need a <em>Custom Quote?</em></h2>
+      <p class="custom-text">No two stories are alike. If our standard packages don't quite fit your vision, we'd love to build a bespoke package around your exact needs, timeline and budget.</p>
+      <ul class="custom-points">
+        <li><i class="fas fa-check"></i>Multi-day destination weddings</li>
+        <li><i class="fas fa-check"></i>Corporate & brand campaigns</li>
+        <li><i class="fas fa-check"></i>International travel packages</li>
+        <li><i class="fas fa-check"></i>Long-term brand partnerships</li>
+        <li><i class="fas fa-check"></i>Film & documentary projects</li>
+      </ul>
+    </div>
+    <div class="quote-form" data-aos="fade-left" data-aos-delay="100">
+      <div class="qf-row">
+        <div class="qf-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-control" placeholder="Full name">
+        </div>
+        <div class="qf-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="email@example.com">
+        </div>
+      </div>
+      <div class="qf-group" style="margin-bottom:16px">
+        <label class="form-label">Project Type</label>
+        <select class="form-control">
+          <option value="">Select project type</option>
+          <option>Destination Wedding</option>
+          <option>Brand Campaign</option>
+          <option>Corporate Project</option>
+          <option>Documentary Film</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="qf-group" style="margin-bottom:16px">
+        <label class="form-label">Tell us about your project</label>
+        <textarea class="form-control" placeholder="Share your vision, dates, location, and any special requirements..." style="min-height:100px"></textarea>
+      </div>
+      <button class="qf-submit">Request Custom Quote →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="trust-row">
+    <div class="trust-item" data-aos="fade-up" data-aos-delay="0">
+      <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="trust-text">
+        <span class="trust-label">Guarantee</span>
+        <div class="trust-val">100% Satisfaction Guarantee</div>
+      </div>
+    </div>
+    <div class="trust-item" data-aos="fade-up" data-aos-delay="60">
+      <div class="trust-icon"><i class="fas fa-lock"></i></div>
+      <div class="trust-text">
+        <span class="trust-label">Payment</span>
+        <div class="trust-val">Secure & Flexible Payment</div>
+      </div>
+    </div>
+    <div class="trust-item" data-aos="fade-up" data-aos-delay="120">
+      <div class="trust-icon"><i class="fas fa-redo"></i></div>
+      <div class="trust-text">
+        <span class="trust-label">Policy</span>
+        <div class="trust-val">Free Rescheduling Once</div>
+      </div>
+    </div>
+    <div class="trust-item" data-aos="fade-up" data-aos-delay="180">
+      <div class="trust-icon"><i class="fas fa-star"></i></div>
+      <div class="trust-text">
+        <span class="trust-label">Reputation</span>
+        <div class="trust-val">850+ Five-Star Reviews</div>
+      </div>
+    </div>
+    <div class="trust-item" data-aos="fade-up" data-aos-delay="240">
+      <div class="trust-icon"><i class="fas fa-headset"></i></div>
+      <div class="trust-text">
+        <span class="trust-label">Support</span>
+        <div class="trust-val">Dedicated Client Coordinator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="pricing-faq" class="section-pad">
+  <span class="section-label" data-aos="fade-up">Questions</span>
+  <h2 class="section-title" data-aos="fade-up" data-aos-delay="80">Pricing <em>FAQ</em></h2>
+  <div class="gold-divider" style="margin-bottom:60px" data-aos="fade-up"></div>
+  <div class="faq-wrap">
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Is GST included in the prices? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">All listed prices are exclusive of GST (18%). GST will be added to the final invoice as per government regulations. A detailed quote with all taxes will be provided before booking confirmation.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">What is the payment schedule? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">30% advance to secure your booking, 40% one week before the event date, and the remaining 30% on the day of the shoot (before we begin). This applies to all packages. Custom payment plans available for large bookings.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Are travel costs included? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Local travel within 50km of Thiruvananthapuram is included. For outstation bookings, travel, accommodation and daily allowance are billed at actuals. We'll provide a complete travel cost estimate upfront with zero surprises.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Can I upgrade my package after booking? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Yes! You can upgrade to a higher tier or add on services at any time before the event, subject to availability. Downgrades are possible up to 60 days before the event date.</div></div>
+    </div>
+    <div class="faq-item" data-aos="fade-up">
+      <div class="faq-question" onclick="toggleFaq(this)">Do prices vary by season or peak dates? <div class="faq-icon"><i class="fas fa-plus"></i></div></div>
+      <div class="faq-answer"><div class="faq-answer-inner">Peak season (October–February) and auspicious wedding dates may carry a modest premium of 10–15%. We recommend booking 6–12 months in advance for the best rates and guaranteed availability.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo">Lazy <span>Panda</span></div>
+      <span class="footer-tagline">Photography</span>
+      <p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="footer-social"><i class="fab fa-pinterest-p"></i></a>
+      </div>
+    </div>
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="services.html">Wedding Photography</a></li>
+        <li><a href="services.html">Pre-Wedding Shoots</a></li>
+        <li><a href="services.html">Portrait Sessions</a></li>
+        <li><a href="services.html">Fashion Photography</a></li>
+        <li><a href="services.html">Drone Coverage</a></li>
+        <li><a href="services.html">Cinematic Videos</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Newsletter</span>
+      <p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Photography tips, stories & offers.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email">
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>
+AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });
+function switchCat(cat) {
+  document.querySelectorAll('.pricing-table').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('cat-' + cat).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

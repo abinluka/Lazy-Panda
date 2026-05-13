@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+body { display:flex; flex-direction:column; min-height:100vh; }
+#notfound {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  min-height:100vh; background:var(--dark); position:relative; overflow:hidden;
+  text-align:center; padding:120px 5% 80px;
+}
+#notfound::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.04) 0%, transparent 45%);
+}
+.nf-content { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+.nf-num {
+  font-family:var(--font-serif);
+  font-size:clamp(8rem,18vw,16rem);
+  font-weight:300; line-height:1;
+  color:rgba(201,168,76,0.1);
+  position:relative; display:block; margin-bottom:-20px;
+  animation:nfFloat 6s ease-in-out infinite;
+}
+@keyframes nfFloat {
+  0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)}
+}
+.nf-icon {
+  font-size:3.5rem; color:var(--gold);
+  opacity:0.6; display:block; margin-bottom:24px;
+}
+.nf-label {
+  font-size:0.62rem; letter-spacing:0.45em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:16px; display:block;
+}
+.nf-title {
+  font-family:var(--font-serif);
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:300; color:var(--white);
+  line-height:1.2; margin-bottom:16px;
+}
+.nf-title em { font-style:italic; color:var(--gold-light); }
+.nf-text {
+  font-size:0.92rem; color:var(--gray);
+  line-height:1.9; max-width:440px; margin:0 auto 48px;
+}
+.nf-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.nf-buttons a { padding:14px 36px; font-size:0.75rem; }
+.nf-links {
+  margin-top:60px; padding-top:40px;
+  border-top:1px solid rgba(201,168,76,0.1);
+}
+.nf-links-label {
+  font-size:0.6rem; letter-spacing:0.38em; color:var(--gray);
+  text-transform:uppercase; margin-bottom:24px; display:block;
+}
+.nf-links-grid {
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+}
+.nf-link {
+  padding:9px 20px;
+  border:1px solid rgba(201,168,76,0.15);
+  color:var(--gray); text-decoration:none;
+  font-size:0.68rem; letter-spacing:0.18em;
+  text-transform:uppercase; transition:all 0.3s; cursor:none;
+}
+.nf-link:hover { border-color:var(--gold); color:var(--gold); }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<canvas id="particles"></canvas>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Lazy <span>Panda</span></span>
+    <span class="nav-logo-tagline">Photography</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="portfolio.html" class="btn-gold">View Work</a>
+    <a href="book.html" class="btn-gold-fill">Book Now</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<section id="notfound">
+  <div class="nf-content">
+    <span class="nf-num">404</span>
+    <i class="fas fa-camera nf-icon"></i>
+    <span class="nf-label">Frame Not Found</span>
+    <h1 class="nf-title">This Page Seems to Have<br><em>Left the Frame</em></h1>
+    <p class="nf-text">It looks like the page you're looking for has moved, been renamed, or simply doesn't exist. Let's get you back to something beautiful.</p>
+    <div class="nf-buttons">
+      <a href="index.html" class="btn-gold-fill">Back to Home</a>
+      <a href="portfolio.html" class="btn-gold">View Portfolio</a>
+    </div>
+    <div class="nf-links">
+      <span class="nf-links-label">Or explore these pages</span>
+      <div class="nf-links-grid">
+        <a href="about.html" class="nf-link">About Us</a>
+        <a href="services.html" class="nf-link">Services</a>
+        <a href="pricing.html" class="nf-link">Pricing</a>
+        <a href="blog.html" class="nf-link">Journal</a>
+        <a href="contact.html" class="nf-link">Contact</a>
+        <a href="book.html" class="nf-link">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<script src="shared.js"></script>
+<script>
+window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60); });
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions | Lazy Panda Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero{background:var(--dark);}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(201,168,76,0.06) 0%,transparent 55%);}
+#terms{background:var(--black);}
+.terms-layout{display:grid;grid-template-columns:240px 1fr;gap:60px;max-width:1100px;margin:0 auto;align-items:start;}
+.terms-nav{position:sticky;top:100px;}
+.tn-title{font-size:0.6rem;letter-spacing:0.38em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:block;border-bottom:1px solid rgba(201,168,76,0.15);padding-bottom:14px;}
+.tn-links{list-style:none;}
+.tn-links li{margin-bottom:4px;}
+.tn-links a{display:block;padding:9px 14px;font-size:0.78rem;color:var(--gray);text-decoration:none;border-left:2px solid transparent;transition:all 0.3s;letter-spacing:0.08em;}
+.tn-links a:hover{color:var(--gold);border-left-color:var(--gold);padding-left:18px;}
+.terms-section{margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid rgba(201,168,76,0.08);}
+.terms-section:last-child{border-bottom:none;}
+.ts-num{font-size:0.6rem;letter-spacing:0.38em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:12px;}
+.ts-title{font-family:var(--font-serif);font-size:1.6rem;font-weight:300;color:var(--white);margin-bottom:20px;line-height:1.2;}
+.ts-text{font-size:0.9rem;color:var(--gray);line-height:2;margin-bottom:14px;}
+.ts-list{list-style:none;margin:14px 0;}
+.ts-list li{padding:8px 0;color:var(--gray);font-size:0.88rem;line-height:1.8;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;gap:14px;align-items:flex-start;}
+.ts-list li i{color:var(--gold);font-size:0.65rem;margin-top:6px;flex-shrink:0;}
+.ts-highlight{background:var(--dark);border-left:2px solid var(--gold);padding:18px 24px;margin:20px 0;}
+.ts-highlight p{font-size:0.88rem;color:var(--gray-light);line-height:1.9;margin:0;}
+.terms-updated{font-size:0.72rem;letter-spacing:0.15em;color:var(--gray);margin-top:44px;padding-top:24px;border-top:1px solid rgba(201,168,76,0.08);}
+.terms-updated span{color:var(--gold);}
+@media(max-width:900px){.terms-layout{grid-template-columns:1fr;}.terms-nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div id="loader"><div class="loader-logo">Lazy <span>Panda</span> Photography</div><div class="loader-bar"></div><div style="font-size:0.75rem;letter-spacing:0.3em;color:var(--gold)" id="loaderPct">Loading...</div></div>
+<canvas id="particles"></canvas>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="closeMobile()">Home</a></li>
+    <li><a href="about.html" onclick="closeMobile()">About</a></li>
+    <li><a href="services.html" onclick="closeMobile()">Services</a></li>
+    <li><a href="portfolio.html" onclick="closeMobile()">Portfolio</a></li>
+    <li><a href="pricing.html" onclick="closeMobile()">Pricing</a></li>
+    <li><a href="blog.html" onclick="closeMobile()">Blog</a></li>
+    <li><a href="contact.html" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="book.html" class="btn-gold-fill" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span class="nav-logo-name">Lazy <span>Panda</span></span><span class="nav-logo-tagline">Photography</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta"><a href="portfolio.html" class="btn-gold">View Work</a><a href="book.html" class="btn-gold-fill">Book Now</a></div>
+  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-hero-label" data-aos="fade-up">Legal</span>
+    <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="80">Terms & <em>Conditions</em></h1>
+    <p class="page-hero-desc" data-aos="fade-up" data-aos-delay="160">The terms governing our services, bookings, deliverables, and the working relationship between us.</p>
+    <div class="page-hero-line" data-aos="fade-up" data-aos-delay="220"></div>
+  </div>
+</section>
+
+<section id="terms" class="section-pad">
+  <div class="terms-layout">
+    <aside class="terms-nav" data-aos="fade-right">
+      <span class="tn-title">Contents</span>
+      <ul class="tn-links">
+        <li><a href="#t-accept">Acceptance</a></li>
+        <li><a href="#t-booking">Booking & Payment</a></li>
+        <li><a href="#t-cancel">Cancellation</a></li>
+        <li><a href="#t-copyright">Copyright & Usage</a></li>
+        <li><a href="#t-delivery">Delivery</a></li>
+        <li><a href="#t-liability">Liability</a></li>
+        <li><a href="#t-conduct">Client Conduct</a></li>
+        <li><a href="#t-dispute">Disputes</a></li>
+        <li><a href="#t-changes">Changes</a></li>
+      </ul>
+    </aside>
+
+    <div class="terms-content" data-aos="fade-left">
+
+      <div class="terms-section" id="t-accept">
+        <span class="ts-num">Section 01</span>
+        <h2 class="ts-title">Acceptance of Terms</h2>
+        <p class="ts-text">By booking any service with Lazy Panda Photography, submitting an enquiry form, or engaging with our studio in any commercial capacity, you ("the Client") agree to be bound by these Terms and Conditions in their entirety.</p>
+        <p class="ts-text">These terms constitute a legally binding agreement between the Client and Lazy Panda Photography (registered at 42 Kowdiar Avenue, Thiruvananthapuram, Kerala — 695 003). A formal contract or booking confirmation issued by us supplements but does not replace these terms.</p>
+        <div class="ts-highlight"><p>If you do not agree to any part of these terms, please do not book our services. We are always happy to clarify any clause — contact us before booking if you have questions.</p></div>
+      </div>
+
+      <div class="terms-section" id="t-booking">
+        <span class="ts-num">Section 02</span>
+        <h2 class="ts-title">Booking & Payment</h2>
+        <p class="ts-text"><strong style="color:var(--white)">2.1 Advance Payment</strong><br>A non-refundable booking advance of 30% of the total agreed package fee is required to confirm and secure your date. No date is held without receipt of the advance payment.</p>
+        <p class="ts-text"><strong style="color:var(--white)">2.2 Payment Schedule</strong></p>
+        <ul class="ts-list">
+          <li><i class="fas fa-circle"></i>30% advance — due at booking confirmation</li>
+          <li><i class="fas fa-circle"></i>40% — due 7 days before the event or shoot date</li>
+          <li><i class="fas fa-circle"></i>30% balance — due on the day of the event before commencement</li>
+        </ul>
+        <p class="ts-text"><strong style="color:var(--white)">2.3 Payment Methods</strong><br>We accept bank transfers (NEFT/IMPS/RTGS), UPI (Google Pay, PhonePe, Paytm) and account payee cheques in favour of "Lazy Panda Photography". Cash payments are accepted only for amounts below ₹10,000.</p>
+        <p class="ts-text"><strong style="color:var(--white)">2.4 GST</strong><br>All prices are exclusive of Goods and Services Tax (GST) at 18%, unless explicitly stated otherwise. GST will be itemised on all invoices.</p>
+        <p class="ts-text"><strong style="color:var(--white)">2.5 Late Payment</strong><br>Failure to make scheduled payments may result in suspension of services and forfeiture of the booking without refund of the advance paid.</p>
+      </div>
+
+      <div class="terms-section" id="t-cancel">
+        <span class="ts-num">Section 03</span>
+        <h2 class="ts-title">Cancellation & Rescheduling</h2>
+        <p class="ts-text"><strong style="color:var(--white)">3.1 Cancellation by Client</strong></p>
+        <ul class="ts-list">
+          <li><i class="fas fa-circle"></i>More than 60 days before event: Full refund less the 30% advance (which is non-refundable)</li>
+          <li><i class="fas fa-circle"></i>31–60 days before event: 50% of total package fee is due and payable</li>
+          <li><i class="fas fa-circle"></i>Within 30 days: 100% of total package fee is due. No refund of any amount paid</li>
+        </ul>
+        <p class="ts-text"><strong style="color:var(--white)">3.2 Rescheduling</strong><br>The Client may reschedule the booking once at no additional charge, subject to availability, provided at least 30 days notice is given. Subsequent rescheduling requests will incur a fee of ₹5,000. Rescheduled events must occur within 12 months of the original date.</p>
+        <p class="ts-text"><strong style="color:var(--white)">3.3 Cancellation by Lazy Panda Photography</strong><br>In the unlikely event that we must cancel due to unforeseen circumstances (illness, emergency, force majeure), we will make every effort to provide an equally qualified replacement photographer and notify you immediately. If a suitable replacement cannot be provided, a full refund of all amounts paid will be issued within 14 days.</p>
+        <div class="ts-highlight"><p>Force majeure events including natural disasters, pandemics, government restrictions, or other events beyond our control may alter these terms on a case-by-case basis. We will always communicate transparently and fairly.</p></div>
+      </div>
+
+      <div class="terms-section" id="t-copyright">
+        <span class="ts-num">Section 04</span>
+        <h2 class="ts-title">Copyright & Image Rights</h2>
+        <p class="ts-text"><strong style="color:var(--white)">4.1 Ownership</strong><br>All photographs and video content created by Lazy Panda Photography remain the intellectual property of Lazy Panda Photography under the Indian Copyright Act, 1957. The Client is granted a personal, non-exclusive, non-transferable licence to use the delivered images.</p>
+        <p class="ts-text"><strong style="color:var(--white)">4.2 Client Personal Use</strong><br>The Client may print, share on social media, and use the images for personal (non-commercial) purposes without restriction. Credit to Lazy Panda Photography is appreciated but not mandatory for personal use.</p>
+        <p class="ts-text"><strong style="color:var(--white)">4.3 Commercial Use</strong><br>Any commercial use of delivered images — including advertising, product packaging, editorial publication, or licensing to third parties — requires a separate written commercial licensing agreement and fee.</p>
+        <p class="ts-text"><strong style="color:var(--white)">4.4 Our Portfolio Rights</strong><br>Lazy Panda Photography reserves the right to use any images from your session in our portfolio, website, social media and marketing materials. Clients who wish to opt out of this usage must notify us in writing before the event. Opting out does not affect delivery of your images.</p>
+        <ul class="ts-list">
+          <li><i class="fas fa-check"></i>Raw/unedited files are not included in any package and will not be delivered</li>
+          <li><i class="fas fa-check"></i>Clients may not apply additional filters or editing that substantially alters the colour-graded master images and redistribute them as our work</li>
+          <li><i class="fas fa-check"></i>Removing or obscuring our watermark (where applied) is prohibited</li>
+        </ul>
+      </div>
+
+      <div class="terms-section" id="t-delivery">
+        <span class="ts-num">Section 05</span>
+        <h2 class="ts-title">Delivery & Deliverables</h2>
+        <p class="ts-text"><strong style="color:var(--white)">5.1 Timelines</strong><br>Delivery timelines are stated in each package and begin from the date of the event. These are estimates; during peak season (October–February) timelines may extend by up to 5 business days. We will communicate proactively if delays are anticipated.</p>
+        <p class="ts-text"><strong style="color:var(--white)">5.2 Image Selection</strong><br>The final selection of images for editing is at the professional discretion of Lazy Panda Photography. We deliver the strongest images from each session. We do not deliver all images captured during a session, as many are test shots, duplicates, or technically imperfect frames.</p>
+        <p class="ts-text"><strong style="color:var(--white)">5.3 Gallery Access</strong><br>Online galleries remain accessible for 90 days after delivery. Clients are responsible for downloading and backing up their images within this period. Retrieval after expiry may incur a ₹2,000 archive fee.</p>
+        <p class="ts-text"><strong style="color:var(--white)">5.4 Editing Style</strong><br>All images are edited in our signature style. Specific editing requests (e.g., colour preferences) should be communicated before the shoot. We do not offer full re-editing of delivered galleries, but minor adjustments on up to 5 images can be requested within 30 days of delivery.</p>
+      </div>
+
+      <div class="terms-section" id="t-liability">
+        <span class="ts-num">Section 06</span>
+        <h2 class="ts-title">Limitation of Liability</h2>
+        <p class="ts-text">While we take every professional precaution to deliver outstanding results, Lazy Panda Photography's liability in any claim shall not exceed the total amount paid by the Client for the specific service in question.</p>
+        <p class="ts-text">We are not liable for:</p>
+        <ul class="ts-list">
+          <li><i class="fas fa-circle"></i>Loss or damage resulting from equipment failure beyond our control</li>
+          <li><i class="fas fa-circle"></i>Circumstances arising from force majeure events</li>
+          <li><i class="fas fa-circle"></i>Missed shots due to access restrictions imposed by venues, families, or event coordinators</li>
+          <li><i class="fas fa-circle"></i>Loss of gallery access due to the Client's failure to download images within the specified period</li>
+          <li><i class="fas fa-circle"></i>Indirect, incidental or consequential damages of any kind</li>
+        </ul>
+        <div class="ts-highlight"><p>We carry professional indemnity insurance. In the event of a genuine service failure on our part, we are committed to working with you to find a fair resolution.</p></div>
+      </div>
+
+      <div class="terms-section" id="t-conduct">
+        <span class="ts-num">Section 07</span>
+        <h2 class="ts-title">Client Responsibilities & Conduct</h2>
+        <p class="ts-text">To ensure the best possible outcome from your session, Clients agree to:</p>
+        <ul class="ts-list">
+          <li><i class="fas fa-check"></i>Provide accurate event details including timing, venue and guest count</li>
+          <li><i class="fas fa-check"></i>Inform us of any access restrictions, photography restrictions, or venue rules</li>
+          <li><i class="fas fa-check"></i>Ensure reasonable access to subjects and locations at agreed times</li>
+          <li><i class="fas fa-check"></i>Treat our team members with respect and professional courtesy</li>
+          <li><i class="fas fa-check"></i>Ensure that meals and refreshments are provided for sessions exceeding 8 hours</li>
+          <li><i class="fas fa-check"></i>Notify us of any changes to schedule, timing or venue at the earliest opportunity</li>
+        </ul>
+        <p class="ts-text">Lazy Panda Photography reserves the right to terminate a session without refund if any team member is subjected to abusive, threatening, or unsafe behaviour by the Client or their guests.</p>
+      </div>
+
+      <div class="terms-section" id="t-dispute">
+        <span class="ts-num">Section 08</span>
+        <h2 class="ts-title">Disputes & Governing Law</h2>
+        <p class="ts-text">These Terms and Conditions are governed by the laws of India. In the event of a dispute, both parties agree to first attempt to resolve the matter amicably through direct communication.</p>
+        <p class="ts-text">If a resolution cannot be reached, the dispute shall be subject to the exclusive jurisdiction of the courts of Thiruvananthapuram, Kerala, India.</p>
+        <p class="ts-text">Clients with grievances are encouraged to contact us directly at <a href="mailto:hello@lazypandaphoto.com" style="color:var(--gold)">hello@lazypandaphoto.com</a> before initiating any legal proceedings. We are committed to fair resolution of all genuine concerns.</p>
+      </div>
+
+      <div class="terms-section" id="t-changes">
+        <span class="ts-num">Section 09</span>
+        <h2 class="ts-title">Changes to These Terms</h2>
+        <p class="ts-text">Lazy Panda Photography reserves the right to update these Terms and Conditions at any time. Updated terms will be published on this page with a revised date. Bookings confirmed before a revision are governed by the terms in effect at the time of booking confirmation.</p>
+        <p class="ts-text">By continuing to use our services after any revision, you accept the updated terms. We encourage you to review this page periodically.</p>
+      </div>
+
+      <div class="terms-updated">
+        Last updated: <span>1 January 2025</span> &nbsp;·&nbsp; These terms apply to all bookings made on or after this date.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div><div class="footer-logo">Lazy <span>Panda</span></div><span class="footer-tagline">Photography</span><p class="footer-desc">Crafting visual legacies — one frame at a time.</p>
+      <div class="footer-socials"><a href="#" class="footer-social"><i class="fab fa-instagram"></i></a><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a><a href="#" class="footer-social"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div><span class="footer-col-title">Quick Links</span><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><span class="footer-col-title">Legal</span><ul class="footer-links"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms & Conditions</a></li></ul></div>
+    <div><span class="footer-col-title">Newsletter</span><p style="font-size:0.83rem;color:var(--gray);line-height:1.8;margin-bottom:20px">Stories & tips in your inbox.</p><input type="email" class="newsletter-input" placeholder="Your email"><button class="newsletter-btn">Subscribe</button></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2025 Lazy Panda Photography. All rights reserved.</div><div class="footer-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></div></div>
+</footer>
+
+<a href="https://wa.me/919447000000" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="back-top" id="backTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="shared.js"></script>
+<script>AOS.init({ duration:800, once:true, offset:80, easing:'ease-out-cubic' });</script>
+</body>
+</html>
