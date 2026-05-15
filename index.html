@@ -20,28 +20,26 @@
 
 <style>
 
-
 /* ==========================================
    FLOATING PANDA HERO
 ========================================== */
-/* MAIN PANDA */
+
+/* DESKTOP */
 
 .hero-panda-wrap{
     position:absolute;
-    left:120px;
+    left:80px;
     top:50%;
     transform:translateY(-50%);
-    width:520px;
-    height:520px;
+
+    width:min(38vw, 520px);
+    height:auto;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
     z-index:3;
-
-    transition:
-        opacity 0.35s ease;
 }
 
 .hero-panda-img{
@@ -52,37 +50,20 @@
     filter:
         drop-shadow(0 0 40px rgba(201,168,76,0.12))
         drop-shadow(0 0 80px rgba(201,168,76,0.06));
-
-    animation:none;
 }
-
-@keyframes pandaFloat{
-    0%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-12px);
-    }
-    100%{
-        transform:translateY(0px);
-    }
-}
-
-
 
 /* NAV MINI LOGO */
 
 .nav-panda-mini{
     position:fixed;
     top:12px;
-    left:60px;
+    left:40px;
 
-    width:180px;
+    width:170px;
 
     opacity:0;
 
-    transition:
-        opacity 0.5s ease;
+    transition:opacity 0.5s ease;
 
     z-index:1200;
 
@@ -95,59 +76,165 @@
     object-fit:contain;
 }
 
-/* SHOW ON SCROLL */
-
 .nav-panda-mini.active{
     opacity:1;
 }
 
-
-/* HERO TEXT POSITION */
+/* HERO CONTENT */
 
 .hero-content{
-    margin-left:520px;
+    position:relative;
+    z-index:5;
+
+    margin-left:min(42vw, 540px);
+
+    max-width:720px;
+
+    text-align:center;
 }
 
-
-/* RESPONSIVE */
+/* =========================
+   TABLET
+========================= */
 
 @media(max-width:1100px){
 
     .hero-panda-wrap{
-        width:360px;
-        height:360px;
-        left:60px;
+        left:30px;
+        width:320px;
     }
 
     .hero-content{
-        margin-left:380px;
+        margin-left:320px;
+        padding-right:20px;
+    }
+
+    .hero-title{
+        font-size:clamp(3rem, 7vw, 5rem);
     }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:768px){
+
+    #hero{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+
+        min-height:100vh;
+        height:auto;
+
+        padding-top:120px;
+        padding-bottom:60px;
+    }
 
     .hero-panda-wrap{
         position:relative;
+
         top:auto;
         left:auto;
+
         transform:none;
 
-        width:260px;
-        height:260px;
+        width:220px;
+        height:auto;
 
-        margin:120px auto 40px;
+        margin:0 auto 30px;
     }
 
     .hero-content{
         margin-left:0;
+
+        width:100%;
+        max-width:100%;
+
+        padding:0 20px;
+
+        text-align:center;
+    }
+
+    .hero-eyebrow{
+        font-size:0.58rem;
+        letter-spacing:0.32em;
+    }
+
+    .hero-title{
+        font-size:clamp(2.5rem, 12vw, 4rem);
+        line-height:1.08;
+
+        margin-bottom:20px;
+    }
+
+    .hero-subtitle{
+        font-size:0.95rem;
+
+        margin-bottom:36px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+
+        width:100%;
+
+        align-items:center;
+
+        gap:14px;
+    }
+
+    .hero-buttons .btn-gold,
+    .hero-buttons .btn-gold-fill{
+        width:100%;
+        max-width:320px;
+    }
+
+    .hero-social{
+        display:none;
+    }
+
+    .hero-scroll-indicator{
+        bottom:20px;
     }
 
     .nav-panda-mini{
-        width:130px;
-        left:20px;
+        width:120px;
+        left:18px;
     }
+	
+	.about-badge{
+    transform: scale(0.5);
+    transform-origin: bottom left;
+}
 }
 
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .hero-panda-wrap{
+        width:180px;
+    }
+
+    .hero-title{
+        font-size:2.3rem;
+    }
+
+    .hero-subtitle{
+        font-size:0.88rem;
+    }
+
+    .hero-buttons .btn-gold,
+    .hero-buttons .btn-gold-fill{
+        padding:14px 22px;
+        font-size:0.7rem;
+    }
+}
 
 /* ==============================
    CSS VARIABLES & RESET
@@ -2374,13 +2461,11 @@ footer {
 </div>
 
 <!-- Small Floating Navbar Panda -->
-
-
   <div class="hero-slides">
     <div class="hero-slide hero-slide-1 active"></div>
     <div class="hero-slide hero-slide-2"></div>
     <div class="hero-slide hero-slide-3"></div>
-  </div>
+  </div> 
 
   <div class="hero-social">
     <a href="#">Instagram</a>
